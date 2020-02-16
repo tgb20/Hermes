@@ -7,7 +7,7 @@
 
   <title>Hermes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-orange.min.css"/> 
   <link rel="stylesheet" href="style.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <script src="js/blockly_compressed_vertical.js"></script>
@@ -34,7 +34,6 @@
 <body onload="start()">
   <div id="collaborators"></div>
   <div id="blocklyDiv"></div>
-  <!-- Toolbox -->
 
   <!-- Sidebar -->
   <div id="sidebarDiv">
@@ -45,12 +44,6 @@
       onclick="toCode('JavaScript')">To JavaScript</button>
     <br>
     <textarea id="importExport" style="width: 100%; height: 12em" onchange="taChange();" onkeyup="taChange()"></textarea>
-    <p>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-        onclick="workspace.undo()">Undo</button>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-        onclick="workspace.undo(true)">Redo</button>
-    </p>
   </div>
 </body>
 
