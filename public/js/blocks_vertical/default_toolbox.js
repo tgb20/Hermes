@@ -30,6 +30,125 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: none">' +
   '<category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="#4C97FF" secondaryColour="#3373CC">' +
+    '<block type="drone_motion_takeoff" id="drone_motion_takeoff"></block>' +
+    '<block type="drone_motion_land" id="drone_motion_land"></block>' +
+    '<block type="drone_motion_setspeed" id="drone_motion_setspeed">' +
+      '<value name="SPEED">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">30</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flyforward" id="drone_motion_flyforward">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flybackward" id="drone_motion_flybackward">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flyleft" id="drone_motion_flyleft">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flyright" id="drone_motion_flyright">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flyup" id="drone_motion_flyup">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flydown" id="drone_motion_flydown">' +
+      '<value name="DISTANCE">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flyto" id="drone_motion_flyto">' +
+      '<value name="XPOS">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="YPOS">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="ZPOS">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">20</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flycurve" id="drone_motion_flycurve">' +
+      '<value name="XPOS1">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">25</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="YPOS1">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">25</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="ZPOS1">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">25</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="XPOS2">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">50</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="YPOS2">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">50</field>' +
+          '</shadow>' +
+        '</value>' +
+        '<value name="ZPOS2">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">50</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_rotateleft" id="drone_motion_rotateleft">' +
+      '<value name="DEGREES">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">90</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_rotateright" id="drone_motion_rotateright">' +
+      '<value name="DEGREES">' +
+          '<shadow type="math_positive_number">' +
+            '<field name="NUM">90</field>' +
+          '</shadow>' +
+        '</value>' +
+    '</block>' +
+    '<block type="drone_motion_flipforward" id="drone_motion_flipforward"></block>' +
+    '<block type="drone_motion_flipbackward" id="drone_motion_flipbackward"></block>' +
+    '<block type="drone_motion_flipleft" id="drone_motion_flipleft"></block>' +
+    '<block type="drone_motion_flipright" id="drone_motion_flipright"></block>' +
+    '<block type="drone_motion_emergency" id="drone_motion_emergency"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">' +
     '<block type="event_whenflagclicked" id="event_whenflagclicked"></block>' +
@@ -56,6 +175,19 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="control_repeat_until" id="control_repeat_until"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">' +
+    '<block type="drone_sensing_speed" id="drone_sensing_speed"></block>' +
+    '<block type="drone_sensing_battery" id="drone_sensing_battery"></block>' +
+    '<block type="drone_sensing_time" id="drone_sensing_time"></block>' +
+    '<block type="drone_sensing_height" id="drone_sensing_height"></block>' +
+    '<block type="drone_sensing_temp" id="drone_sensing_temp"></block>' +
+    '<block type="drone_sensing_pitch" id="drone_sensing_pitch"></block>' +
+    '<block type="drone_sensing_roll" id="drone_sensing_roll"></block>' +
+    '<block type="drone_sensing_yaw" id="drone_sensing_yaw"></block>' +
+    '<block type="drone_sensing_baro" id="drone_sensing_baro"></block>' +
+    '<block type="drone_sensing_accx" id="drone_sensing_accx"></block>' +
+    '<block type="drone_sensing_accy" id="drone_sensing_accy"></block>' +
+    '<block type="drone_sensing_accz" id="drone_sensing_accz"></block>' +
+    '<block type="drone_sensing_tof" id="drone_sensing_tof"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">' +
     '<block type="operator_add" id="operator_add">' +
