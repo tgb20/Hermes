@@ -14,13 +14,13 @@ html, body {
   }
 
   #blocklyDiv {
-    float: right;
+    float: left;
     height: 100%;
     width: 70%;
   }
 
   #sidebarDiv {
-    float: left;
+    float: right;
     height: 100%;
     width: 30%;
     background: whitesmoke;

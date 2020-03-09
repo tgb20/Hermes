@@ -326,3 +326,17 @@ Blockly.Blocks['event_whenkeypressed'] = {
     });
   }
 };
+
+Blockly.Blocks['drone_event_emergency'] = {
+  /**
+   * Block to move steps.
+   * @this Blockly.Block
+   */
+  init: function () {
+      this.jsonInit({
+          "message0": "stop motors",
+          "category": Blockly.Categories.event,
+          "extensions": ["colours_event", "shape_statement"]
+      });
+  }
+};

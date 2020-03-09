@@ -1,22 +1,12 @@
-var fakeDragStack = [];
 var workspace = null;
 
-function start() {
-    var soundsEnabled = null;
-    if (sessionStorage) {
-        // Restore sounds state.
-        soundsEnabled = sessionStorage.getItem('soundsEnabled');
-        if (soundsEnabled === null) {
-            soundsEnabled = true;
-        } else {
-            soundsEnabled = (soundsEnabled === 'true');
-        }
-    } else {
-        soundsEnabled = true;
-    }
+const { ipcRenderer, remote } = require('electron');
+const fs = require('fs');
+const dialog = remote.dialog;
+const win = remote.getCurrentWindow();
 
-    // Setup blocks
-    // Parse the URL arguments.
+
+function start() {
     var match = location.search.match(/dir=([^&]+)/);
     var rtl = match && match[1] == 'rtl';
     var toolbox = getToolboxElement();
@@ -42,7 +32,7 @@ function start() {
         toolboxPosition: side == 'top' || side == 'start' ? 'start' : 'end',
         horizontalLayout: side == 'top' || side == 'bottom',
         trashcan: true,
-        sounds: soundsEnabled,
+        sounds: true,
         zoom: {
             controls: true,
             wheel: true,
@@ -56,23 +46,6 @@ function start() {
             dragShadowOpacity: 0.6
         }
     });
-
-    // Restore previously displayed text.
-    var text = sessionStorage.getItem('textarea');
-    if (text) {
-        document.getElementById('importExport').value = text;
-    }
-    taChange();
-
-    if (sessionStorage) {
-        // Restore event logging state.
-        var state = sessionStorage.getItem('logEvents');
-        logEvents(Boolean(state));
-
-        // Restore flyout event logging state.
-        state = sessionStorage.getItem('logFlyoutEvents');
-        logFlyoutEvents(Boolean(state));
-    }
 }
 
 function getToolboxElement() {
@@ -80,70 +53,74 @@ function getToolboxElement() {
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
-function toXml() {
+function codePreview(lang) {
     var output = document.getElementById('importExport');
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    output.value = Blockly.Xml.domToPrettyText(xml);
-    output.focus();
-    output.select();
-    taChange();
+    output.textContent = Blockly[lang].workspaceToCode(workspace) + "}";
 }
 
-function fromXml() {
-    var input = document.getElementById('importExport');
-    var xml = Blockly.Xml.textToDom(input.value);
-    Blockly.Xml.domToWorkspace(xml, workspace);
-    taChange();
+function clickedGreenFlag() {
+    let lang = 'JavaScript'
+
+    codePreview(lang);
+    let code = Blockly[lang].workspaceToCode(workspace) + "}";
+    ipcRenderer.send('greenflag', code);
 }
 
-function toCode(lang) {
-    var output = document.getElementById('importExport');
-    output.value = Blockly[lang].workspaceToCode(workspace);
-    taChange();
+function saveWorkspace() {
+    let xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+
+    let xmlString = new XMLSerializer().serializeToString(xml);
+
+    let options = {
+        title: "Save your workspace",
+        buttonLabel: "Save Workspace",
+        filters: [
+            { name: 'Workspace File', extensions: ['space'] }
+        ]
+    }
+
+    dialog.showSaveDialog(win, options).then(result => {
+        let filename = result.filePath;
+        console.log(filename);
+
+        if (filename === undefined) {
+            console.log('Filename not selected');
+            return;
+        }
+
+        fs.writeFile(filename, xmlString, (err) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log('Success!');
+        });
+    });
 }
 
-// Disable the "Import from XML" button if the XML is invalid.
-// Preserve text between page reloads.
-function taChange() {
-    var textarea = document.getElementById('importExport');
-    if (sessionStorage) {
-        sessionStorage.setItem('textarea', textarea.value);
-    }
-    try {
-        Blockly.Xml.textToDom(textarea.value);
-    } catch (e) {
-        valid = false;
-    }
-}
+function loadWorkspace() {
 
-function logEvents(state) {
-    var checkbox = document.getElementById('logCheck');
-    checkbox.checked = state;
-    if (sessionStorage) {
-        sessionStorage.setItem('logEvents', state ? 'checked' : '');
+    let options = {
+        title: "Open a workspace",
+        buttonLabel: "Open Workspace",
+        filters: [
+            { name: 'Workspace File', extensions: ['space'] }
+        ]
     }
-    if (state) {
-        workspace.addChangeListener(logger);
-    } else {
-        workspace.removeChangeListener(logger);
-    }
-}
 
-function logFlyoutEvents(state) {
-    var checkbox = document.getElementById('logFlyoutCheck');
-    checkbox.checked = state;
-    if (sessionStorage) {
-        sessionStorage.setItem('logFlyoutEvents', state ? 'checked' : '');
-    }
-    var flyoutWorkspace = (workspace.flyout_) ? workspace.flyout_.workspace_ :
-        workspace.toolbox_.flyout_.workspace_;
-    if (state) {
-        flyoutWorkspace.addChangeListener(logger);
-    } else {
-        flyoutWorkspace.removeChangeListener(logger);
-    }
-}
+    dialog.showOpenDialog(win, options).then(result => {
+        let filename = result.filePaths[0];
 
-function logger(e) {
-    console.log(e);
+        if(filename === undefined) {
+            console.log('No File');
+            return;
+        }
+
+        let xmlString = fs.readFileSync(filename);
+
+        let xml = Blockly.Xml.textToDom(xmlString);
+
+        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+
+    });
 }

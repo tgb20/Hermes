@@ -338,17 +338,3 @@ Blockly.Blocks['drone_motion_flipright'] = {
         });
     }
 };
-
-Blockly.Blocks['drone_motion_emergency'] = {
-    /**
-     * Block to move steps.
-     * @this Blockly.Block
-     */
-    init: function () {
-        this.jsonInit({
-            "message0": "emergency stop motors",
-            "category": Blockly.Categories.motion,
-            "extensions": ["colours_motion", "shape_statement"]
-        });
-    }
-};

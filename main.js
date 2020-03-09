@@ -3,9 +3,7 @@ const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const ws = require('ws');
-const electron = require('electron')
-
-const { app, BrowserWindow } = require('electron')
+const { ipcMain, app, BrowserWindow, Menu } = require('electron')
 
 const exp = express()
 
@@ -16,6 +14,13 @@ const TELLO_HOST = '192.168.10.1'
 
 const HOST = 'localhost';
 const PORT = 3000;
+
+ipcMain.on('greenflag', (event, arg) => {
+    let code = arg;
+    console.log('CODE: ' + code);
+    eval(code);
+    greenFlag();
+});
 
 exp.use(express.static(path.join(__dirname, 'public')))
 
@@ -124,16 +129,20 @@ wsServer.broadcast = function (data) {
     })
 }
 
-function createWindow () {
+function createWindow() {
     // Create the browser window.
     let win = new BrowserWindow({
-      width: 800,
-      height: 600,
-      webPreferences: {
-        nodeIntegration: true
-      }
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
     win.loadFile('public/index.html')
-  }
-  
-  app.whenReady().then(createWindow)
+}
+
+function saveCode() {
+
+}
+
+app.whenReady().then(createWindow)
