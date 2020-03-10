@@ -119,8 +119,7 @@ function loadWorkspace() {
         let xmlString = fs.readFileSync(filename);
 
         let xml = Blockly.Xml.textToDom(xmlString);
-
-        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+        Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, Blockly.mainWorkspace);
 
     });
 }
