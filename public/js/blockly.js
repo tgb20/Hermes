@@ -66,6 +66,58 @@ function clickedGreenFlag() {
     ipcRenderer.send('greenflag', code);
 }
 
+ipcRenderer.on('file', (event, arg) => {
+
+    console.log(arg);
+
+    if (arg == 'save') {
+        saveWorkspace();
+    }
+
+    if (arg == 'open') {
+        loadWorkspace();
+    }
+});
+
+ipcRenderer.on('dronestate', (event, arg) => {
+    console.log(arg);
+
+    let bat = arg.bat;
+    let h = arg.h;
+
+    document.getElementById('bat').textContent = bat;
+    document.getElementById('height').textContent = h;
+});
+
+document.addEventListener('keydown', getKeyPress);
+
+function getKeyPress(e) {
+
+    let keyCode = e.code;
+
+    let leftRight = 0;
+    let forBack = 0;
+    let upDown = 0;
+    let yaw = 0;
+
+    // KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowLeft, ArrowDown, ArrowRight
+
+    if(keyCode == 'KeyW') {
+        forBack = 50;
+    }
+    if(keyCode == 'KeyS') {
+        forBack = -50;
+    }
+    if(keyCode == 'KeyA') {
+        leftRight = 50;
+    }
+    if(keyCode == 'KeyD') {
+        leftRight = -50;
+    }
+
+    ipcRenderer.send('rc', {leftRight: leftRight, forBack: forBack, upDown: upDown, yaw: yaw});
+}
+
 function saveWorkspace() {
     let xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
 
@@ -111,7 +163,7 @@ function loadWorkspace() {
     dialog.showOpenDialog(win, options).then(result => {
         let filename = result.filePaths[0];
 
-        if(filename === undefined) {
+        if (filename === undefined) {
             console.log('No File');
             return;
         }

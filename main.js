@@ -9,6 +9,8 @@ const exp = express()
 
 const drone = tello.connect();
 
+let win;
+
 const TELLO_VIDEO_PORT = 11111
 const TELLO_HOST = '192.168.10.1'
 
@@ -20,6 +22,16 @@ ipcMain.on('greenflag', (event, arg) => {
     console.log('CODE: ' + code);
     eval(code);
     greenFlag();
+});
+
+ipcMain.on('rc', (event, arg) => {
+
+    let leftRight = arg.leftRight;
+    let forBack = arg.forBack;
+    let upDown = arg.upDown;
+    let yaw = arg.yaw;
+ 
+    // drone.send("rc", { value: '0 0 0 0'});
 });
 
 exp.use(express.static(path.join(__dirname, 'public')))
@@ -49,6 +61,7 @@ drone.on("connection", () => {
 
 drone.on("state", state => {
     //console.log("Recieved State > ", state);
+    win.webContents.send('dronestate', state);
 });
 
 drone.on("send", (err, length) => {
@@ -131,7 +144,7 @@ wsServer.broadcast = function (data) {
 
 function createWindow() {
     // Create the browser window.
-    let win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -139,9 +152,39 @@ function createWindow() {
         }
     })
     win.loadFile('public/index.html')
-}
 
-function saveCode() {
+
+    const template = [
+        {
+            label: 'Default'
+        },
+        {
+            label: 'File',
+            submenu: [
+                {
+                    label: 'Save',
+                    click() {
+                        // Send save message
+                        win.webContents.send('file', 'save');
+                    },
+                    accelerator: 'CmdOrCtrl+S'
+                },
+                {
+                    label: 'Open',
+                    click() {
+                        // Send open message
+                        win.webContents.send('file', 'open');
+                    },
+                    accelerator: 'CmdOrCtrl+O'
+                }
+            ]
+        },
+        { role: 'viewMenu' },
+        { role: 'windowMenu' }
+    ];
+
+    const menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
 
 }
 
