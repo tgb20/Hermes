@@ -9,7 +9,7 @@ const exp = express()
 
 const drone = tello.connect();
 
-let win;
+let win, droneState;
 
 const TELLO_VIDEO_PORT = 11111
 const TELLO_HOST = '192.168.10.1'
@@ -61,6 +61,7 @@ drone.on("connection", () => {
 
 drone.on("state", state => {
     //console.log("Recieved State > ", state);
+    droneState = state;
     win.webContents.send('dronestate', state);
 });
 

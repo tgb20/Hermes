@@ -7,14 +7,44 @@ goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
-Blockly.Blocks['drone_sensing_speed'] = {
+Blockly.Blocks['drone_sensing_speed_x'] = {
     /**
      * Block to report Y.
      * @this Blockly.Block
      */
     init: function () {
         this.jsonInit({
-            "message0": "speed (cm/s)",
+            "message0": "speed x (cm/s)",
+            "category": Blockly.Categories.sensing,
+            "checkboxInFlyout": false,
+            "extensions": ["colours_sensing", "output_number"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_speed_y'] = {
+    /**
+     * Block to report Y.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "speed y (cm/s)",
+            "category": Blockly.Categories.sensing,
+            "checkboxInFlyout": false,
+            "extensions": ["colours_sensing", "output_number"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_speed_z'] = {
+    /**
+     * Block to report Y.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "speed z (cm/s)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": false,
             "extensions": ["colours_sensing", "output_number"]
@@ -67,14 +97,29 @@ Blockly.Blocks['drone_sensing_height'] = {
     }
 };
 
-Blockly.Blocks['drone_sensing_temp'] = {
+Blockly.Blocks['drone_sensing_temp_high'] = {
     /**
      * Block to report Y.
      * @this Blockly.Block
      */
     init: function () {
         this.jsonInit({
-            "message0": "temperature (C)",
+            "message0": "high temperature (C)",
+            "category": Blockly.Categories.sensing,
+            "checkboxInFlyout": false,
+            "extensions": ["colours_sensing", "output_number"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_temp_low'] = {
+    /**
+     * Block to report Y.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "low temperature (C)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": false,
             "extensions": ["colours_sensing", "output_number"]
@@ -164,7 +209,7 @@ Blockly.Blocks['drone_sensing_accy'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration x (0.001 g)",
+            "message0": "acceleration y (0.001 g)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": false,
             "extensions": ["colours_sensing", "output_number"]
@@ -179,7 +224,7 @@ Blockly.Blocks['drone_sensing_accz'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration x (0.001 g)",
+            "message0": "acceleration z (0.001 g)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": false,
             "extensions": ["colours_sensing", "output_number"]
