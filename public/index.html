@@ -58,21 +58,26 @@
     <div id="imagewrapper" style="width: 100%;">
       <canvas style="width: 100%;" id="video-canvas"></canvas>
     </div>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-      onclick="codePreview('JavaScript')">Preview JavaScript</button>
-    <br>
-    <textarea id="importExport" style="width: 100%; height: 12em"></textarea>
-    <br>
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="clickedGreenFlag()">
-      <img src="media/green-flag.svg" alt="Green green-flag" height="50%" width="50%" />
-    </button>
-    <br>
-    <span class="mdl-chip mdl-color--gray">
-      <span class="mdl-chip__text">Battery: <span id='bat'>0</span>%</span>
-    </span>
-    <span class="mdl-chip mdl-color--gray">
-      <span class="mdl-chip__text">Height: <span id='height'>0</span>cm</span>
-    </span>
+    <div class="controls">
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="clickedGreenFlag()">
+        <img src="media/green-flag.svg" alt="Green green-flag" height="50%" width="50%" />
+      </button>
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="fullScreenVideo()">
+        <img src="media/icons/fullscreen.svg" alt="Fullscreen mode" height="50%" width="50%" />
+      </button>
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="toggleJavaScript()">
+        <img src="media/icons/code.svg" alt="View JavaScript" height="50%" width="50%" />
+      </button>
+    </div>
+    <div class="controls">
+      <span class="mdl-chip mdl-color--gray">
+        <span class="mdl-chip__text">Battery: <span id='bat'>0</span>%</span>
+      </span>
+      <span class="mdl-chip mdl-color--gray">
+        <span class="mdl-chip__text">Height: <span id='height'>0</span>cm</span>
+      </span>
+    </div>
+    <textarea id="importExport" readonly></textarea>
   </div>
 </body>
 
