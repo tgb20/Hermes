@@ -4,7 +4,7 @@ const { ipcRenderer, remote } = require('electron');
 const fs = require('fs');
 const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
-
+const lang = 'JavaScript';
 
 function start() {
     var match = location.search.match(/dir=([^&]+)/);
@@ -53,14 +53,7 @@ function getToolboxElement() {
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
-function codePreview(lang) {
-    var output = document.getElementById('importExport');
-    output.textContent = Blockly[lang].workspaceToCode(workspace) + "}";
-}
-
 function clickedGreenFlag() {
-    let lang = 'JavaScript'
-
     codePreview(lang);
     let code = Blockly[lang].workspaceToCode(workspace) + "}";
     ipcRenderer.send('greenflag', code);
@@ -68,6 +61,13 @@ function clickedGreenFlag() {
 
 function fullScreenVideo() {
     document.querySelector("#video-canvas").requestFullscreen();
+}
+
+function toggleJavaScript() {
+    let output = document.getElementById('importExport');
+    output.textContent = Blockly[lang].workspaceToCode(workspace);
+    if (output.textContent.length > 0) { output.textContent += "}"; }
+    output.classList.toggle("active");
 }
 
 ipcRenderer.on('file', (event, arg) => {
