@@ -119,6 +119,9 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '</shadow>' +
       '</value>' +
     '</block>' +
+    '<block type="control_if" id="control_if"></block>' +
+    '<block type="control_if_else" id="control_if_else"></block>' +
+    '<block type="control_while" id="control_while"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">' +
     '<block type="drone_sensing_speed_x" id="drone_sensing_speed"></block>' +
