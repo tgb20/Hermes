@@ -66,6 +66,10 @@ function clickedGreenFlag() {
     ipcRenderer.send('greenflag', code);
 }
 
+function fullScreenVideo() {
+    document.querySelector("#video-canvas").requestFullscreen();
+}
+
 ipcRenderer.on('file', (event, arg) => {
 
     console.log(arg);
