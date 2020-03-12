@@ -188,3 +188,7 @@ function loadWorkspace() {
 
     });
 }
+
+function connectButton() {
+    ipcRenderer.send('connect', 'connect');
+}
