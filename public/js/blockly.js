@@ -69,7 +69,7 @@ function clickedGreenFlag() {
 }
 
 function fullScreenVideo() {
-    document.querySelector("#video-canvas").requestFullscreen();
+    document.querySelector("#videowrapper").requestFullscreen();
 }
 
 function toggleJavaScript() {
