@@ -62,20 +62,24 @@ function getToolboxElement() {
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
+function codePreview() {
+    let output = document.getElementById('importExport');
+    output.textContent = Blockly[lang].workspaceToCode(workspace);
+    if (output.textContent.length > 0) { output.textContent += "}"; }
+}
+
 function clickedGreenFlag() {
-    codePreview(lang);
+    codePreview();
     let code = Blockly[lang].workspaceToCode(workspace) + "}";
     ipcRenderer.send('greenflag', code);
 }
 
 function fullScreenVideo() {
-    document.querySelector("#video-canvas").requestFullscreen();
+    document.querySelector("#videowrapper").requestFullscreen();
 }
 
 function toggleJavaScript() {
-    let output = document.getElementById('importExport');
-    output.textContent = Blockly[lang].workspaceToCode(workspace);
-    if (output.textContent.length > 0) { output.textContent += "}"; }
+    codePreview();
     output.classList.toggle("active");
 }
 
