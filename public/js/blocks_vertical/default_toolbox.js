@@ -145,48 +145,48 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="operator_add" id="operator_add">' +
       '<value name="NUM1">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="NUM2">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_subtract" id="operator_subtract">' +
       '<value name="NUM1">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="NUM2">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_multiply" id="operator_multiply">' +
       '<value name="NUM1">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="NUM2">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_divide" id="operator_divide">' +
       '<value name="NUM1">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="NUM2">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
@@ -205,36 +205,36 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="operator_lt" id="operator_lt">' +
       '<value name="OPERAND1">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="OPERAND2">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_equals" id="operator_equals">' +
       '<value name="OPERAND1">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="OPERAND2">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_gt" id="operator_gt">' +
       '<value name="OPERAND1">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="OPERAND2">' +
         '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
+          '<field name="TEXT">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
@@ -244,28 +244,32 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="operator_mod" id="operator_mod">' +
       '<value name="NUM1">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
       '<value name="NUM2">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_round" id="operator_round">' +
       '<value name="NUM">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
     '<block type="operator_mathop" id="operator_mathop">' +
       '<value name="NUM">' +
         '<shadow type="math_number">' +
-          '<field name="NUM"></field>' +
+          '<field name="NUM">0</field>' +
         '</shadow>' +
       '</value>' +
     '</block>' +
+  '</category>' +
+  '<category name="%{BKY_CATEGORY_VARIABLES}" id="variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">' +
+  '</category>' +
+  '<category name="LISTS NOT IMPLEMENTED" id="LISTS NOT IMPLEMENTED" colour="#FF0000" secondaryColour="#FF0000">'
   '</category>' +
   '</xml>';
