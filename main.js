@@ -34,6 +34,12 @@ ipcMain.on('rc', (event, arg) => {
     // drone.send("rc", { value: '0 0 0 0'});
 });
 
+ipcMain.on('connect', (event, arg) => {
+
+    // Try to connect
+    console.log(arg);
+});
+
 exp.use(express.static(path.join(__dirname, 'public')))
 
 exp.post(`/tellostream`, (req, res) => {
