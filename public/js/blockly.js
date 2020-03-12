@@ -1,10 +1,19 @@
 var workspace = null;
 
 const { ipcRenderer, remote } = require('electron');
+const prompt = require('electron-prompt');
 const fs = require('fs');
 const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
 const lang = 'JavaScript';
+
+Blockly.prompt = ((msg, defaultValue, callback) => {
+    prompt({
+        title: msg,
+        label: msg,
+        type: 'input'
+    }).then((name) => {callback(name)});
+});
 
 function start() {
     var match = location.search.match(/dir=([^&]+)/);
