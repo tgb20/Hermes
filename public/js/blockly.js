@@ -66,6 +66,7 @@ function codePreview() {
     let output = document.getElementById('importExport');
     output.textContent = Blockly[lang].workspaceToCode(workspace);
     if (output.textContent.length > 0) { output.textContent += "}"; }
+    output.classList.toggle("active");
 }
 
 function clickedGreenFlag() {
@@ -76,11 +77,6 @@ function clickedGreenFlag() {
 
 function fullScreenVideo() {
     document.querySelector("#videowrapper").requestFullscreen();
-}
-
-function toggleJavaScript() {
-    codePreview();
-    output.classList.toggle("active");
 }
 
 ipcRenderer.on('file', (event, arg) => {
