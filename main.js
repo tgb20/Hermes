@@ -101,13 +101,13 @@ const ffmpeg = spawn('ffmpeg', [
     '-codec:v',
     'mpeg1video',
     '-s',
-    '640x480',
+    '1280x720',
     '-b:v',
-    '800k',
+    '1000k',
     '-bf',
     '0',
     '-r',
-    '20',
+    '30',
     `http://${HOST}:${PORT}/tellostream`
 ])
 
