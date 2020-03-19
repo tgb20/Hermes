@@ -24,6 +24,15 @@ ipcMain.on('greenflag', (event, arg) => {
     greenFlag();
 });
 
+ipcMain.on('takeoff', (event, arg) => {
+    drone.send('takeoff');    
+});
+
+
+ipcMain.on('land', (event, arg) => {
+    drone.send('land');    
+});
+
 ipcMain.on('rc', (event, arg) => {
 
     let leftRight = arg.leftRight;
@@ -31,11 +40,10 @@ ipcMain.on('rc', (event, arg) => {
     let upDown = arg.upDown;
     let yaw = arg.yaw;
  
-    // drone.send("rc", { value: '0 0 0 0'});
+    drone.send("rc", { a: leftRight, b: forBack, c: upDown, d: yaw });
 });
 
 ipcMain.on('connect', (event, arg) => {
-
     // Try to connect
     console.log(arg);
 });

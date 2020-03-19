@@ -108,6 +108,10 @@ document.addEventListener('keydown', getKeyPress);
 
 function getKeyPress(e) {
 
+    // KeyW, KeyA, KeyS, KeyD = forward, left, back, right
+    // ArrowUp, ArrowLeft, ArrowDown, ArrowRight = up, yaw left, down, yaw right
+    // Tab = takeoff, Delete = land
+
     let keyCode = e.code;
 
     let leftRight = 0;
@@ -115,8 +119,12 @@ function getKeyPress(e) {
     let upDown = 0;
     let yaw = 0;
 
-    // KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowLeft, ArrowDown, ArrowRight
-
+    if (keyCode == 'Delete') {
+        ipcRenderer.send('land');
+    }
+    if (keyCode == 'Tab') {
+        ipcRenderer.send('takeoff');
+    }
     if(keyCode == 'KeyW') {
         forBack = 50;
     }
@@ -129,9 +137,24 @@ function getKeyPress(e) {
     if(keyCode == 'KeyD') {
         leftRight = -50;
     }
-
+    if(keyCode == 'ArrowUp') {
+        upDown = 50;
+    }
+    if(keyCode == 'ArrowDown') {
+        upDown = -50;
+    }
+    if(keyCode == 'ArrowLeft') {
+        yaw = -50;
+    }
+    if(keyCode == 'ArrowRight') {
+        yaw = 50;
+    }
     ipcRenderer.send('rc', {leftRight: leftRight, forBack: forBack, upDown: upDown, yaw: yaw});
 }
+
+document.addEventListener('keyup', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
+});
 
 function saveWorkspace() {
     let xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
