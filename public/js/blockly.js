@@ -6,6 +6,7 @@ const fs = require('fs');
 const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
 const lang = 'JavaScript';
+let flying = false;
 
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
@@ -78,7 +79,13 @@ function clickedGreenFlag() {
 }
 
 function fullScreenVideo() {
-    document.querySelector("#videowrapper").requestFullscreen();
+    if (!document.fullscreenElement) {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
+        document.querySelector("#videowrapper").requestFullscreen();
+      } else {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen';
+        document.exitFullscreen();
+      }
 }
 
 ipcRenderer.on('file', (event, arg) => {
@@ -95,7 +102,6 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-    console.log(arg);
 
     let bat = arg.bat;
     let h = arg.h;
@@ -121,9 +127,11 @@ function getKeyPress(e) {
 
     if (keyCode == 'Delete') {
         ipcRenderer.send('land');
+        flying = false;
     }
     if (keyCode == 'Tab') {
         ipcRenderer.send('takeoff');
+        flying = true;
     }
     if(keyCode == 'KeyW') {
         forBack = 50;
@@ -155,6 +163,52 @@ function getKeyPress(e) {
 document.addEventListener('keyup', () => {
     ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
 });
+
+document.querySelector('.mdl-button.forward').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
+    console.log('forward');
+})
+document.querySelector('.mdl-button.backward').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: -50, upDown: 0, yaw: 0}); 
+})
+document.querySelector('.mdl-button.left').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: -50, forBack: 0, upDown: 0, yaw: 0}); 
+})
+document.querySelector('.mdl-button.right').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 50, forBack: 0, upDown: 0, yaw: 0}); 
+})
+document.querySelector('.mdl-button.up').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 50, yaw: 0}); 
+})
+document.querySelector('.mdl-button.down').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: -50, yaw: 0}); 
+})
+document.querySelector('.mdl-button.yaw-left').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: -50}); 
+})
+document.querySelector('.mdl-button.yaw-right').addEventListener('mousedown', () => {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 50}); 
+})
+const buttons = document.querySelectorAll(".mdl-button");
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("mouseup", () => {
+        ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0}); 
+    });
+}
+
+function takeoffOrLand() {
+    if (flying) {
+        ipcRenderer.send('land');
+        flying = false;
+        document.querySelector('#btn-takeoff-land i').textContent = 'flight_takeoff';
+        document.querySelector('#text-takeoff-land').textContent = 'Takeoff';
+    } else {
+        ipcRenderer.send('takeoff');
+        flying = true;
+        document.querySelector('#btn-takeoff-land i').textContent = 'flight_land';
+        document.querySelector('#text-takeoff-land').textContent = 'Land';
+    }
+}
 
 function saveWorkspace() {
     let xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);

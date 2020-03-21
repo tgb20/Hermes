@@ -7,8 +7,117 @@
 
   <title>Hermes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-orange.min.css" />
+  <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-orange.min.css" /> -->
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-light_green.min.css" />
   <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="start()">
+  <div id="blocklyDiv"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebarDiv">
+    <div id="videowrapper" style="width: 100%;">
+      <div class="controls">
+        <div>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red" onclick="connectButton()">
+            <i class="material-icons">wifi_off</i>
+          </button>
+        </div>
+        <div>
+          <span class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">battery_full</i>
+            <span class="mdl-chip__text"><span id='bat'>0</span>%</span>
+          </span>
+          <span class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">height</i>
+            <span class="mdl-chip__text"><span id='height'>0</span>cm</span>
+          </span>
+        </div>
+        <div>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="">
+            <i class="material-icons">photo_camera</i>
+          </button>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="">
+            <i class="material-icons">videocam</i>
+          </button>
+          <button id="fullscreen" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="fullScreenVideo()">
+            <i class="material-icons">fullscreen</i>
+          </button>
+        </div>
+      </div>
+      <canvas style="width: 100%;" id="video-canvas"></canvas>
+    </div>
+    <div>
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+          <!-- Tabs -->
+          <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#code" class="mdl-layout__tab is-active"><i class="material-icons">code</i></a>
+            <a href="#rc-ui" class="mdl-layout__tab"><i class="material-icons">gamepad</i></a>
+            <a href="#rc-keyboard" class="mdl-layout__tab"><i class="material-icons">keyboard</i></a>
+          </div>
+        </header>
+        <main class="mdl-layout__content">
+          <section class="mdl-layout__tab-panel is-active" id="code">
+            <div class="page-content">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent" onclick="clickedGreenFlag()">
+                <img src="media/green-flag.svg" alt="Green green-flag" height="50%" width="50%" />
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="codePreview()">
+                <i class="material-icons">code</i>
+              </button>
+              <textarea id="importExport" readonly></textarea>
+            </div>
+          </section>
+          <section class="mdl-layout__tab-panel" id="rc-ui">
+            <div class="page-content">
+              <div class="rc-controls">
+                <div class="rc-controls-bg"></div>
+                <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+                  <i class="material-icons">vertical_align_top</i>
+                </button>
+                <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+                  <i class="material-icons">vertical_align_bottom</i>
+                </button>
+                <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+                  <i class="material-icons">rotate_left</i>
+                </button>
+                <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+                  <i class="material-icons">rotate_right</i>
+                </button>
+              </div>
+              <div class="rc-controls">
+                <div class="rc-controls-bg"></div>
+                <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+                  <i class="material-icons">arrow_upward</i>
+                </button>
+                <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+                  <i class="material-icons">arrow_downward</i>
+                </button>
+                <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+                  <i class="material-icons">arrow_back</i>
+                </button>
+                <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+                  <i class="material-icons">arrow_forward</i>
+                </button>
+              </div>
+            </div>
+            <div class="page-content" style="flex-direction: column;">
+              <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="takeoffOrLand();">
+                <i class="material-icons">flight_takeoff</i>
+              </button>
+              <div id="text-takeoff-land">Takeoff</div>
+            </div>
+          </section>
+
+          <section class="mdl-layout__tab-panel" id="rc-keyboard">
+            <div class="page-content"><!-- Your content goes here --></div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <script src="js/blockly_compressed_vertical.js"></script>
   <script src="js/blockly.js"></script>
@@ -48,43 +157,5 @@
   <script src="js/jsmpeg.min.js"></script>
   <script src="js/videofeed.js"></script>
   <script src="js/blocks_vertical/default_toolbox.js"></script>
-</head>
-
-<body onload="start()">
-  <div id="blocklyDiv"></div>
-
-  <!-- Sidebar -->
-  <div id="sidebarDiv">
-    <div id="videowrapper" style="width: 100%;">
-      <div class="controls">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red" onclick="connectButton()">
-          <i class="material-icons">wifi_off</i>
-        </button>
-        <span class="mdl-chip mdl-color--gray">
-          <span class="mdl-chip__text">Battery: <span id='bat'>0</span>%</span>
-        </span>
-        <span class="mdl-chip mdl-color--gray">
-          <span class="mdl-chip__text">Height: <span id='height'>0</span>cm</span>
-        </span>
-      </div>
-      <canvas style="width: 100%;" id="video-canvas"></canvas>
-    </div>
-    <div class="controls">
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="clickedGreenFlag()">
-        <img src="media/green-flag.svg" alt="Green green-flag" height="50%" width="50%" />
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="fullScreenVideo()">
-        <i class="material-icons">fullscreen</i>
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" onclick="codePreview()">
-        <i class="material-icons">code</i>
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
-        <i class="material-icons">videogame_asset</i>
-      </button>
-    </div>
-    <textarea id="importExport" readonly></textarea>
-  </div>
 </body>
-
 </html>
