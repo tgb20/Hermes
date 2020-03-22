@@ -191,6 +191,13 @@ function createWindow() {
                         win.webContents.send('file', 'open');
                     },
                     accelerator: 'CmdOrCtrl+O'
+                },
+                {
+                    label: 'Quit',
+                    click() {
+                        app.quit()
+                    },
+                    accelerator: 'CmdOrCtrl+Q'
                 }
             ]
         },
