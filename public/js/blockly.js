@@ -144,12 +144,10 @@ function getKeyPress(e) {
     let yaw = 0;
 
     if (keyCode == 'Delete') {
-        ipcRenderer.send('land');
-        flying = false;
+        takeoffOrLand();
     }
     if (keyCode == 'Tab') {
-        ipcRenderer.send('takeoff');
-        flying = true;
+        takeoffOrLand();
     }
     if(keyCode == 'KeyW') {
         forBack = 50;
@@ -186,7 +184,6 @@ document.querySelectorAll('.mdl-button.forward').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
             ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
-            console.log('forward');
         })
     }
 );
@@ -252,13 +249,29 @@ function takeoffOrLand() {
     if (flying) {
         ipcRenderer.send('land');
         flying = false;
-        document.querySelector('#btn-takeoff-land i').textContent = 'flight_takeoff';
-        document.querySelector('#text-takeoff-land').textContent = 'Takeoff';
+        document.querySelectorAll('#btn-takeoff-land i').forEach(
+            (button) => {
+                button.textContent = 'flight_takeoff';
+            }
+        );
+        document.querySelectorAll('#text-takeoff-land').forEach(
+            (text) => {
+                text.textContent = 'Takeoff';
+            }
+        );
     } else {
         ipcRenderer.send('takeoff');
         flying = true;
-        document.querySelector('#btn-takeoff-land i').textContent = 'flight_land';
-        document.querySelector('#text-takeoff-land').textContent = 'Land';
+        document.querySelectorAll('#btn-takeoff-land i').forEach(
+            (button) => {
+                button.textContent = 'flight_land';
+            }
+        );
+        document.querySelectorAll('#text-takeoff-land').forEach(
+            (text) => {
+                text.textContent = 'Land';
+            }
+        );
     }
 }
 
