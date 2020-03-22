@@ -46,6 +46,9 @@ h1 {
   display: flex;
   justify-content: space-between;
 }
+.green-flag {
+  margin: 20px;
+}
 
 .mdl-layout__container {
   position: relative;

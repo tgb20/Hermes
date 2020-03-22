@@ -201,7 +201,29 @@ function createWindow() {
                 }
             ]
         },
-        { role: 'viewMenu' },
+        {
+            label: 'View',
+            submenu: [
+                {
+                    label: 'Display JavaScript',
+                    type: 'checkbox', 
+                    checked: false,
+                    click: e => {
+                        win.webContents.send('displayJS', e.checked);
+                    }
+                },
+                { type: 'separator' },
+                { role: 'reload' },
+                { role: 'forcereload' },
+                { role: 'toggledevtools' },
+                { type: 'separator' },
+                { role: 'resetzoom' },
+                { role: 'zoomin' },
+                { role: 'zoomout' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
+        },
         { role: 'windowMenu' }
     ];
 

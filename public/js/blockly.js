@@ -56,6 +56,7 @@ function start() {
             dragShadowOpacity: 0.6
         }
     });
+    ateCodeworkspace.addChangeListener(updPreview);
 }
 
 function getToolboxElement() {
@@ -63,18 +64,27 @@ function getToolboxElement() {
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
-function codePreview(code) {
-    const output = document.getElementById('importExport');
-    output.textContent = code;
-    output.classList.toggle("active");
+ipcRenderer.on('displayJS', (event, arg) => {
+    if (arg) {
+        document.getElementById('importExport').classList.add('active');
+    } else {
+        document.getElementById('importExport').classList.remove('active');
+}
+});
+
+function updateCodePreview(event) {
+    if (event.type != Blockly.Events.BLOCK_MOVE) {
+        const code = Blockly.JavaScript.workspaceToCode(workspace);
+        if (code.length > 0) {
+            document.getElementById('importExport').textContent = code + "}";
+        }
+    }
 }
 
 function clickedGreenFlag() {
     let code = Blockly[lang].workspaceToCode(workspace);
     if (code.length > 0) {
-        code += "}";
-        codePreview(code);
-        ipcRenderer.send('greenflag', code);
+        ipcRenderer.send('greenflag', code + "}");
     }
 }
 
