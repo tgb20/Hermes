@@ -134,7 +134,7 @@ function getKeyPress(e) {
 
     // KeyW, KeyA, KeyS, KeyD = forward, left, back, right
     // ArrowUp, ArrowLeft, ArrowDown, ArrowRight = up, yaw left, down, yaw right
-    // Tab = takeoff, Delete = land
+    // Tab = takeoff, Backspace = land
 
     let keyCode = e.code;
 
@@ -143,7 +143,7 @@ function getKeyPress(e) {
     let upDown = 0;
     let yaw = 0;
 
-    if (keyCode == 'Delete') {
+    if (keyCode == 'Backspace') {
         takeoffOrLand();
     }
     if (keyCode == 'Tab') {
