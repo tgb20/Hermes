@@ -25,6 +25,9 @@ h1 {
   width: 30%;
   background: whitesmoke;
 }
+#video-canvas {
+  width: 100%;
+}
 
 #importExport {
   width: 100%;
@@ -104,4 +107,19 @@ h1 {
 .rc-controls .right {
   right: -20px;
   top: 20px;
+}
+#sidebarDiv .mdl-layout--fixed-drawer {
+  display: none;
+}
+#fullscreen-rc-controls {
+  display: none;
+}
+#fullscreen-rc-controls .page-content {
+  position: fixed;
+  bottom: 0;
+  left: calc(50vw - 120px);
+}
+#fullscreen-rc-controls .page-content.takeoff-land {
+  bottom: 30px;
+  left: calc(50vw - 240px);
 }

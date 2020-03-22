@@ -69,7 +69,7 @@ ipcRenderer.on('displayJS', (event, arg) => {
         document.getElementById('importExport').classList.add('active');
     } else {
         document.getElementById('importExport').classList.remove('active');
-}
+    }
 });
 
 function updateCodePreview(event) {
@@ -90,13 +90,21 @@ function clickedGreenFlag() {
 
 function fullScreenVideo() {
     if (!document.fullscreenElement) {
-        document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
         document.querySelector("#videowrapper").requestFullscreen();
       } else {
-        document.querySelector("#fullscreen i").textContent = 'fullscreen';
         document.exitFullscreen();
       }
 }
+
+document.addEventListener('fullscreenchange', (event) => {
+    if (document.fullscreenElement) {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
+        document.querySelector("#fullscreen-rc-controls").style.display = 'block';
+    } else {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen';
+        document.querySelector("#fullscreen-rc-controls").style.display = 'none';
+    }
+});
 
 ipcRenderer.on('file', (event, arg) => {
 
@@ -174,37 +182,71 @@ document.addEventListener('keyup', () => {
     ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
 });
 
-document.querySelector('.mdl-button.forward').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
-    console.log('forward');
-})
-document.querySelector('.mdl-button.backward').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: -50, upDown: 0, yaw: 0}); 
-})
-document.querySelector('.mdl-button.left').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: -50, forBack: 0, upDown: 0, yaw: 0}); 
-})
-document.querySelector('.mdl-button.right').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 50, forBack: 0, upDown: 0, yaw: 0}); 
-})
-document.querySelector('.mdl-button.up').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 50, yaw: 0}); 
-})
-document.querySelector('.mdl-button.down').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: -50, yaw: 0}); 
-})
-document.querySelector('.mdl-button.yaw-left').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: -50}); 
-})
-document.querySelector('.mdl-button.yaw-right').addEventListener('mousedown', () => {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 50}); 
-})
-const buttons = document.querySelectorAll(".mdl-button");
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("mouseup", () => {
-        ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0}); 
-    });
-}
+document.querySelectorAll('.mdl-button.forward').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
+            console.log('forward');
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.backward').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: -50, upDown: 0, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.left').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: -50, forBack: 0, upDown: 0, yaw: 0}); 
+        })
+    }
+)
+document.querySelectorAll('.mdl-button.right').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 50, forBack: 0, upDown: 0, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.up').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 50, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.down').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: -50, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.yaw-left').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: -50}); 
+        })
+    }
+)
+document.querySelectorAll('.mdl-button.yaw-right').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 50}); 
+        })
+    }
+);
+// Stop movement on mouseup
+document.querySelectorAll(".mdl-button").forEach(
+    (button) => {
+        button.addEventListener("mouseup", () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0}); 
+        });
+    }
+);
 
 function takeoffOrLand() {
     if (flying) {

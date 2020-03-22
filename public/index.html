@@ -46,7 +46,47 @@
           </button>
         </div>
       </div>
-      <canvas style="width: 100%;" id="video-canvas"></canvas>
+      <canvas id="video-canvas"></canvas>
+      <div id="fullscreen-rc-controls">
+        <div class="page-content takeoff-land" style="flex-direction: column;">
+          <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="takeoffOrLand();">
+            <i class="material-icons">flight_takeoff</i>
+          </button>
+          <div id="text-takeoff-land">Takeoff</div>
+        </div>
+        <div class="page-content">
+          <div class="rc-controls">
+            <div class="rc-controls-bg"></div>
+            <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+              <i class="material-icons">vertical_align_top</i>
+            </button>
+            <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+              <i class="material-icons">vertical_align_bottom</i>
+            </button>
+            <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+              <i class="material-icons">rotate_left</i>
+            </button>
+            <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+              <i class="material-icons">rotate_right</i>
+            </button>
+          </div>
+          <div class="rc-controls">
+            <div class="rc-controls-bg"></div>
+            <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+              <i class="material-icons">arrow_upward</i>
+            </button>
+            <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+              <i class="material-icons">arrow_downward</i>
+            </button>
+            <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+              <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
