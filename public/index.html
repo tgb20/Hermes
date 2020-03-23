@@ -93,9 +93,9 @@
         <header class="mdl-layout__header">
           <!-- Tabs -->
           <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#code" class="mdl-layout__tab is-active"><i class="material-icons">code</i></a>
-            <a href="#rc-ui" class="mdl-layout__tab"><i class="material-icons">gamepad</i></a>
-            <a href="#rc-keyboard" class="mdl-layout__tab"><i class="material-icons">keyboard</i></a>
+            <a href="#code" class="mdl-layout__tab is-active" onclick="disableKeyboard()"><i class="material-icons">code</i></a>
+            <a href="#rc-ui" class="mdl-layout__tab" onclick="disableKeyboard()"><i class="material-icons">gamepad</i></a>
+            <a href="#rc-keyboard" class="mdl-layout__tab" onclick="enableKeyboard()"><i class="material-icons">keyboard</i></a>
           </div>
         </header>
         <main class="mdl-layout__content">

@@ -7,6 +7,7 @@ const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
 const lang = 'JavaScript';
 let flying = false;
+let keyboard = false;
 
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
@@ -88,6 +89,14 @@ function clickedGreenFlag() {
     }
 }
 
+function enableKeyboard() {
+    keyboard = true;
+}
+
+function disableKeyboard() {
+    keyboard = false;
+}
+
 function fullScreenVideo() {
     if (!document.fullscreenElement) {
         document.querySelector("#videowrapper").requestFullscreen();
@@ -143,10 +152,10 @@ function getKeyPress(e) {
     let upDown = 0;
     let yaw = 0;
 
-    if (keyCode == 'Backspace') {
+    if (keyCode == 'Backspace' && keyboard) {
         takeoffOrLand();
     }
-    if (keyCode == 'Tab') {
+    if (keyCode == 'Tab' && keyboard) {
         takeoffOrLand();
     }
     if(keyCode == 'KeyW') {
@@ -173,11 +182,15 @@ function getKeyPress(e) {
     if(keyCode == 'ArrowRight') {
         yaw = 50;
     }
+    if (keyboard) {
     ipcRenderer.send('rc', {leftRight: leftRight, forBack: forBack, upDown: upDown, yaw: yaw});
+    };
 }
 
 document.addEventListener('keyup', () => {
+    if (keyboard) {
     ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
+    }
 });
 
 document.querySelectorAll('.mdl-button.forward').forEach(
