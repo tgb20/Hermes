@@ -56,7 +56,7 @@ function start() {
             dragShadowOpacity: 0.6
         }
     });
-    ateCodeworkspace.addChangeListener(updPreview);
+    workspace.addChangeListener(updateCodePreview);
 }
 
 function getToolboxElement() {
