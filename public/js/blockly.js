@@ -6,6 +6,8 @@ const fs = require('fs');
 const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
 const lang = 'JavaScript';
+let flying = false;
+let keyboard = false;
 
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
@@ -55,6 +57,7 @@ function start() {
             dragShadowOpacity: 0.6
         }
     });
+    workspace.addChangeListener(updateCodePreview);
 }
 
 function getToolboxElement() {
@@ -62,22 +65,55 @@ function getToolboxElement() {
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
-function codePreview() {
-    let output = document.getElementById('importExport');
-    output.textContent = Blockly[lang].workspaceToCode(workspace);
-    if (output.textContent.length > 0) { output.textContent += "}"; }
-    output.classList.toggle("active");
+ipcRenderer.on('displayJS', (event, arg) => {
+    if (arg) {
+        document.getElementById('importExport').classList.add('active');
+    } else {
+        document.getElementById('importExport').classList.remove('active');
+    }
+});
+
+function updateCodePreview(event) {
+    if (event.type != Blockly.Events.BLOCK_MOVE) {
+        const code = Blockly.JavaScript.workspaceToCode(workspace);
+        if (code.length > 0) {
+            document.getElementById('importExport').textContent = code + "}";
+        }
+    }
 }
 
 function clickedGreenFlag() {
-    codePreview();
-    let code = Blockly[lang].workspaceToCode(workspace) + "}";
-    ipcRenderer.send('greenflag', code);
+    let code = Blockly[lang].workspaceToCode(workspace);
+    if (code.length > 0) {
+        ipcRenderer.send('greenflag', code + "}");
+    }
+}
+
+function enableKeyboard() {
+    keyboard = true;
+}
+
+function disableKeyboard() {
+    keyboard = false;
 }
 
 function fullScreenVideo() {
-    document.querySelector("#videowrapper").requestFullscreen();
+    if (!document.fullscreenElement) {
+        document.querySelector("#videowrapper").requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
 }
+
+document.addEventListener('fullscreenchange', (event) => {
+    if (document.fullscreenElement) {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
+        document.querySelector("#fullscreen-rc-controls").style.display = 'block';
+    } else {
+        document.querySelector("#fullscreen i").textContent = 'fullscreen';
+        document.querySelector("#fullscreen-rc-controls").style.display = 'none';
+    }
+});
 
 ipcRenderer.on('file', (event, arg) => {
 
@@ -93,7 +129,6 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-    console.log(arg);
 
     let bat = arg.bat;
     let h = arg.h;
@@ -106,6 +141,10 @@ document.addEventListener('keydown', getKeyPress);
 
 function getKeyPress(e) {
 
+    // KeyW, KeyA, KeyS, KeyD = forward, left, back, right
+    // ArrowUp, ArrowLeft, ArrowDown, ArrowRight = up, yaw left, down, yaw right
+    // Tab = takeoff, Backspace = land
+
     let keyCode = e.code;
 
     let leftRight = 0;
@@ -113,8 +152,12 @@ function getKeyPress(e) {
     let upDown = 0;
     let yaw = 0;
 
-    // KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowLeft, ArrowDown, ArrowRight
-
+    if (keyCode == 'Backspace' && keyboard) {
+        takeoffOrLand();
+    }
+    if (keyCode == 'Tab' && keyboard) {
+        takeoffOrLand();
+    }
     if(keyCode == 'KeyW') {
         forBack = 50;
     }
@@ -127,8 +170,122 @@ function getKeyPress(e) {
     if(keyCode == 'KeyD') {
         leftRight = -50;
     }
-
+    if(keyCode == 'ArrowUp') {
+        upDown = 50;
+    }
+    if(keyCode == 'ArrowDown') {
+        upDown = -50;
+    }
+    if(keyCode == 'ArrowLeft') {
+        yaw = -50;
+    }
+    if(keyCode == 'ArrowRight') {
+        yaw = 50;
+    }
+    if (keyboard) {
     ipcRenderer.send('rc', {leftRight: leftRight, forBack: forBack, upDown: upDown, yaw: yaw});
+    };
+}
+
+document.addEventListener('keyup', () => {
+    if (keyboard) {
+    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
+    }
+});
+
+document.querySelectorAll('.mdl-button.forward').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.backward').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: -50, upDown: 0, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.left').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: -50, forBack: 0, upDown: 0, yaw: 0}); 
+        })
+    }
+)
+document.querySelectorAll('.mdl-button.right').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 50, forBack: 0, upDown: 0, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.up').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 50, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.down').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: -50, yaw: 0}); 
+        })
+    }
+);
+document.querySelectorAll('.mdl-button.yaw-left').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: -50}); 
+        })
+    }
+)
+document.querySelectorAll('.mdl-button.yaw-right').forEach(
+    (button) => {
+        button.addEventListener('mousedown', () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 50}); 
+        })
+    }
+);
+// Stop movement on mouseup
+document.querySelectorAll(".mdl-button").forEach(
+    (button) => {
+        button.addEventListener("mouseup", () => {
+            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0}); 
+        });
+    }
+);
+
+function takeoffOrLand() {
+    if (flying) {
+        ipcRenderer.send('land');
+        flying = false;
+        document.querySelectorAll('#btn-takeoff-land i').forEach(
+            (button) => {
+                button.textContent = 'flight_takeoff';
+            }
+        );
+        document.querySelectorAll('#text-takeoff-land').forEach(
+            (text) => {
+                text.textContent = 'Takeoff';
+            }
+        );
+    } else {
+        ipcRenderer.send('takeoff');
+        flying = true;
+        document.querySelectorAll('#btn-takeoff-land i').forEach(
+            (button) => {
+                button.textContent = 'flight_land';
+            }
+        );
+        document.querySelectorAll('#text-takeoff-land').forEach(
+            (text) => {
+                text.textContent = 'Land';
+            }
+        );
+    }
 }
 
 function saveWorkspace() {

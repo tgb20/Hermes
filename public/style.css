@@ -25,9 +25,8 @@ h1 {
   width: 30%;
   background: whitesmoke;
 }
-
-#videowrapper {
-  margin-bottom: 20px;
+#video-canvas {
+  width: 100%;
 }
 
 #importExport {
@@ -47,4 +46,80 @@ h1 {
 
 .controls {
   margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.green-flag {
+  margin: 20px;
+}
+
+.mdl-layout__container {
+  position: relative;
+}
+.mdl-layout__tab-bar-left-button, .mdl-layout__tab-bar-right-button {
+  display: none;
+}
+.mdl-layout__tab-bar {
+  width: 100%;
+  justify-content: space-evenly;
+  padding-left: 0;
+}
+.mdl-chip__contact {
+  margin-right: 0;
+}
+.page-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: rgba(103,58,183);
+  text-align: center;
+}
+.rc-controls {
+  position: relative;
+  width:80px;
+  min-width: 80px;
+  height: 80px;
+  margin: 30px;
+}
+.rc-controls-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(103,58,183);
+  opacity: 0.5;
+}
+.rc-controls button {
+  position: absolute;
+}
+.rc-controls .top {
+  top: -20px;
+  left: 20px;
+}
+.rc-controls .bottom {
+  bottom: -20px;
+  left: 20px;
+}
+.rc-controls .left {
+  left: -20px;
+  top: 20px;
+}
+.rc-controls .right {
+  right: -20px;
+  top: 20px;
+}
+#sidebarDiv .mdl-layout--fixed-drawer {
+  display: none;
+}
+#fullscreen-rc-controls {
+  display: none;
+}
+#fullscreen-rc-controls .page-content {
+  position: fixed;
+  bottom: 0;
+  left: calc(50vw - 120px);
+}
+#fullscreen-rc-controls .page-content.takeoff-land {
+  bottom: 30px;
+  left: calc(50vw - 240px);
 }

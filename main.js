@@ -24,6 +24,15 @@ ipcMain.on('greenflag', (event, arg) => {
     greenFlag();
 });
 
+ipcMain.on('takeoff', (event, arg) => {
+    drone.send('takeoff');    
+});
+
+
+ipcMain.on('land', (event, arg) => {
+    drone.send('land');    
+});
+
 ipcMain.on('rc', (event, arg) => {
 
     let leftRight = arg.leftRight;
@@ -31,11 +40,10 @@ ipcMain.on('rc', (event, arg) => {
     let upDown = arg.upDown;
     let yaw = arg.yaw;
  
-    // drone.send("rc", { value: '0 0 0 0'});
+    drone.send("rc", { a: leftRight, b: forBack, c: upDown, d: yaw });
 });
 
 ipcMain.on('connect', (event, arg) => {
-
     // Try to connect
     console.log(arg);
 });
@@ -101,13 +109,13 @@ const ffmpeg = spawn('ffmpeg', [
     '-codec:v',
     'mpeg1video',
     '-s',
-    '640x480',
+    '1280x720',
     '-b:v',
-    '800k',
+    '1000k',
     '-bf',
     '0',
     '-r',
-    '20',
+    '30',
     `http://${HOST}:${PORT}/tellostream`
 ])
 
@@ -152,7 +160,7 @@ wsServer.broadcast = function (data) {
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 800,
+        width: 980,
         height: 600,
         webPreferences: {
             nodeIntegration: true
@@ -183,10 +191,39 @@ function createWindow() {
                         win.webContents.send('file', 'open');
                     },
                     accelerator: 'CmdOrCtrl+O'
+                },
+                {
+                    label: 'Quit',
+                    click() {
+                        app.quit()
+                    },
+                    accelerator: 'CmdOrCtrl+Q'
                 }
             ]
         },
-        { role: 'viewMenu' },
+        {
+            label: 'View',
+            submenu: [
+                {
+                    label: 'Display JavaScript',
+                    type: 'checkbox', 
+                    checked: false,
+                    click: e => {
+                        win.webContents.send('displayJS', e.checked);
+                    }
+                },
+                { type: 'separator' },
+                { role: 'reload' },
+                { role: 'forcereload' },
+                { role: 'toggledevtools' },
+                { type: 'separator' },
+                { role: 'resetzoom' },
+                { role: 'zoomin' },
+                { role: 'zoomout' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
+        },
         { role: 'windowMenu' }
     ];
 
