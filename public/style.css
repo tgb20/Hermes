@@ -123,4 +123,6 @@ h1 {
   bottom: 30px;
   left: calc(50vw - 240px);
 }
+.page-content img {
   max-width: 100%;
+}
