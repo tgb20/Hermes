@@ -33,6 +33,10 @@ ipcMain.on('land', (event, arg) => {
     drone.send('land');    
 });
 
+ipcMain.on('emergency', (event, arg) => {
+    drone.send('emergency');
+});
+
 ipcMain.on('rc', (event, arg) => {
 
     let leftRight = arg.leftRight;

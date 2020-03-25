@@ -89,6 +89,10 @@ function clickedGreenFlag() {
     }
 }
 
+function clickedStop() {
+    ipcRenderer.send('emergency');
+}
+
 function enableKeyboard() {
     keyboard = true;
 }
