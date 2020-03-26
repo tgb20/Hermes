@@ -89,6 +89,10 @@ function clickedGreenFlag() {
     }
 }
 
+function clickedStop() {
+    ipcRenderer.send('emergency');
+}
+
 function enableKeyboard() {
     keyboard = true;
 }
@@ -137,58 +141,40 @@ ipcRenderer.on('dronestate', (event, arg) => {
     document.getElementById('height').textContent = h;
 });
 
+const validKeys = {
+    'KeyW': {leftRight: 0, forBack: 50, upDown: 0, yaw: 0},
+    'KeyS': {leftRight: 0, forBack: -50, upDown: 0, yaw: 0},
+    'KeyA': {leftRight: -50, forBack: 0, upDown: 0, yaw: 0},
+    'KeyD': {leftRight: 50, forBack: 0, upDown: 0, yaw: 0},
+    'ArrowUp': {leftRight: 0, forBack: 0, upDown: 50, yaw: 0},
+    'ArrowDown': {leftRight: 0, forBack: 0, upDown: -50, yaw: 0},
+    'ArrowRight': {leftRight: 0, forBack: 0, upDown: 0, yaw: 50},
+    'ArrowLeft': {leftRight: 0, forBack: 0, upDown: 0, yaw: -50},
+}
+
 document.addEventListener('keydown', getKeyPress);
 
-function getKeyPress(e) {
+function getKeyPress(key) {
 
     // KeyW, KeyA, KeyS, KeyD = forward, left, back, right
     // ArrowUp, ArrowLeft, ArrowDown, ArrowRight = up, yaw left, down, yaw right
-    // Tab = takeoff, Backspace = land
 
-    let keyCode = e.code;
-
-    let leftRight = 0;
-    let forBack = 0;
-    let upDown = 0;
-    let yaw = 0;
-
-    if (keyCode == 'Backspace' && keyboard) {
-        takeoffOrLand();
-    }
-    if (keyCode == 'Tab' && keyboard) {
-        takeoffOrLand();
-    }
-    if(keyCode == 'KeyW') {
-        forBack = 50;
-    }
-    if(keyCode == 'KeyS') {
-        forBack = -50;
-    }
-    if(keyCode == 'KeyA') {
-        leftRight = 50;
-    }
-    if(keyCode == 'KeyD') {
-        leftRight = -50;
-    }
-    if(keyCode == 'ArrowUp') {
-        upDown = 50;
-    }
-    if(keyCode == 'ArrowDown') {
-        upDown = -50;
-    }
-    if(keyCode == 'ArrowLeft') {
-        yaw = -50;
-    }
-    if(keyCode == 'ArrowRight') {
-        yaw = 50;
-    }
     if (keyboard) {
-    ipcRenderer.send('rc', {leftRight: leftRight, forBack: forBack, upDown: upDown, yaw: yaw});
-    };
+        if (key.code in validKeys) {
+            ipcRenderer.send('rc', validKeys[key.code]);
+    }
+        // Tab = takeoff, Backspace = land
+        if (key.code == 'Tab') {
+            ipcRenderer.send('takeoff');
+    }
+        if (key.callback == 'Backspace') {
+            ipcRenderer.send('land');
+    }
+    }
 }
 
-document.addEventListener('keyup', () => {
-    if (keyboard) {
+document.addEventListener('keyup', (key) => {
+    if (keyboard && key.code in validKeys) {
     ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
     }
 });
