@@ -61,7 +61,7 @@ function start() {
 }
 
 function getToolboxElement() {
-    var match = location.search.match(/toolbox=([^&]+)/);
+    const match = location.search.match(/toolbox=([^&]+)/);
     return document.getElementById('toolbox-' + (match ? match[1] : 'categories'));
 }
 
@@ -83,7 +83,7 @@ function updateCodePreview(event) {
 }
 
 function clickedGreenFlag() {
-    let code = Blockly[lang].workspaceToCode(workspace);
+    const code = Blockly[lang].workspaceToCode(workspace);
     if (code.length > 0) {
         ipcRenderer.send('greenflag', code + "}");
     }
@@ -162,20 +162,20 @@ function getKeyPress(key) {
     if (keyboard) {
         if (key.code in validKeys) {
             ipcRenderer.send('rc', validKeys[key.code]);
-    }
+        }
         // Tab = takeoff, Backspace = land
         if (key.code == 'Tab') {
             ipcRenderer.send('takeoff');
-    }
+        }
         if (key.callback == 'Backspace') {
             ipcRenderer.send('land');
-    }
+        }
     }
 }
 
 document.addEventListener('keyup', (key) => {
     if (keyboard && key.code in validKeys) {
-    ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
+        ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
     }
 });
 
