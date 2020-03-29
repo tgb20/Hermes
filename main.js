@@ -216,6 +216,14 @@ function createWindow() {
                         win.webContents.send('displayJS', e.checked);
                     }
                 },
+                {
+                    label: 'Detect Markers',
+                    type: 'checkbox', 
+                    checked: false,
+                    click: e => {
+                        win.webContents.send('detectMarkers', e.checked);
+                    }
+                },
                 { type: 'separator' },
                 { role: 'reload' },
                 { role: 'forcereload' },

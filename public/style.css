@@ -25,8 +25,11 @@ h1 {
   width: 30%;
   background: whitesmoke;
 }
-#video-canvas {
+#video-canvas, #canvasOutput {
   width: 100%;
+}
+#canvasOutput {
+  display: none;
 }
 
 #importExport {

@@ -8,6 +8,7 @@ const win = remote.getCurrentWindow();
 const lang = 'JavaScript';
 let flying = false;
 let keyboard = false;
+let opencv = false;
 
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
@@ -73,6 +74,23 @@ ipcRenderer.on('displayJS', (event, arg) => {
     }
 });
 
+ipcRenderer.on('detectMarkers', (event, arg) => {
+    if (arg) {
+        initOpenCV();
+        opencv = true;
+        video = document.getElementById('video-canvas');
+        video.style.display = 'none';
+        canvas = document.getElementById('canvasOutput');
+        canvas.style.display = 'block';
+    } else {
+        opencv = false;
+        video = document.getElementById('video-canvas');
+        video.style.display = 'block';
+        canvas = document.getElementById('canvasOutput');
+        canvas.style.display = 'none';
+    }
+});
+
 function updateCodePreview(event) {
     if (event.type != Blockly.Events.BLOCK_MOVE) {
         const code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -113,6 +131,10 @@ document.addEventListener('fullscreenchange', (event) => {
     if (document.fullscreenElement) {
         document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
         document.querySelector("#fullscreen-rc-controls").style.display = 'block';
+        // let canvas = document.getElementById("canvasOutput")
+        // let rect = canvas.getBoundingClientRect();
+        // canvas.width = rect.width;
+        // canvas.height = rect.height;
     } else {
         document.querySelector("#fullscreen i").textContent = 'fullscreen';
         document.querySelector("#fullscreen-rc-controls").style.display = 'none';

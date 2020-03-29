@@ -10,6 +10,45 @@
   <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-orange.min.css" /> -->
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-light_green.min.css" />
   <link rel="stylesheet" href="style.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script defer src="js/blockly_compressed_vertical.js"></script>
+  <script defer src="js/blockly.js"></script>
+  <script defer src="js/msg/messages.js"></script>
+  <script defer src="js/msg/scratch_msgs.js"></script>
+  <script defer src="js/blocks_common/colour.js"></script>
+  <script defer src="js/blocks_common/math.js"></script>
+  <script defer src="js/blocks_common/matrix.js"></script>
+  <script defer src="js/blocks_common/text.js"></script>
+  <script defer src="js/blocks_vertical/control.js"></script>
+  <script defer src="js/blocks_vertical/data.js"></script>
+  <script defer src="js/blocks_vertical/event.js"></script>
+  <script defer src="js/blocks_vertical/extensions.js"></script>
+  <script defer src="js/blocks_vertical/looks.js"></script>
+  <script defer src="js/blocks_vertical/motion.js"></script>
+  <script defer src="js/blocks_vertical/drone_motion.js"></script>
+  <script defer src="js/blocks_vertical/operators.js"></script>
+  <script defer src="js/blocks_vertical/sensing.js"></script>
+  <script defer src="js/blocks_vertical/drone_sensing.js"></script>
+  <script defer src="js/blocks_vertical/sound.js"></script>
+  <script defer src="js/blocks_vertical/vertical_extensions.js"></script>
+  <script defer src="js/generators/javascript.js"></script>
+  <script defer src="js/generators/javascript/event.js"></script>
+  <script defer src="js/generators/javascript/colour.js"></script>
+  <script defer src="js/generators/javascript/lists.js"></script>
+  <script defer src="js/generators/javascript/logic.js"></script>
+  <script defer src="js/generators/javascript/loops.js"></script>
+  <script defer src="js/generators/javascript/math.js"></script>
+  <script defer src="js/generators/javascript/text.js"></script>
+  <script defer src="js/generators/javascript/variables.js"></script>
+  <script defer src="js/generators/javascript/variables_dynamic.js"></script>
+  <script defer src="js/generators/javascript/operators.js"></script>
+  <script defer src="js/generators/javascript/drone_motion.js"></script>
+  <script defer src="js/generators/javascript/control.js"></script>
+  <script defer src="js/generators/javascript/drone_sensing.js"></script>
+  <script defer src="js/generators/javascript/data.js"></script>
+  <script defer src="js/jsmpeg.min.js"></script>
+  <script defer src="js/videofeed.js"></script>
+  <script defer src="js/blocks_vertical/default_toolbox.js"></script>
 </head>
 
 <body onload="start()">
@@ -46,7 +85,8 @@
           </button>
         </div>
       </div>
-      <canvas id="video-canvas"></canvas>
+      <canvas id="video-canvas" width="640" height="480" ></canvas>
+      <canvas id="canvasOutput" width="640" height="480"></canvas>
       <div id="fullscreen-rc-controls">
         <div class="page-content takeoff-land" style="flex-direction: column;">
           <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="takeoffOrLand();">
@@ -150,7 +190,6 @@
               <div id="text-takeoff-land">Takeoff</div>
             </div>
           </section>
-
           <section class="mdl-layout__tab-panel" id="rc-keyboard">
             <div class="page-content">
               <img src="media/keyboard_controls.png" alt="Keyboard controls"/>
@@ -160,44 +199,6 @@
       </div>
     </div>
   </div>
-  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <script src="js/blockly_compressed_vertical.js"></script>
-  <script src="js/blockly.js"></script>
-  <script src="js/msg/messages.js"></script>
-  <script src="js/msg/scratch_msgs.js"></script>
-  <script src="js/blocks_common/colour.js"></script>
-  <script src="js/blocks_common/math.js"></script>
-  <script src="js/blocks_common/matrix.js"></script>
-  <script src="js/blocks_common/text.js"></script>
-  <script src="js/blocks_vertical/control.js"></script>
-  <script src="js/blocks_vertical/data.js"></script>
-  <script src="js/blocks_vertical/event.js"></script>
-  <script src="js/blocks_vertical/extensions.js"></script>
-  <script src="js/blocks_vertical/looks.js"></script>
-  <script src="js/blocks_vertical/motion.js"></script>
-  <script src="js/blocks_vertical/drone_motion.js"></script>
-  <script src="js/blocks_vertical/operators.js"></script>
-  <script src="js/blocks_vertical/sensing.js"></script>
-  <script src="js/blocks_vertical/drone_sensing.js"></script>
-  <script src="js/blocks_vertical/sound.js"></script>
-  <script src="js/blocks_vertical/vertical_extensions.js"></script>
-  <script src="js/generators/javascript.js"></script>
-  <script src="js/generators/javascript/event.js"></script>
-  <script src="js/generators/javascript/colour.js"></script>
-  <script src="js/generators/javascript/lists.js"></script>
-  <script src="js/generators/javascript/logic.js"></script>
-  <script src="js/generators/javascript/loops.js"></script>
-  <script src="js/generators/javascript/math.js"></script>
-  <script src="js/generators/javascript/text.js"></script>
-  <script src="js/generators/javascript/variables.js"></script>
-  <script src="js/generators/javascript/variables_dynamic.js"></script>
-  <script src="js/generators/javascript/operators.js"></script>
-  <script src="js/generators/javascript/drone_motion.js"></script>
-  <script src="js/generators/javascript/control.js"></script>
-  <script src="js/generators/javascript/drone_sensing.js"></script>
-  <script src="js/generators/javascript/data.js"></script>
-  <script src="js/jsmpeg.min.js"></script>
-  <script src="js/videofeed.js"></script>
-  <script src="js/blocks_vertical/default_toolbox.js"></script>
+  
 </body>
 </html>
