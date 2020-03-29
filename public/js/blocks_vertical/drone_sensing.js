@@ -206,7 +206,7 @@ Blockly.Blocks['drone_sensing_accx'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration x (0.001 g)",
+            "message0": "acceleration x (cm/s²)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
             "tooltip": "the acceleration of the x axis",
@@ -222,7 +222,7 @@ Blockly.Blocks['drone_sensing_accy'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration y (0.001 g)",
+            "message0": "acceleration y (cm/s²)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
             "tooltip": "the acceleration of the y axis",
@@ -238,7 +238,7 @@ Blockly.Blocks['drone_sensing_accz'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration z (0.001 g)",
+            "message0": "acceleration z (cm/s²)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
             "tooltip": "the acceleration of the z axis",

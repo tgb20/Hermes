@@ -679,9 +679,13 @@ Blockly.VerticalFlyout.prototype.setCheckboxState = function(blockId, value) {
         Blockly.utils.removeClass((checkboxObj.svgRoot), 'checked');
       }
 
+      let event = new CustomEvent('blocklyCheckmark', {detail: { id: checkboxObj.block.id, value: value }});
+
+      document.dispatchEvent(event);
+
       Blockly.Events.fire(new Blockly.Events.Change(
           checkboxObj.block, 'checkbox', null, oldValue, value));
-      console.log(value); // This does get run with the correct value
+
       return;
     }
   }

@@ -124,14 +124,14 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="control_while" id="control_while"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">' +
-    '<block type="drone_sensing_speed_x" id="drone_sensing_speed"></block>' +
-    '<block type="drone_sensing_speed_y" id="drone_sensing_speed"></block>' +
-    '<block type="drone_sensing_speed_z" id="drone_sensing_speed"></block>' +
+    '<block type="drone_sensing_speed_x" id="drone_sensing_speed_x"></block>' +
+    '<block type="drone_sensing_speed_y" id="drone_sensing_speed_y"></block>' +
+    '<block type="drone_sensing_speed_z" id="drone_sensing_speed_z"></block>' +
     '<block type="drone_sensing_battery" id="drone_sensing_battery"></block>' +
     '<block type="drone_sensing_time" id="drone_sensing_time"></block>' +
     '<block type="drone_sensing_height" id="drone_sensing_height"></block>' +
-    '<block type="drone_sensing_temp_high" id="drone_sensing_temp"></block>' +
-    '<block type="drone_sensing_temp_low" id="drone_sensing_temp"></block>' +
+    '<block type="drone_sensing_temp_high" id="drone_sensing_temp_high"></block>' +
+    '<block type="drone_sensing_temp_low" id="drone_sensing_temp_low"></block>' +
     '<block type="drone_sensing_pitch" id="drone_sensing_pitch"></block>' +
     '<block type="drone_sensing_roll" id="drone_sensing_roll"></block>' +
     '<block type="drone_sensing_yaw" id="drone_sensing_yaw"></block>' +
