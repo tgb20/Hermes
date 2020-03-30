@@ -10,10 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^8.1.1",
+    "app-root-dir": "^1.0.2",
+    "electron": "^8.2.0",
     "electron-prompt": "^1.5.1",
     "express": "^4.17.1",
+    "ffbinaries": "^1.1.4",
+    "fs-extra": "^9.0.0",
+    "moment": "^2.24.0",
     "tello-drone": "^3.0.4",
     "ws": "^7.2.3"
-  }
+  },
+  "devDependencies": {}
 }

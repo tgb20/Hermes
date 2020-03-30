@@ -1,3 +1,6 @@
+# Ignore directory with ffmpeg binaries
+bin
+
 # Logs
 logs
 *.log

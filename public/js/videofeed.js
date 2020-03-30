@@ -1,23 +1,29 @@
-
-let videoCanvas;
+var nativeImage = require('electron').nativeImage
+var moment = require('moment');
 let player;
-let video, context, src, dst, dictionary, markerIds, markerCorners, parameter;
+let video, canvas, context, src, dst, dictionary, markerIds, markerCorners, parameter;
 let height, width;
 const FPS = 20;
+const type = 'image/png';
+const quality = 9;
 
 // opencv.js build from https://github.com/ganwenyao/opencv_js
 var cv = require('./js/opencv.js')
 
-async function init() {
-  videoCanvas = document.getElementById('video-canvas');
-}
+let recording = false;
+let mediaRecorder;
+let chunks = [];
 
+async function init() {
+  video = document.getElementById('video-canvas');
+  canvas = document.getElementById('canvasOutput');
+}
 
 const wsConnect = async function() {
   wsUrl = 'ws://localhost:3000';
 
   player = new JSMpeg.Player(wsUrl, {
-    canvas: videoCanvas,
+    canvas: video,
     audio: false,
     videoBufferSize: 512 * 1024,
     preserveDrawingBuffer: true,
@@ -42,8 +48,6 @@ cv['onRuntimeInitialized']=()=>{
 };
 
 function initOpenCV() {
-  video = document.getElementById('video-canvas');
-  canvas = document.getElementById('canvasOutput');
   width = video.width;
   height = video.height;
   context = video.getContext("2d");
@@ -94,3 +98,63 @@ function processVideo() {
     setTimeout(processVideo, delay);
   }
 }
+
+function saveImage() {
+  let data;
+  if (opencv) {
+    data = canvas.toDataURL(type, quality);
+  } else {
+    data = video.toDataURL(type, quality);
+  }
+  const img = nativeImage.createFromDataURL(data).toPNG();
+  const fileName = 'image-'+ moment().format('M_D_Y-[at]-h_mm_ss_A') + '.png';
+  ipcRenderer.send('save_photo', fileName, img)
+}
+
+function videoControl() {
+  let stream;
+  if (!recording) {
+    if (opencv) {
+      stream = canvas.captureStream(FPS);
+    } else {
+      stream = video.captureStream(FPS)
+    }
+    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder.start();
+
+    document.querySelector("#video-control i").textContent = 'videocam_off';
+    recording = true;
+
+    mediaRecorder.ondataavailable = (ev) => {
+      chunks.push(ev.data);
+    }
+
+    mediaRecorder.onstop = (ev)=>{
+      const blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+      chunks = [];
+      const videoFilename = 'video-'+ moment().format('M_D_Y-[at]-h_mm_ss_A')
+      saveBlob(blob, videoFilename);
+    }
+  } else {
+    mediaRecorder.stop();
+    document.querySelector("#video-control i").textContent = 'videocam';
+    recording = false;
+  }
+}
+
+function saveBlob(blob, fileName) {
+  let reader = new FileReader()
+  reader.onload = function() {
+      if (reader.readyState == 2) {
+          var buffer = new Buffer(reader.result)
+          ipcRenderer.send('save_video', fileName, buffer)
+          console.log(`Saving ${JSON.stringify({ fileName, size: blob.size })}`)
+      }
+  }
+  reader.readAsArrayBuffer(blob)
+}
+
+ipcRenderer.on('saved_file', (event, status) => {
+  console.log("Saved file " + status)
+})
+

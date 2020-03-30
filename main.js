@@ -3,7 +3,13 @@ const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const ws = require('ws');
+const fs = require('fs');
+const { outputFile } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
+var ffbinaries = require('ffbinaries')
+
+var appRootDir = require('app-root-dir').get();
+var ffmpegpath = appRootDir + '/bin/ffmpeg';
 
 const exp = express()
 
@@ -13,9 +19,47 @@ let win, droneState;
 
 const TELLO_VIDEO_PORT = 11111
 const TELLO_HOST = '192.168.10.1'
-
 const HOST = 'localhost';
 const PORT = 3000;
+
+// Store photos and videos in the default directories
+const imageDir = app.getPath('pictures') + "/Hermes/";
+const videoDir = app.getPath('videos') + "/Hermes/";
+
+// Create the directories if they doesn't already exist
+mkDir(imageDir);
+mkDir(videoDir);
+
+function mkDir(path) {
+    fs.opendir(path, (err, dir) => {
+        if (err) {
+            fs.mkdir(path, (err) => {
+                if (err) throw error;
+            })
+        }
+        dir.close();
+    })
+}
+
+function downloadBinaries(callback) {
+    var platform = ffbinaries.detectPlatform();
+    const dest = appRootDir + '/bin';
+    const options = {
+        destination: dest
+    }
+    return ffbinaries.downloadFiles(['ffmpeg'], options, function (err, data) {
+        console.log('Downloading ffmpeg binaries for ' + platform + ':');  
+        return callback(err, data);
+    });
+}
+
+downloadBinaries(function (err, data) {
+    if (err) {
+        console.log('Downloads failed.');
+    }
+    console.log('Downloads successful.');
+    startVideoStream();
+});
 
 ipcMain.on('greenflag', (event, arg) => {
     let code = arg;
@@ -52,6 +96,46 @@ ipcMain.on('connect', (event, arg) => {
     console.log(arg);
 });
 
+ipcMain.on('save_photo', (event, fileName, img) => {
+    const filePath = imageDir + fileName;
+    outputFile(filePath, img, (err) => {
+        if (err) {
+            event.sender.send('save_file_error', err.message);
+        } else {
+            event.reply('saved_file', filePath);
+        }
+    })
+})
+
+ipcMain.on('save_video', (event, fileName, buffer) => {
+    const webmFilename = videoDir + fileName + '.webm';
+    const mp4Filename = videoDir + fileName + '.mp4';
+    outputFile(webmFilename, buffer, (err) => {
+        if (err) {
+            event.sender.send('save_file_error', err.message);
+        } else {
+            const ffmpeg = spawn(ffmpegpath, [
+                '-y',
+                '-i',
+                webmFilename,
+                '-c:v',
+                'mpeg4',
+                '-strict', 'experimental',
+                mp4Filename
+            ])
+            
+            ffmpeg.stderr.on('data', data => {
+                console.log(`stderr: ${data}`)
+            })
+            
+            ffmpeg.on('close', code => {
+                console.log(`child process exited with code ${code}`);
+                event.reply('saved_file', mp4Filename);
+            })
+        }
+    })
+})
+
 exp.use(express.static(path.join(__dirname, 'public')))
 
 exp.post(`/tellostream`, (req, res) => {
@@ -63,7 +147,6 @@ exp.post(`/tellostream`, (req, res) => {
 
     req.on('data', function (data) {
         wsServer.broadcast(data);
-
     })
 
     req.on('end', function () {
@@ -102,34 +185,37 @@ drone.on("connection", async () => {
     }
 });
 
-console.log('starting ffmpeg')
-// ffmpeg -i udp://192.168.10.1:11111 -f mpegts -codec:v mpeg1video -s 640x480 -b:v 800k -r 20 -bf 0 http://127.0.0.1:8081/tellostream
-const ffmpeg = spawn('ffmpeg', [
-    '-hide_banner',
-    '-i',
-    `udp://${TELLO_HOST}:${TELLO_VIDEO_PORT}`,
-    '-f',
-    'mpegts',
-    '-codec:v',
-    'mpeg1video',
-    '-s',
-    '1280x720',
-    '-b:v',
-    '1000k',
-    '-bf',
-    '0',
-    '-r',
-    '30',
-    `http://${HOST}:${PORT}/tellostream`
-])
+function startVideoStream() {
+    console.log('starting ffmpeg')
+    // ffmpeg -i udp://192.168.10.1:11111 -f mpegts -codec:v mpeg1video -s 640x480 -b:v 800k -r 20 -bf 0 http://127.0.0.1:8081/tellostream
+    const ffmpeg = spawn(ffmpegpath, [
+        '-hide_banner',
+        '-i',
+        `udp://${TELLO_HOST}:${TELLO_VIDEO_PORT}`,
+        '-f',
+        'mpegts',
+        '-codec:v',
+        'mpeg1video',
+        '-s',
+        '1280x720',
+        '-b:v',
+        '1000k',
+        '-bf',
+        '0',
+        '-r',
+        '30',
+        `http://${HOST}:${PORT}/tellostream`
+    ])
+    
+    ffmpeg.stderr.on('data', data => {
+        console.log(`stderr: ${data}`)
+    })
+    
+    ffmpeg.on('close', code => {
+        console.log(`child process exited with code ${code}`)
+    })
+}
 
-ffmpeg.stderr.on('data', data => {
-    console.log(`stderr: ${data}`)
-})
-
-ffmpeg.on('close', code => {
-    console.log(`child process exited with code ${code}`)
-})
 
 const server = exp.listen(PORT, HOST, () => {
     const host = server.address().address
