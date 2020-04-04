@@ -64,7 +64,6 @@ Blockly.Blocks['drone_sensing_battery'] = {
         this.jsonInit({
             "message0": "battery (%)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": true,
             "tooltip": "the percentage of the current battery level",
             "extensions": ["colours_sensing", "output_number"]
         });
@@ -96,7 +95,6 @@ Blockly.Blocks['drone_sensing_height'] = {
         this.jsonInit({
             "message0": "height (cm)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": true,
             "tooltip": "the height in cm",
             "extensions": ["colours_sensing", "output_number"]
         });
