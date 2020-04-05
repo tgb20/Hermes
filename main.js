@@ -1,15 +1,35 @@
-const tello = require("tello-drone");
+const tello = require('tello-drone');
 const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const ws = require('ws');
 const fs = require('fs');
+const os = require('os');
 const { outputFile } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
-var ffbinaries = require('ffbinaries')
 
-var appRootDir = require('app-root-dir').get();
-var ffmpegpath = appRootDir + '/bin/ffmpeg';
+let platform = os.platform()
+if (platform == "darwin") {
+	platform = "mac";
+} else if(platform == "win32") {
+	platform = "win";
+}
+
+var getResourcesPath = function () {
+    var paths = Array.from(arguments)
+    
+    if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
+        paths.unshift(path.join(process.cwd(), 'resources') );
+    } else {
+        // In builds the resources directory is located in 'Contents/Resources'
+        paths.unshift(process.resourcesPath)
+    } 
+    return path.join.apply(null, paths)
+}
+
+// TODO: Support Windows with ffmpeg.exe binary
+const platformPath = getResourcesPath(platform)
+const ffmpegpath = path.join(platformPath, 'bin', 'ffmpeg');
 
 const exp = express()
 
@@ -40,26 +60,6 @@ function mkDir(path) {
         dir.close();
     })
 }
-
-function downloadBinaries(callback) {
-    var platform = ffbinaries.detectPlatform();
-    const dest = appRootDir + '/bin';
-    const options = {
-        destination: dest
-    }
-    return ffbinaries.downloadFiles(['ffmpeg'], options, function (err, data) {
-        console.log('Downloading ffmpeg binaries for ' + platform + ':');  
-        return callback(err, data);
-    });
-}
-
-downloadBinaries(function (err, data) {
-    if (err) {
-        console.log('Downloads failed.');
-    }
-    console.log('Downloads successful.');
-    startVideoStream();
-});
 
 ipcMain.on('greenflag', (event, arg) => {
     let code = arg;
@@ -173,7 +173,7 @@ drone.on("send", (err, length) => {
 });
 
 drone.on("message", message => {
-    console.log("Recieved Message > ", message);
+    console.log("Received Message > ", message);
 });
 
 drone.on("connection", async () => {
@@ -215,7 +215,7 @@ function startVideoStream() {
         console.log(`child process exited with code ${code}`)
     })
 }
-
+startVideoStream();
 
 const server = exp.listen(PORT, HOST, () => {
     const host = server.address().address
