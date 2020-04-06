@@ -246,3 +246,45 @@ Blockly.Blocks['drone_sensing_tof'] = {
         });
     }
 };
+
+Blockly.Blocks['drone_sensing_take_photo'] = {
+    /**
+     * Block to take photo.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "take photo",
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "shape_statement"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_start_video'] = {
+    /**
+     * Block to start video recording.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "start video",
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "shape_statement"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_stop_video'] = {
+    /**
+     * Block to stop video recording.
+     * @this Blockly.Block
+     */
+    init: function () {
+        this.jsonInit({
+            "message0": "stop video",
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "shape_statement"]
+        });
+    }
+};

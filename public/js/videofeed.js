@@ -111,6 +111,20 @@ function saveImage() {
   ipcRenderer.send('save_photo', fileName, img)
 }
 
+ipcRenderer.on('takePhoto', (event, arg) => {
+  saveImage();
+});
+
+ipcRenderer.on('startVideo', (event, arg) => {
+  recording = false;
+  videoControl();
+});
+
+ipcRenderer.on('stopVideo', (event, arg) => {
+  recording = true;
+  videoControl();
+});
+
 function videoControl() {
   let stream;
   if (!recording) {

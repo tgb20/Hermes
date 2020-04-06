@@ -124,6 +124,9 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="control_while" id="control_while"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">' +
+    '<block type="drone_sensing_take_photo" id="drone_sensing_take_photo"></block>' +
+    '<block type="drone_sensing_start_video" id="drone_sensing_start_video"></block>' +
+    '<block type="drone_sensing_stop_video" id="drone_sensing_stop_video"></block>' +
     '<block type="drone_sensing_speed_x" id="drone_sensing_speed"></block>' +
     '<block type="drone_sensing_speed_y" id="drone_sensing_speed"></block>' +
     '<block type="drone_sensing_speed_z" id="drone_sensing_speed"></block>' +

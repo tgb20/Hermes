@@ -96,6 +96,10 @@ ipcMain.on('connect', (event, arg) => {
     console.log(arg);
 });
 
+function takePhoto() {
+    win.webContents.send('takePhoto');
+}
+
 ipcMain.on('save_photo', (event, fileName, img) => {
     const filePath = imageDir + fileName;
     outputFile(filePath, img, (err) => {
@@ -106,6 +110,14 @@ ipcMain.on('save_photo', (event, fileName, img) => {
         }
     })
 })
+
+function startVideo() {
+    win.webContents.send('startVideo');
+}
+
+function stopVideo() {
+    win.webContents.send('stopVideo');
+}
 
 ipcMain.on('save_video', (event, fileName, buffer) => {
     const webmFilename = videoDir + fileName + '.webm';
