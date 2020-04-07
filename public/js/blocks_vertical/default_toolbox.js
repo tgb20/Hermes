@@ -270,6 +270,4 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
   '</category>' +
   '<category name="%{BKY_CATEGORY_VARIABLES}" id="variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">' +
   '</category>' +
-  '<category name="LISTS NOT IMPLEMENTED" id="LISTS NOT IMPLEMENTED" colour="#FF0000" secondaryColour="#FF0000">'
-  '</category>' +
   '</xml>';

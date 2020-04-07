@@ -34,3 +34,10 @@ Blockly.JavaScript['data_changevariableby'] = function (block) {
 
     return code;
 }
+
+Blockly.JavaScript['data_addtolist'] = function (block) {
+
+    let code = '\tlet testGenerator = "New List!";\n';
+
+    return code;
+}
