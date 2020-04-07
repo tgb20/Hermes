@@ -59,6 +59,10 @@ function start() {
     });
     workspace.addChangeListener(updateCodePreview);
 
+    let greenFlagBlock = workspace.newBlock('event_whenflagclicked');
+    greenFlagBlock.initSvg();
+    greenFlagBlock.render();
+
     document.addEventListener('blocklyCheckmark', (event) => {
 
         let blockID = event.detail.id;
