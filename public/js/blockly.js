@@ -5,10 +5,7 @@ const prompt = require('electron-prompt');
 const fs = require('fs');
 const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
-const lang = 'JavaScript';
-let flying = false;
 let keyboard = false;
-let opencv = false;
 
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
@@ -74,37 +71,38 @@ ipcRenderer.on('displayJS', (event, arg) => {
     }
 });
 
-ipcRenderer.on('detectMarkers', (event, arg) => {
-    if (arg) {
-        initOpenCV();
-        opencv = true;
-        video = document.getElementById('video-canvas');
-        video.style.display = 'none';
-        canvas = document.getElementById('canvasOutput');
-        canvas.style.display = 'block';
-    } else {
-        opencv = false;
-        video = document.getElementById('video-canvas');
-        video.style.display = 'block';
-        canvas = document.getElementById('canvasOutput');
-        canvas.style.display = 'none';
+function generateJavaScript() {
+    var xml = Blockly.Xml.workspaceToDom(workspace);
+    // Find and remove all top blocks.
+    var topBlocks = [];
+    for (var i = xml.childNodes.length - 1, node; block = xml.childNodes[i]; i--) {
+        if (block.tagName == 'BLOCK') {
+            xml.removeChild(block);
+            topBlocks.unshift(block);
+        }
     }
-});
-
+    // Add each top block one by one and generate code.
+    var allCode = [];
+    for (var i = 0, block; block = topBlocks[i]; i++) {
+        var headless = new Blockly.Workspace();
+        xml.appendChild(block);
+        Blockly.Xml.domToWorkspace(xml, headless);
+        allCode.push(Blockly.JavaScript.workspaceToCode(headless) + "})()");
+        headless.dispose();
+        xml.removeChild(block);
+    }
+    return allCode;
+}
 function updateCodePreview(event) {
     if (event.type != Blockly.Events.BLOCK_MOVE) {
-        const code = Blockly.JavaScript.workspaceToCode(workspace);
-        if (code.length > 0) {
-            document.getElementById('importExport').textContent = code + "}";
-        }
+        const code = generateJavaScript();
+        document.getElementById('importExport').textContent = code.join("\n");
     }
 }
 
 function clickedGreenFlag() {
-    const code = Blockly[lang].workspaceToCode(workspace);
-    if (code.length > 0) {
-        ipcRenderer.send('greenflag', code + "}");
-    }
+    const code = generateJavaScript();
+    ipcRenderer.send('greenflag', code);
 }
 
 function clickedStop() {
@@ -131,10 +129,6 @@ document.addEventListener('fullscreenchange', (event) => {
     if (document.fullscreenElement) {
         document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
         document.querySelector("#fullscreen-rc-controls").style.display = 'block';
-        // let canvas = document.getElementById("canvasOutput")
-        // let rect = canvas.getBoundingClientRect();
-        // canvas.width = rect.width;
-        // canvas.height = rect.height;
     } else {
         document.querySelector("#fullscreen i").textContent = 'fullscreen';
         document.querySelector("#fullscreen-rc-controls").style.display = 'none';
@@ -142,8 +136,6 @@ document.addEventListener('fullscreenchange', (event) => {
 });
 
 ipcRenderer.on('file', (event, arg) => {
-
-    console.log(arg);
 
     if (arg == 'save') {
         saveWorkspace();
@@ -155,13 +147,16 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-
-    let bat = arg.bat;
-    let h = arg.h;
-
-    document.getElementById('bat').textContent = bat;
-    document.getElementById('height').textContent = h;
+    let el = document.getElementById('bat');
+    if (el) { el.textContent = arg.bat; }
+    el = document.getElementById('height')
+    if (el) { el.textContent = arg.h; }
 });
+
+ipcRenderer.on('flying', (event, arg) => {
+    flying = arg;
+    console.log('app flying: ', flying);
+})
 
 const validKeys = {
     'KeyW': {leftRight: 0, forBack: 50, upDown: 0, yaw: 0},
@@ -269,7 +264,6 @@ document.querySelectorAll(".mdl-button").forEach(
 function takeoffOrLand() {
     if (flying) {
         ipcRenderer.send('land');
-        flying = false;
         document.querySelectorAll('#btn-takeoff-land i').forEach(
             (button) => {
                 button.textContent = 'flight_takeoff';
@@ -282,7 +276,6 @@ function takeoffOrLand() {
         );
     } else {
         ipcRenderer.send('takeoff');
-        flying = true;
         document.querySelectorAll('#btn-takeoff-land i').forEach(
             (button) => {
                 button.textContent = 'flight_land';

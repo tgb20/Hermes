@@ -25,10 +25,10 @@ h1 {
   width: 30%;
   background: whitesmoke;
 }
-#video-canvas, #canvasOutput {
+#video-canvas, #canvasOutput, video {
   width: 100%;
 }
-#canvasOutput {
+#video-canvas, video {
   display: none;
 }
 
@@ -164,4 +164,15 @@ h1 {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+}
+#configMarkers {
+  overflow-y: auto;
+}
+.mdl-data-table {
+  border: 0;
+}
+.mdl-data-table th {
+  background-color: rgba(105,101,160);
+  border-color: rgba(105,101,160);
+  color: #ffffff;
 }

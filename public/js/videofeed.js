@@ -1,35 +1,31 @@
-var nativeImage = require('electron').nativeImage
-var moment = require('moment');
-let player;
-let video, canvas, context, src, dst, dictionary, markerIds, markerCorners, parameter;
-let height, width;
-const FPS = 20;
-const type = 'image/png';
-const quality = 9;
-
-// opencv.js build from https://github.com/ganwenyao/opencv_js
-var cv = require('./js/opencv.js')
-
-let recording = false;
-let mediaRecorder;
+const nativeImage = require('electron').nativeImage
+const moment = require('moment');
+let video, canvas, context;
+let markerLabels, detector, recording, mediaRecorder;
+const FPS = 20; // for saving video
+const type = 'image/png'; // for saving images
+const quality = 9; // PNG quality
 let chunks = [];
 
 async function init() {
   video = document.getElementById('video-canvas');
   canvas = document.getElementById('canvasOutput');
+  context = canvas.getContext("2d");
+  markerLabels = JSON.parse(localStorage.getItem('markers'));
+  detector = new AR.Detector();
+  requestAnimationFrame(tick);
 }
 
 const wsConnect = async function() {
   wsUrl = 'ws://localhost:3000';
 
-  player = new JSMpeg.Player(wsUrl, {
+  const player = new JSMpeg.Player(wsUrl, {
     canvas: video,
     audio: false,
     videoBufferSize: 512 * 1024,
     preserveDrawingBuffer: true,
     disableGl: true,
-    onPlay: p => {
-    }
+    onPlay: p => { }
   });
 }
 
@@ -44,73 +40,53 @@ document.addEventListener("DOMContentLoaded", () => {
   wsConnect();
 });
 
-cv['onRuntimeInitialized']=()=>{
-};
-
-function initOpenCV() {
-  width = video.width;
-  height = video.height;
-  context = video.getContext("2d");
-  src = new cv.Mat(height, width, cv.CV_8UC4);
-  dst = new cv.Mat(height, width, cv.CV_8UC3);
-  dictionary = new cv.Dictionary(cv.DICT_6X6_250);
-  markerIds = new cv.Mat();
-  markerCorners  = new cv.MatVector();
-  parameter = new cv.DetectorParameters();
-
-  parameter.adaptiveThreshWinSizeMax = 23;
-  parameter.adaptiveThreshWinSizeStep = 10,
-  parameter.adaptiveThreshConstant = 7;
-  parameter.minMarkerPerimeterRate = 0.1;
-  parameter.maxMarkerPerimeterRate = 4;
-  parameter.polygonalApproxAccuracyRate = 0.03;
-  parameter.minCornerDistanceRate = 0.05;
-  parameter.minDistanceToBorder = 3;
-  parameter.minMarkerDistanceRate = 0.05;
-  parameter.cornerRefinementMethod = cv.CORNER_REFINE_NONE;
-  parameter.cornerRefinementWinSize = 5;
-  parameter.cornerRefinementMaxIterations = 30;
-  parameter.cornerRefinementMinAccuracy = 0.1;
-  parameter.markerBorderBits = 1;
-  parameter.perspectiveRemovePixelPerCell = 2;
-  parameter.perspectiveRemoveIgnoredMarginPerCell = 0.13;
-  parameter.maxErroneousBitsInBorderRate = 0.35;
-  parameter.minOtsuStdDev = 5.0;
-  parameter.errorCorrectionRate = 0.6;
-
-  // schedule first one.
-  setTimeout(processVideo, 0);
-}
-
-function processVideo() {
-  if (opencv) {
-    let begin = Date.now();
-    context.drawImage(video, 0, 0, width, height);
-    src.data.set(context.getImageData(0, 0, width, height).data);
-    cv.cvtColor(src, dst, cv.COLOR_RGBA2RGB, 0);
-    cv.detectMarkers(dst, dictionary, markerCorners, markerIds, parameter);
-    if (markerIds.rows > 0) {
-        cv.drawDetectedMarkers(dst, markerCorners, markerIds);
+ipcRenderer.on('useLocalCamera', (event, useLocalCamera) => {
+  if (useLocalCamera) { 
+    video = document.querySelector('video');
+    if (navigator.mediaDevices === undefined) {
+      navigator.mediaDevices = {};
     }
-    cv.imshow("canvasOutput", dst); 
-    // schedule next one.
-    let delay = 1000/FPS - (Date.now() - begin);
-    setTimeout(processVideo, delay);
+    
+    if (navigator.mediaDevices.getUserMedia === undefined) {
+      navigator.mediaDevices.getUserMedia = function(constraints) {
+        var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        
+        if (!getUserMedia) {
+          return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+        }
+  
+        return new Promise(function(resolve, reject) {
+          getUserMedia.call(navigator, constraints, resolve, reject);
+        });
+      }
+    }
+    
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then( (stream) => {
+        if ("srcObject" in video) {
+          video.srcObject = stream;
+        } else {
+          video.src = stream;
+        }
+      })
+      .catch(function(err) {
+        console.log(err.name + ": " + err.message);
+      }
+    ); 
+  } else {
+    video = document.getElementById('video-canvas')
   }
-}
+});
 
 function saveImage() {
-  let data;
-  if (opencv) {
-    data = canvas.toDataURL(type, quality);
-  } else {
-    data = video.toDataURL(type, quality);
-  }
+  const data = canvas.toDataURL(type, quality);
   const img = nativeImage.createFromDataURL(data).toPNG();
   const fileName = 'image-'+ moment().format('M_D_Y-[at]-h_mm_ss_A') + '.png';
   ipcRenderer.send('save_photo', fileName, img)
 }
 
+/* Listeners for code block events */
 ipcRenderer.on('takePhoto', (event, arg) => {
   saveImage();
 });
@@ -125,14 +101,14 @@ ipcRenderer.on('stopVideo', (event, arg) => {
   videoControl();
 });
 
+ipcRenderer.on('saved_file', (event, status) => {
+  console.log("Saved file " + status)
+})
+
+/* Start and stop video */
 function videoControl() {
-  let stream;
   if (!recording) {
-    if (opencv) {
-      stream = canvas.captureStream(FPS);
-    } else {
-      stream = video.captureStream(FPS)
-    }
+    const stream = canvas.captureStream(FPS);
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.start();
 
@@ -168,7 +144,72 @@ function saveBlob(blob, fileName) {
   reader.readAsArrayBuffer(blob)
 }
 
-ipcRenderer.on('saved_file', (event, status) => {
-  console.log("Saved file " + status)
-})
+/* OpenCV AruCo functions */
+function tick(){
+  requestAnimationFrame(tick);
+  
+  if (video.readyState === video.HAVE_ENOUGH_DATA){
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    
+    var markers = detector.detect(imageData);
+    if (markers.length > 0) {
+      detectedMarkers = [...new Set(markers)]; 
+      drawCorners(detectedMarkers);
+      drawId(detectedMarkers);
+    } 
+  }
+}
+      
+function drawCorners(markers){
+  var corners, corner, i, j;
 
+  context.lineWidth = 3;
+
+  for (i = 0; i !== markers.length; ++ i){
+    corners = markers[i].corners;
+    
+    context.strokeStyle = "red";
+    context.beginPath();
+    
+    for (j = 0; j !== corners.length; ++ j){
+      corner = corners[j];
+      context.moveTo(corner.x, corner.y);
+      corner = corners[(j + 1) % corners.length];
+      context.lineTo(corner.x, corner.y);
+    }
+
+    context.stroke();
+    context.closePath();
+    
+    context.strokeStyle = "green";
+    context.strokeRect(corners[0].x - 2, corners[0].y - 2, 4, 4);
+  }
+}
+
+function drawId(markers){
+  var corners, corner, x, y, i, j;
+  
+  context.strokeStyle = "blue";
+  context.lineWidth = 1;
+  
+  for (i = 0; i !== markers.length; ++ i){
+    corners = markers[i].corners;
+    
+    x = Infinity;
+    y = Infinity;
+    
+    for (j = 0; j !== corners.length; ++ j){
+      corner = corners[j];
+      
+      x = Math.min(x, corner.x);
+      y = Math.min(y, corner.y);
+    }
+    const label = (markerLabels[markers[i].id] != '') ? markerLabels[markers[i].id] : markers[i].id 
+    context.strokeText(label, x, y)
+  }
+}
+
+ipcRenderer.on('updateMarkers', (event, status) => {
+  markerLabels = JSON.parse(localStorage.getItem('markers'));
+})

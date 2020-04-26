@@ -26,8 +26,13 @@
   "build": {
     "appId": "hermes",
     "mac": {
-      "category": "public.app-category.education"
+      "category": "public.app-category.education",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
+    "afterSign": "build/notarize.js",
     "extraFiles": [
       {
         "from": "resources/mac/bin",
@@ -39,7 +44,9 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "electron": "^8.1.1",
-    "electron-builder": "^22.4.1"
+    "electron-builder": "^22.4.1",
+    "electron-notarize": "^0.3.0"
   }
 }

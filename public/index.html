@@ -8,6 +8,7 @@
   <title>Hermes</title>
   <link rel="stylesheet" href="../node_modules/material-design-lite/material.min.css" />
   <link rel="stylesheet" href="style.css">
+  <script>var detectedMarkers; var flying = false;</script>
   <script defer src="../node_modules/material-design-lite/material.min.js"></script>
   <script src="js/blockly_compressed_vertical.js"></script>
   <script src="js/blockly.js"></script>
@@ -47,6 +48,8 @@
   <script src="js/jsmpeg.min.js"></script>
   <script src="js/videofeed.js"></script>
   <script src="js/blocks_vertical/default_toolbox.js"></script>
+  <script type="text/javascript" src="js/cv.js"></script> 
+  <script type="text/javascript" src="js/aruco.js"></script> 
 </head>
 
 <body onload="start()">
@@ -83,8 +86,15 @@
           </button>
         </div>
       </div>
-      <canvas id="video-canvas" width="640" height="480" ></canvas>
+      
+      <!-- Canvas for processed video -->
       <canvas id="canvasOutput" width="640" height="480"></canvas>
+      <!-- JSMpeg player canvas -->
+      <canvas id="video-canvas" width="640" height="480" ></canvas>
+      <!-- Local mediaDevices video element -->
+      <video playsinline autoplay></video>
+
+      <!-- Fullscreen -->
       <div id="fullscreen-rc-controls">
         <div class="page-content takeoff-land" style="flex-direction: column;">
           <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="takeoffOrLand();">
@@ -126,6 +136,7 @@
         </div>
       </div>
     </div>
+    <!-- Controls -->
     <div>
       <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -139,6 +150,7 @@
         <main class="mdl-layout__content">
           <section class="mdl-layout__tab-panel is-active" id="code">
             <div class="page-content">
+              <!-- Code -->
               <button class="green-flag mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent" onclick="clickedGreenFlag()">
                 <img src="media/green-flag.svg" alt="Green flag" height="50%" width="50%" />
               </button>
@@ -150,6 +162,7 @@
           </section>
           <section class="mdl-layout__tab-panel" id="rc-ui">
             <div class="page-content">
+              <!-- RC -->
               <div class="rc-controls">
                 <div class="rc-controls-bg"></div>
                 <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
@@ -182,6 +195,7 @@
               </div>
             </div>
             <div class="page-content" style="flex-direction: column;">
+              <!-- Keyboard -->
               <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="takeoffOrLand();">
                 <i class="material-icons">flight_takeoff</i>
               </button>

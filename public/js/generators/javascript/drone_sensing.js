@@ -136,3 +136,13 @@ Blockly.JavaScript['drone_sensing_stop_video'] = function (block) {
 
     return code;
 }
+
+Blockly.JavaScript['drone_sensing_detect_marker'] = function (block) {
+    const id = block.getFieldValue('ID');
+    const code = (id in detectedMarkers) ? true : false;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+}
+
+Blockly.JavaScript['drone_sensing_flying'] = function (block) {
+    return [flying, Blockly.JavaScript.ORDER_NONE];
+}

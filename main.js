@@ -7,7 +7,9 @@ const fs = require('fs');
 const os = require('os');
 const { outputFile } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
+let winMarkerConfig;
 
+// Normalize platform for path to ffmpeg binary
 let platform = os.platform()
 if (platform == "darwin") {
 	platform = "mac";
@@ -15,13 +17,14 @@ if (platform == "darwin") {
 	platform = "win";
 }
 
+// Get path to resources directory if app is built
 var getResourcesPath = function () {
     var paths = Array.from(arguments)
     
     if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
         paths.unshift(path.join(process.cwd(), 'resources') );
     } else {
-        // In builds the resources directory is located in 'Contents/Resources'
+        // In builds, the resources directory is located in 'Contents/Resources'
         paths.unshift(process.resourcesPath)
     } 
     return path.join.apply(null, paths)
@@ -35,7 +38,8 @@ const exp = express()
 
 const drone = tello.connect();
 
-let win, droneState;
+let win;
+let flying;
 
 const TELLO_VIDEO_PORT = 11111
 const TELLO_HOST = '192.168.10.1'
@@ -58,37 +62,37 @@ function mkDir(path) {
             })
         }
         dir.close();
-    })
+    });
 }
 
-ipcMain.on('greenflag', (event, arg) => {
-    let code = arg;
-    console.log('CODE: ' + code);
-    eval(code);
-    greenFlag();
+ipcMain.on('greenflag', (event, codeBlocks) => {
+    console.log('CODE:\n' + codeBlocks.join("\n"));
+    codeBlocks.forEach( code => eval(code) );
 });
 
 ipcMain.on('takeoff', (event, arg) => {
-    drone.send('takeoff');    
+    drone.send('takeoff');
+    flying = true;
+    console.log('flying: ', flying);
+    win.webContents.send('flying', true);
 });
 
 
 ipcMain.on('land', (event, arg) => {
-    drone.send('land');    
+    drone.send('land');
+    flying = false;
+    console.log('flying: ', flying);
+    win.webContents.send('flying', false);
 });
 
 ipcMain.on('emergency', (event, arg) => {
     drone.send('emergency');
+    flying = false;
+    win.webContents.send('flying', false);
 });
 
-ipcMain.on('rc', (event, arg) => {
-
-    let leftRight = arg.leftRight;
-    let forBack = arg.forBack;
-    let upDown = arg.upDown;
-    let yaw = arg.yaw;
- 
-    drone.send("rc", { a: leftRight, b: forBack, c: upDown, d: yaw });
+ipcMain.on('rc', (event, arg) => { 
+    drone.send("rc", { a: arg.leftRight, b: arg.forBack, c: arg.upDown, d: arg.yaw });
 });
 
 ipcMain.on('connect', (event, arg) => {
@@ -173,8 +177,7 @@ drone.on("connection", () => {
 });
 
 drone.on("state", state => {
-    //console.log("Recieved State > ", state);
-    droneState = state;
+    // console.log("Received State > ", state);
     win.webContents.send('dronestate', state);
 });
 
@@ -259,6 +262,23 @@ wsServer.broadcast = function (data) {
     })
 }
 
+function configureMarkers() {
+    if (!winMarkerConfig) {
+        winMarkerConfig = new BrowserWindow({ 
+            width: 472,
+            height: 600,
+            resizable: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        });
+        winMarkerConfig.on('closed', () => {
+          winMarkerConfig = null
+        })
+        winMarkerConfig.loadFile('public/configMarkers.html');
+    }
+}
+
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
@@ -268,8 +288,12 @@ function createWindow() {
             nodeIntegration: true
         }
     })
-    win.loadFile('public/index.html')
-
+    win.loadFile('public/index.html');
+    
+    win.on('closed', () => {
+        win = null;
+        if (wsServer) wsServer.close();
+    });
 
     const template = [
         {
@@ -315,11 +339,17 @@ function createWindow() {
                     }
                 },
                 {
-                    label: 'Detect Markers',
-                    type: 'checkbox', 
+                    label: 'Configure markers',
+                    click() {
+                        configureMarkers();
+                    },
+                },
+                {
+                    label: 'Use local camera',
+                    type: 'checkbox',
                     checked: false,
                     click: e => {
-                        win.webContents.send('detectMarkers', e.checked);
+                        win.webContents.send('useLocalCamera', e.checked);
                     }
                 },
                 { type: 'separator' },
@@ -343,3 +373,8 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+const updateMarkers = () => {
+    win.webContents.send('updateMarkers');
+}
+module.exports.updateMarkers = updateMarkers;

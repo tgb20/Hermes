@@ -288,3 +288,41 @@ Blockly.Blocks['drone_sensing_stop_video'] = {
         });
     }
 };
+
+Blockly.Blocks['drone_sensing_detect_marker'] = {
+    /**
+     * Block to Report if the drone sees a marker.
+     * @this Blockly.Block
+     */
+    init: function() {
+        this.jsonInit({
+            "message0": "marker %1",
+            "args0": [{
+                "type": "field_dropdown",
+                "name": "ID",
+                "options": [
+                    ['0', '0'],
+                    ['1', '1'],
+                    ['2', '2'],
+                    ['3', '3']
+                ]
+            }],
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "output_boolean"]
+        });
+    }
+};
+
+Blockly.Blocks['drone_sensing_flying'] = {
+    /**
+     * Block to Report if the drone is flying.
+     * @this Blockly.Block
+     */
+    init: function() {
+        this.jsonInit({
+            "message0": "flying",
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "output_boolean"]
+        });
+    }
+};
