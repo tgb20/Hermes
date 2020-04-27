@@ -97,7 +97,9 @@ function generateMarkerTableRow(markerId) {
     input.setAttribute('type', 'text');
     input.classList.add('mdl-textfield__input');
     input.setAttribute('id', markerId);
-    input.setAttribute('value', markerLabels[markerId] || '');
+    if (markerLabels && markerLabels.hasOwnProperty(markerId)) {
+        input.setAttribute('value', markerLabels[markerId]); 
+    }
     textfield.appendChild(input);
 
     const label = document.createElement('label');
