@@ -184,7 +184,7 @@ function getKeyPress(key) {
         if (key.code == 'Tab') {
             ipcRenderer.send('takeoff');
         }
-        if (key.callback == 'Backspace') {
+        if (key.code == 'Backspace') {
             ipcRenderer.send('land');
         }
     }
