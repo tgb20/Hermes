@@ -125,10 +125,6 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
   '</category>' +
   '<category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">' +
     '<block type="drone_sensing_flying" id="drone_sensing_flying"></block>' +
-    '<block type="drone_sensing_take_photo" id="drone_sensing_take_photo"></block>' +
-    '<block type="drone_sensing_start_video" id="drone_sensing_start_video"></block>' +
-    '<block type="drone_sensing_stop_video" id="drone_sensing_stop_video"></block>' +
-    '<block type="drone_sensing_detect_marker" id="drone_sensing_detect_marker"></block>' +
     '<block type="drone_sensing_speed_x" id="drone_sensing_speed"></block>' +
     '<block type="drone_sensing_speed_y" id="drone_sensing_speed"></block>' +
     '<block type="drone_sensing_speed_z" id="drone_sensing_speed"></block>' +
@@ -145,6 +141,12 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="drone_sensing_accy" id="drone_sensing_accy"></block>' +
     '<block type="drone_sensing_accz" id="drone_sensing_accz"></block>' +
     '<block type="drone_sensing_tof" id="drone_sensing_tof"></block>' +
+  '</category>' +
+  '<category name="Camera" id="camera" colour="#9966FF" secondaryColour="#774DCB">' +
+    '<block type="drone_camera_take_photo" id="drone_camera_take_photo"></block>' +
+    '<block type="drone_camera_start_video" id="drone_camera_start_video"></block>' +
+    '<block type="drone_camera_stop_video" id="drone_camera_stop_video"></block>' +
+    '<block type="drone_camera_detect_marker" id="drone_camera_detect_marker"></block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">' +
     '<block type="operator_add" id="operator_add">' +

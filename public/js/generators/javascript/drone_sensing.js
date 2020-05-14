@@ -116,33 +116,6 @@ Blockly.JavaScript['drone_sensing_tof'] = function (block) {
     return [code, Blockly.JavaScript.ORDER_NONE];
 }
 
-Blockly.JavaScript['drone_sensing_take_photo'] = function (block) {
-
-    let code = '\ttakePhoto();\n';
-
-    return code;
-}
-
-Blockly.JavaScript['drone_sensing_start_video'] = function (block) {
-
-    let code = '\tstartVideo();\n';
-
-    return code;
-}
-
-Blockly.JavaScript['drone_sensing_stop_video'] = function (block) {
-
-    let code = '\tstopVideo();\n';
-
-    return code;
-}
-
-Blockly.JavaScript['drone_sensing_detect_marker'] = function (block) {
-    const id = block.getFieldValue('ID');
-    const code = (id in detectedMarkers) ? true : false;
-    return [code, Blockly.JavaScript.ORDER_NONE];
-}
-
 Blockly.JavaScript['drone_sensing_flying'] = function (block) {
     return [flying, Blockly.JavaScript.ORDER_NONE];
 }
