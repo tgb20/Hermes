@@ -62,28 +62,92 @@
     <div id="videowrapper" style="width: 100%;">
       <div class="controls">
         <div>
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red" onclick="connectButton()">
+          <button
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red"
+            onclick="connectButton()">
             <i class="material-icons">wifi_off</i>
           </button>
         </div>
         <div>
-          <span class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_speed_x" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">speed</i>
+            <span class="mdl-chip__text">speed x: <span id='vgx'>0</span> cm/s</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_speed_y" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">speed</i>
+            <span class="mdl-chip__text">speed y: <span id='vgy'>0</span> cm/s</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_speed_z" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">speed</i>
+            <span class="mdl-chip__text">speed z: <span id='vgz'>0</span> cm/s</span>
+          </span>
+          <span id="drone_sensing_battery" class="mdl-chip mdl-color--gray mdl-chip--contact">
             <i class="material-icons mdl-chip__contact">battery_full</i>
             <span class="mdl-chip__text"><span id='bat'>0</span>%</span>
           </span>
-          <span class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_time" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">update</i>
+            <span class="mdl-chip__text"><span id='time'>0</span> s</span>
+          </span>
+          <span id="drone_sensing_height" class="mdl-chip mdl-color--gray mdl-chip--contact">
             <i class="material-icons mdl-chip__contact">height</i>
-            <span class="mdl-chip__text"><span id='height'>0</span>cm</span>
+            <span class="mdl-chip__text"><span id='h'>0</span> cm</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_temp_high" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">whatshot</i>
+            <span class="mdl-chip__text"><span id='temph'>0</span> C</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_temp_low" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">ac_unit</i>
+            <span class="mdl-chip__text"><span id='templ'>0</span> C</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_pitch" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">device_hub</i>
+            <span class="mdl-chip__text">pitch: <span id='pitch'>0</span>°</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_roll" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">device_hub</i>
+            <span class="mdl-chip__text">roll: <span id='roll'>0</span>°</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_yaw" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">device_hub</i>
+            <span class="mdl-chip__text">yaw: <span id='yaw'>0</span>°</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_baro" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">height</i>
+            <span class="mdl-chip__text"><span id='baro'>0</span> m</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_accx" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">fast_forward</i>
+            <span class="mdl-chip__text">acc x: <span id='agx'>0</span> cm/s²</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_accy" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">fast_forward</i>
+            <span class="mdl-chip__text">acc y: <span id='agy'>0</span> cm/s²</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_accz" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">fast_forward</i>
+            <span class="mdl-chip__text">acc z: <span id='agz'>0</span> cm/s²</span>
+          </span>
+          <span style="display: none;" id="drone_sensing_tof" class="mdl-chip mdl-color--gray mdl-chip--contact">
+            <i class="material-icons mdl-chip__contact">square_foot</i>
+            <span class="mdl-chip__text"><span id='tof'>0</span> cm</span>
           </span>
         </div>
         <div>
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="saveImage()">
+          <button
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            onclick="">
             <i class="material-icons">photo_camera</i>
           </button>
-          <button id="video-control" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="videoControl()">
+          <button
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            onclick="">
             <i class="material-icons">videocam</i>
           </button>
-          <button id="fullscreen" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary" onclick="fullScreenVideo()">
+          <button id="fullscreen"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            onclick="fullScreenVideo()">
             <i class="material-icons">fullscreen</i>
           </button>
         </div>
@@ -99,7 +163,9 @@
       <!-- Fullscreen -->
       <div id="fullscreen-rc-controls">
         <div class="page-content takeoff-land" style="flex-direction: column;">
-          <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="takeoffOrLand();">
+          <button id="btn-takeoff-land"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            onclick="takeoffOrLand();">
             <i class="material-icons">flight_takeoff</i>
           </button>
           <div id="text-takeoff-land">Takeoff</div>
@@ -107,31 +173,39 @@
         <div class="page-content">
           <div class="rc-controls">
             <div class="rc-controls-bg"></div>
-            <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+            <button
+              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
               <i class="material-icons">vertical_align_top</i>
             </button>
-            <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+            <button
+              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
               <i class="material-icons">vertical_align_bottom</i>
             </button>
-            <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+            <button
+              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
               <i class="material-icons">rotate_left</i>
             </button>
-            <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+            <button
+              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
               <i class="material-icons">rotate_right</i>
             </button>
           </div>
           <div class="rc-controls">
             <div class="rc-controls-bg"></div>
-            <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+            <button
+              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
               <i class="material-icons">arrow_upward</i>
             </button>
-            <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+            <button
+              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
               <i class="material-icons">arrow_downward</i>
             </button>
-            <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+            <button
+              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
               <i class="material-icons">arrow_back</i>
             </button>
-            <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+            <button
+              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
               <i class="material-icons">arrow_forward</i>
             </button>
           </div>
@@ -144,19 +218,25 @@
         <header class="mdl-layout__header">
           <!-- Tabs -->
           <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#code" class="mdl-layout__tab is-active" onclick="disableKeyboard()"><i class="material-icons">code</i></a>
-            <a href="#rc-ui" class="mdl-layout__tab" onclick="disableKeyboard()"><i class="material-icons">gamepad</i></a>
-            <a href="#rc-keyboard" class="mdl-layout__tab" onclick="enableKeyboard()"><i class="material-icons">keyboard</i></a>
+            <a href="#code" class="mdl-layout__tab is-active" onclick="disableKeyboard()"><i
+                class="material-icons">code</i></a>
+            <a href="#rc-ui" class="mdl-layout__tab" onclick="disableKeyboard()"><i
+                class="material-icons">gamepad</i></a>
+            <a href="#rc-keyboard" class="mdl-layout__tab" onclick="enableKeyboard()"><i
+                class="material-icons">keyboard</i></a>
           </div>
         </header>
         <main class="mdl-layout__content">
           <section class="mdl-layout__tab-panel is-active" id="code">
             <div class="page-content">
               <!-- Code -->
-              <button class="green-flag mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent" onclick="clickedGreenFlag()">
+              <button
+                class="green-flag mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent"
+                onclick="clickedGreenFlag()">
                 <img src="media/green-flag.svg" alt="Green flag" height="50%" width="50%" />
               </button>
-              <button class="stop mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red" onclick="clickedStop()">
+              <button class="stop mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red"
+                onclick="clickedStop()">
                 <i class="material-icons">report</i>
               </button>
               <textarea id="importExport" readonly></textarea>
@@ -167,38 +247,48 @@
               <!-- RC -->
               <div class="rc-controls">
                 <div class="rc-controls-bg"></div>
-                <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+                <button
+                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
                   <i class="material-icons">vertical_align_top</i>
                 </button>
-                <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+                <button
+                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
                   <i class="material-icons">vertical_align_bottom</i>
                 </button>
-                <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+                <button
+                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
                   <i class="material-icons">rotate_left</i>
                 </button>
-                <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+                <button
+                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
                   <i class="material-icons">rotate_right</i>
                 </button>
               </div>
               <div class="rc-controls">
                 <div class="rc-controls-bg"></div>
-                <button class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+                <button
+                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
                   <i class="material-icons">arrow_upward</i>
                 </button>
-                <button class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+                <button
+                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
                   <i class="material-icons">arrow_downward</i>
                 </button>
-                <button class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+                <button
+                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
                   <i class="material-icons">arrow_back</i>
                 </button>
-                <button class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+                <button
+                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
                   <i class="material-icons">arrow_forward</i>
                 </button>
               </div>
             </div>
             <div class="page-content" style="flex-direction: column;">
               <!-- Keyboard -->
-              <button id="btn-takeoff-land" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" onclick="takeoffOrLand();">
+              <button id="btn-takeoff-land"
+                class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+                onclick="takeoffOrLand();">
                 <i class="material-icons">flight_takeoff</i>
               </button>
               <div id="text-takeoff-land">Takeoff</div>
@@ -206,13 +296,13 @@
           </section>
           <section class="mdl-layout__tab-panel" id="rc-keyboard">
             <div class="page-content">
-              <img src="media/keyboard_controls.png" alt="Keyboard controls"/>
+              <img src="media/keyboard_controls.png" alt="Keyboard controls" />
             </div>
           </section>
         </main>
       </div>
     </div>
   </div>
-  
 </body>
+
 </html>

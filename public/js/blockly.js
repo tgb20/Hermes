@@ -56,6 +56,20 @@ function start() {
         }
     });
     workspace.addChangeListener(updateCodePreview);
+
+    document.addEventListener('blocklyCheckmark', (event) => {
+
+        let blockID = event.detail.id;
+        let showHide = event.detail.value;
+
+        
+        let sensorChip = document.getElementById(blockID);
+        if (showHide) {
+            sensorChip.style.display = "";
+        } else {
+            sensorChip.style.display = "none";
+        }
+    });
 }
 
 function getToolboxElement() {
@@ -147,10 +161,37 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-    let el = document.getElementById('bat');
-    if (el) { el.textContent = arg.bat; }
-    el = document.getElementById('height')
-    if (el) { el.textContent = arg.h; }
+    let vgx = arg.vgx;
+    let vgy = arg.vgy;
+    let vgz = arg.vgz;
+    let bat = arg.bat;
+    let time = arg.time;
+    let h = arg.h;
+    let temph = arg.temph;
+    let templ = arg.templ;
+    let pitch = arg.pitch;
+    let yaw = arg.yaw;
+    let baro = arg.baro;
+    let agx = arg.agx;
+    let agy = arg.agy;
+    let agz = arg.agz;
+    let tof = arg.tof;
+
+    document.getElementById('vgx').textContent = vgx;
+    document.getElementById('vgy').textContent = vgy;
+    document.getElementById('vgz').textContent = vgz;
+    document.getElementById('bat').textContent = bat;
+    document.getElementById('time').textContent = time;
+    document.getElementById('h').textContent = h;
+    document.getElementById('temph').textContent = temph;
+    document.getElementById('templ').textContent = templ;
+    document.getElementById('pitch').textContent = pitch;
+    document.getElementById('yaw').textContent = yaw;
+    document.getElementById('baro').textContent = baro;
+    document.getElementById('agx').textContent = agx;
+    document.getElementById('agy').textContent = agy;
+    document.getElementById('agz').textContent = agz;
+    document.getElementById('tof').textContent = tof;
 });
 
 ipcRenderer.on('flying', (event, arg) => {

@@ -16,7 +16,8 @@ Blockly.Blocks['drone_sensing_speed_x'] = {
         this.jsonInit({
             "message0": "speed x (cm/s)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the speed of the x axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -31,7 +32,8 @@ Blockly.Blocks['drone_sensing_speed_y'] = {
         this.jsonInit({
             "message0": "speed y (cm/s)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the speed of the y axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -46,7 +48,8 @@ Blockly.Blocks['drone_sensing_speed_z'] = {
         this.jsonInit({
             "message0": "speed z (cm/s)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the speed of the z axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -61,7 +64,7 @@ Blockly.Blocks['drone_sensing_battery'] = {
         this.jsonInit({
             "message0": "battery (%)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "tooltip": "the percentage of the current battery level",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -76,7 +79,8 @@ Blockly.Blocks['drone_sensing_time'] = {
         this.jsonInit({
             "message0": "flight time (s)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the amount of time the motor has been used",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -91,7 +95,7 @@ Blockly.Blocks['drone_sensing_height'] = {
         this.jsonInit({
             "message0": "height (cm)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "tooltip": "the height in cm",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -106,7 +110,8 @@ Blockly.Blocks['drone_sensing_temp_high'] = {
         this.jsonInit({
             "message0": "high temperature (C)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the highest temperature in degree Celsius",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -121,7 +126,8 @@ Blockly.Blocks['drone_sensing_temp_low'] = {
         this.jsonInit({
             "message0": "low temperature (C)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the lowest temperature in degree Celsius",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -136,7 +142,8 @@ Blockly.Blocks['drone_sensing_pitch'] = {
         this.jsonInit({
             "message0": "pitch (°)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the degree of the attitude pitch",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -151,7 +158,8 @@ Blockly.Blocks['drone_sensing_roll'] = {
         this.jsonInit({
             "message0": "roll (°)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the degree of the attitude roll",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -166,7 +174,8 @@ Blockly.Blocks['drone_sensing_yaw'] = {
         this.jsonInit({
             "message0": "yaw (°)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the degree of the attitude yaw",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -181,7 +190,8 @@ Blockly.Blocks['drone_sensing_baro'] = {
         this.jsonInit({
             "message0": "barometer (m)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the barometer measurement in cm",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -194,9 +204,10 @@ Blockly.Blocks['drone_sensing_accx'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration x (0.001 g)",
+            "message0": "acceleration x (cm/s²)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the acceleration of the x axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -209,9 +220,10 @@ Blockly.Blocks['drone_sensing_accy'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration y (0.001 g)",
+            "message0": "acceleration y (cm/s²)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the acceleration of the y axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -224,9 +236,10 @@ Blockly.Blocks['drone_sensing_accz'] = {
      */
     init: function () {
         this.jsonInit({
-            "message0": "acceleration z (0.001 g)",
+            "message0": "acceleration z (cm/s²)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the acceleration of the z axis",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -241,7 +254,8 @@ Blockly.Blocks['drone_sensing_tof'] = {
         this.jsonInit({
             "message0": "tof (cm)",
             "category": Blockly.Categories.sensing,
-            "checkboxInFlyout": false,
+            "checkboxInFlyout": true,
+            "tooltip": "the time of flight distance in cm",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
