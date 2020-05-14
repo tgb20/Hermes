@@ -6,7 +6,7 @@ goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript['event_whenflagclicked'] = function (block) {
 
-    let code = "async function greenFlag() {\n";
+    let code = "(async function greenFlag() {\n";
 
     return [code, Blockly.JavaScript.ORDER_NONE];
 }

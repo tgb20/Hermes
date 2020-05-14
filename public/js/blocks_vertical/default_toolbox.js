@@ -141,6 +141,12 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="drone_sensing_accz" id="drone_sensing_accz"></block>' +
     '<block type="drone_sensing_tof" id="drone_sensing_tof"></block>' +
   '</category>' +
+  '<category name="Camera" id="camera" colour="#9966FF" secondaryColour="#774DCB">' +
+    '<block type="drone_camera_take_photo" id="drone_camera_take_photo"></block>' +
+    '<block type="drone_camera_start_video" id="drone_camera_start_video"></block>' +
+    '<block type="drone_camera_stop_video" id="drone_camera_stop_video"></block>' +
+    '<block type="drone_camera_detect_marker" id="drone_camera_detect_marker"></block>' +
+  '</category>' +
   '<category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">' +
     '<block type="operator_add" id="operator_add">' +
       '<value name="NUM1">' +

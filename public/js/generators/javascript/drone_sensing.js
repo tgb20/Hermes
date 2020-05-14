@@ -115,3 +115,7 @@ Blockly.JavaScript['drone_sensing_tof'] = function (block) {
 
     return [code, Blockly.JavaScript.ORDER_NONE];
 }
+
+Blockly.JavaScript['drone_sensing_flying'] = function (block) {
+    return [flying, Blockly.JavaScript.ORDER_NONE];
+}
