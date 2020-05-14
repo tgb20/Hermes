@@ -1,5 +1,4 @@
 # Ignore directory with ffmpeg binaries
-bin
 
 .DS_Store
 
