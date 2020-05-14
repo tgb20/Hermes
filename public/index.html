@@ -12,6 +12,8 @@
   <script defer src="../node_modules/material-design-lite/material.min.js"></script>
   <script src="js/blockly_compressed_vertical.js"></script>
   <script src="js/blockly.js"></script>
+  <script src="js/css.js"></script>
+  <script src="js/flyout_vertical.js"></script>
   <script src="js/msg/messages.js"></script>
   <script src="js/msg/scratch_msgs.js"></script>
   <script src="js/blocks_common/colour.js"></script>
@@ -63,6 +65,7 @@
       <div class="controls">
         <div>
           <button
+            id="connectButton"
             class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red"
             onclick="connectButton()">
             <i class="material-icons">wifi_off</i>

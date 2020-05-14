@@ -39,6 +39,7 @@ const exp = express()
 const drone = tello.connect();
 
 let win;
+let droneState;
 let flying;
 
 const TELLO_VIDEO_PORT = 11111
@@ -172,12 +173,9 @@ exp.post(`/tellostream`, (req, res) => {
     })
 });
 
-drone.on("connection", () => {
-    console.log("Connected to drone");
-});
-
 drone.on("state", state => {
     // console.log("Received State > ", state);
+    droneState = state;
     win.webContents.send('dronestate', state);
 });
 
@@ -195,6 +193,7 @@ drone.on("connection", async () => {
     try {
         await drone.send("battery?");
         await drone.send("streamon");
+        console.log("Connected to drone");
     } catch (error) {
         console.log(error)
     }
