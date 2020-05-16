@@ -260,3 +260,17 @@ Blockly.Blocks['drone_sensing_tof'] = {
         });
     }
 };
+
+Blockly.Blocks['drone_sensing_flying'] = {
+    /**
+     * Block to Report if the drone is flying.
+     * @this Blockly.Block
+     */
+    init: function() {
+        this.jsonInit({
+            "message0": "flying",
+            "category": Blockly.Categories.sensing,
+            "extensions": ["colours_sensing", "output_boolean"]
+        });
+    }
+};

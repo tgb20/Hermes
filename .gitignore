@@ -1,3 +1,7 @@
+# Ignore directory with ffmpeg binaries
+
+.DS_Store
+
 # Logs
 logs
 *.log
