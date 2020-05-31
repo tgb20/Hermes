@@ -161,37 +161,21 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-    let vgx = arg.vgx;
-    let vgy = arg.vgy;
-    let vgz = arg.vgz;
-    let bat = arg.bat;
-    let time = arg.time;
-    let h = arg.h;
-    let temph = arg.temph;
-    let templ = arg.templ;
-    let pitch = arg.pitch;
-    let yaw = arg.yaw;
-    let baro = arg.baro;
-    let agx = arg.agx;
-    let agy = arg.agy;
-    let agz = arg.agz;
-    let tof = arg.tof;
-
-    document.getElementById('vgx').textContent = vgx;
-    document.getElementById('vgy').textContent = vgy;
-    document.getElementById('vgz').textContent = vgz;
-    document.getElementById('bat').textContent = bat;
-    document.getElementById('time').textContent = time;
-    document.getElementById('h').textContent = h;
-    document.getElementById('temph').textContent = temph;
-    document.getElementById('templ').textContent = templ;
-    document.getElementById('pitch').textContent = pitch;
-    document.getElementById('yaw').textContent = yaw;
-    document.getElementById('baro').textContent = baro;
-    document.getElementById('agx').textContent = agx;
-    document.getElementById('agy').textContent = agy;
-    document.getElementById('agz').textContent = agz;
-    document.getElementById('tof').textContent = tof;
+    document.getElementById('vgx').textContent = arg.vgx;
+    document.getElementById('vgy').textContent = arg.vgy;
+    document.getElementById('vgz').textContent = arg.vgz;
+    document.getElementById('bat').textContent = arg.bat;
+    document.getElementById('time').textContent = arg.time;
+    document.getElementById('h').textContent = arg.h;
+    document.getElementById('temph').textContent = arg.temph;
+    document.getElementById('templ').textContent = arg.templ;
+    document.getElementById('pitch').textContent = arg.pitch;
+    document.getElementById('yaw').textContent = arg.yaw;
+    document.getElementById('baro').textContent = arg.baro;
+    document.getElementById('agx').textContent = arg.agx;
+    document.getElementById('agy').textContent = arg.agy;
+    document.getElementById('agz').textContent = arg.agz;
+    document.getElementById('tof').textContent = arg.tof;
 });
 
 ipcRenderer.on('flying', (event, arg) => {
