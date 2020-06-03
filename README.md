@@ -1,3 +1,6 @@
 # Welcome!
 
-This is a test commit to make sure the docs update with Github
+* Code the Tello Edu drone with Scratch blocks
+* Remote control with mouse or keyboard
+* Recognize AruCo markers with OpenCV
+
