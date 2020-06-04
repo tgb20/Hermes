@@ -86,31 +86,41 @@ ipcRenderer.on('displayJS', (event, arg) => {
 });
 
 function generateJavaScript() {
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    // Find and remove all top blocks.
-    var topBlocks = [];
-    for (var i = xml.childNodes.length - 1, node; block = xml.childNodes[i]; i--) {
-        if (block.tagName == 'BLOCK') {
-            xml.removeChild(block);
-            topBlocks.unshift(block);
+    let code = Blockly.JavaScript.workspaceToCode(workspace);
+
+    if (code.length > 0) {
+
+        let lines = code.match(/[^\r\n]+/g);
+        let cpLines = [...lines];
+
+        for(let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            if(line == '(async function greenFlag() {') {
+                if(i > 0) {
+                    let lineBefore = lines[i-1];
+
+                    if(!lineBefore.startsWith('var')) {
+                        cpLines.splice(i, 0, '})();');
+                    }
+                }
+            }
         }
+        let newCode = '';
+        cpLines.forEach(line => {
+            newCode += line + '\n';
+        });
+
+        return newCode;
     }
-    // Add each top block one by one and generate code.
-    var allCode = [];
-    for (var i = 0, block; block = topBlocks[i]; i++) {
-        var headless = new Blockly.Workspace();
-        xml.appendChild(block);
-        Blockly.Xml.domToWorkspace(xml, headless);
-        allCode.push(Blockly.JavaScript.workspaceToCode(headless) + "})()");
-        headless.dispose();
-        xml.removeChild(block);
-    }
-    return allCode;
+    return '';
 }
+
 function updateCodePreview(event) {
     if (event.type != Blockly.Events.BLOCK_MOVE) {
         const code = generateJavaScript();
-        document.getElementById('importExport').textContent = code.join("\n");
+        if(code != '') {
+            document.getElementById('importExport').textContent = code + '})();';
+        }
     }
 }
 
