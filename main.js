@@ -7,7 +7,14 @@ const fs = require('fs');
 const os = require('os');
 const { outputFile } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
+const log = require('electron-log');
+const { autoUpdater } = require("electron-updater");
+const { dialog } = require('electron')
 let winMarkerConfig;
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 // Normalize platform for path to ffmpeg binary
 let platform = os.platform()
@@ -353,8 +360,6 @@ function createWindow() {
                     }
                 },
                 { type: 'separator' },
-                { role: 'reload' },
-                { role: 'forcereload' },
                 { role: 'toggledevtools' },
                 { type: 'separator' },
                 { role: 'resetzoom' },
@@ -371,6 +376,71 @@ function createWindow() {
     Menu.setApplicationMenu(menu);
 
 }
+
+/* Auto-update */
+
+autoUpdater.on('checking-for-update', () => {
+    // It's quiet here.
+});
+
+autoUpdater.on('update-available', (info) => {
+    options = {
+        title: 'Hermes Updates',
+        message: 'An update for Hermes is available.',
+        buttons: ["Download", "Cancel"],
+        defaultId: 0,
+        cancelId: 1
+    };
+    dialog.showMessageBox(win, options, (res, checked) => {
+        console.log(res);
+        if (res === 0) {
+            let cancellationToken;
+            appUpdater.downloadUpdate(cancellationToken);
+        }
+    });
+});
+
+autoUpdater.on('update-not-available', (info) => {
+    // It's quiet here.
+});
+
+autoUpdater.on('error', (err) => {
+    options = {
+        message: 'Error in auto-updater. ' + err,
+    };
+    dialog.showMessageBox(win, options, (res, checked) => {
+        console.log(res);
+    });
+})
+
+autoUpdater.on('download-progress', (progressObj) => {
+    let log_message = "Download speed: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+    log.info(log_message);
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+    options = {
+        title: 'Hermes Updates',
+        message: 'The update has been downloaded. ',
+        buttons: ["Restart & Install", "Cancel"],
+        defaultId: 0,
+        cancelId: 1
+    };
+    dialog.showMessageBox(win, options, (res, checked) => {
+        console.log(res);
+        if (res === 0) {
+            const isSilent = false;
+            const isForceRunAfter = true;
+            appUpdater.quitAndInstall(isSilent, isForceRunAfter)
+        }
+    });
+});
+
+app.on('ready', function()  {
+    autoUpdater.checkForUpdatesAndNotify();
+});
 
 app.whenReady().then(createWindow)
 
