@@ -34,6 +34,30 @@ Blockly.JavaScript['math_number'] = function(block) {
   return [code, order];
 };
 
+Blockly.JavaScript['math_integer'] = function(block) {
+  // Numeric value.
+  var code = Number(block.getFieldValue('NUM')); 
+  var order = code >= 0 ? Blockly.JavaScript.ORDER_ATOMIC :
+              Blockly.JavaScript.ORDER_UNARY_NEGATION;
+  return [code, order];
+};
+
+Blockly.JavaScript['math_whole_number'] = function(block) {
+  // Numeric value.
+  var code = Number(block.getFieldValue('NUM')); 
+  var order = code >= 0 ? Blockly.JavaScript.ORDER_ATOMIC :
+              Blockly.JavaScript.ORDER_UNARY_NEGATION;
+  return [code, order];
+};
+
+Blockly.JavaScript['math_positive_number'] = function(block) {
+  // Numeric value.
+  var code = Number(block.getFieldValue('NUM')); 
+  var order = code >= 0 ? Blockly.JavaScript.ORDER_ATOMIC :
+              Blockly.JavaScript.ORDER_UNARY_NEGATION;
+  return [code, order];
+};
+
 Blockly.JavaScript['math_arithmetic'] = function(block) {
   // Basic arithmetic operators, and power.
   var OPERATORS = {

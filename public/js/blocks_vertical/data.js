@@ -263,7 +263,10 @@ Blockly.Blocks['data_deleteoflist'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "INDEX"
+          "name": "INDEX",
+          "value": 1,
+          "min": 1,
+          "precision": 1
         },
         {
           "type": "field_variable",
@@ -313,7 +316,10 @@ Blockly.Blocks['data_insertatlist'] = {
         },
         {
           "type": "input_value",
-          "name": "INDEX"
+          "name": "INDEX",
+          "value": 1,
+          "min": 1,
+          "precision": 1
         },
         {
           "type": "field_variable",
@@ -338,7 +344,10 @@ Blockly.Blocks['data_replaceitemoflist'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "INDEX"
+          "name": "INDEX",
+          "value": 1,
+          "min": 1,
+          "precision": 1
         },
         {
           "type": "field_variable",
