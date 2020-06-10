@@ -63,6 +63,8 @@ function start() {
     greenFlagBlock.initSvg();
     greenFlagBlock.render();
 
+    workspace.scrollCenter();
+
     document.addEventListener('blocklyCheckmark', (event) => {
 
         console.log(event);
