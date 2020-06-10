@@ -323,10 +323,11 @@ const interval = setInterval(function() {
         connectButtonElement.classList.remove('mdl-color--green');
         connectButtonElement.classList.add('mdl-color--red');
         connectButtonElement.children[0].innerHTML = 'wifi_off';
+        ipcRenderer.send('tryConnect', 'connect'); 
     }
 
     lastState = currentState;
-}, 500);
+}, 1000);
 
 
 function takeoffOrLand() {
@@ -416,5 +417,5 @@ function loadWorkspace() {
 }
 
 function connectButton() {
-    ipcRenderer.send('connect', 'connect');
+    ipcRenderer.send('tryConnect', 'connect');
 }

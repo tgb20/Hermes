@@ -66,6 +66,11 @@ function mkDir(path) {
     });
 }
 
+ipcMain.on('tryConnect', (event, arg) => {
+    drone.send('command');
+    console.log('Tried Connecting to Drone');
+});
+
 ipcMain.on('greenflag', (event, codeBlocks) => {
     console.log('CODE:\n' + codeBlocks.join("\n"));
     codeBlocks.forEach( code => eval(code) );
@@ -94,11 +99,6 @@ ipcMain.on('emergency', (event, arg) => {
 
 ipcMain.on('rc', (event, arg) => { 
     drone.send("rc", { a: arg.leftRight, b: arg.forBack, c: arg.upDown, d: arg.yaw });
-});
-
-ipcMain.on('connect', (event, arg) => {
-    // Try to connect
-    console.log(arg);
 });
 
 function takePhoto() {
