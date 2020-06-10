@@ -301,8 +301,8 @@ function configureMarkers() {
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 980,
-        height: 600,
+        width: 1280,
+        height: 800,
         webPreferences: {
             nodeIntegration: true
         }
