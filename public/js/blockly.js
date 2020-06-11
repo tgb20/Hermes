@@ -96,31 +96,41 @@ ipcRenderer.on('displayJS', (event, arg) => {
 });
 
 function generateJavaScript() {
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    // Find and remove all top blocks.
-    var topBlocks = [];
-    for (var i = xml.childNodes.length - 1, node; block = xml.childNodes[i]; i--) {
-        if (block.tagName == 'BLOCK') {
-            xml.removeChild(block);
-            topBlocks.unshift(block);
+    let code = Blockly.JavaScript.workspaceToCode(workspace);
+
+    if (code.length > 0) {
+
+        let lines = code.match(/[^\r\n]+/g);
+        let cpLines = [...lines];
+
+        for(let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            if(line == '(async function greenFlag() {') {
+                if(i > 0) {
+                    let lineBefore = lines[i-1];
+
+                    if(!lineBefore.startsWith('var')) {
+                        cpLines.splice(i, 0, '})();');
+                    }
+                }
+            }
         }
+        let newCode = '';
+        cpLines.forEach(line => {
+            newCode += line + '\n';
+        });
+
+        return newCode;
     }
-    // Add each top block one by one and generate code.
-    var allCode = [];
-    for (var i = 0, block; block = topBlocks[i]; i++) {
-        var headless = new Blockly.Workspace();
-        xml.appendChild(block);
-        Blockly.Xml.domToWorkspace(xml, headless);
-        allCode.push(Blockly.JavaScript.workspaceToCode(headless) + "})()");
-        headless.dispose();
-        xml.removeChild(block);
-    }
-    return allCode;
+    return '';
 }
+
 function updateCodePreview(event) {
     if (event.type != Blockly.Events.BLOCK_MOVE) {
         const code = generateJavaScript();
-        document.getElementById('importExport').textContent = code.join("\n");
+        if(code != '') {
+            document.getElementById('importExport').textContent = code + '})();';
+        }
     }
 }
 
@@ -171,40 +181,22 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
-
     currentState = arg;
-
-    let vgx = arg.vgx;
-    let vgy = arg.vgy;
-    let vgz = arg.vgz;
-    let bat = arg.bat;
-    let time = arg.time;
-    let h = arg.h;
-    let temph = arg.temph;
-    let templ = arg.templ;
-    let pitch = arg.pitch;
-    let yaw = arg.yaw;
-    let baro = arg.baro;
-    let agx = arg.agx;
-    let agy = arg.agy;
-    let agz = arg.agz;
-    let tof = arg.tof;
-
-    document.getElementById('vgx').textContent = vgx;
-    document.getElementById('vgy').textContent = vgy;
-    document.getElementById('vgz').textContent = vgz;
-    document.getElementById('bat').textContent = bat;
-    document.getElementById('time').textContent = time;
-    document.getElementById('h').textContent = h;
-    document.getElementById('temph').textContent = temph;
-    document.getElementById('templ').textContent = templ;
-    document.getElementById('pitch').textContent = pitch;
-    document.getElementById('yaw').textContent = yaw;
-    document.getElementById('baro').textContent = baro;
-    document.getElementById('agx').textContent = agx;
-    document.getElementById('agy').textContent = agy;
-    document.getElementById('agz').textContent = agz;
-    document.getElementById('tof').textContent = tof;
+    document.getElementById('vgx').textContent = arg.vgx;
+    document.getElementById('vgy').textContent = arg.vgy;
+    document.getElementById('vgz').textContent = arg.vgz;
+    document.getElementById('bat').textContent = arg.bat;
+    document.getElementById('time').textContent = arg.time;
+    document.getElementById('h').textContent = arg.h;
+    document.getElementById('temph').textContent = arg.temph;
+    document.getElementById('templ').textContent = arg.templ;
+    document.getElementById('pitch').textContent = arg.pitch;
+    document.getElementById('yaw').textContent = arg.yaw;
+    document.getElementById('baro').textContent = arg.baro;
+    document.getElementById('agx').textContent = arg.agx;
+    document.getElementById('agy').textContent = arg.agy;
+    document.getElementById('agz').textContent = arg.agz;
+    document.getElementById('tof').textContent = arg.tof;
 });
 
 ipcRenderer.on('flying', (event, arg) => {

@@ -8,52 +8,6 @@
   <title>Hermes</title>
   <link rel="stylesheet" href="../node_modules/material-design-lite/material.min.css" />
   <link rel="stylesheet" href="style.css">
-  <script>var detectedMarkers; var flying = false;</script>
-  <script defer src="../node_modules/material-design-lite/material.min.js"></script>
-  <script src="js/blockly_compressed_vertical.js"></script>
-  <script src="js/blockly.js"></script>
-  <script src="js/css.js"></script>
-  <script src="js/flyout_vertical.js"></script>
-  <script src="js/msg/messages.js"></script>
-  <script src="js/msg/scratch_msgs.js"></script>
-  <script src="js/blocks_common/colour.js"></script>
-  <script src="js/blocks_common/math.js"></script>
-  <script src="js/blocks_common/matrix.js"></script>
-  <script src="js/blocks_common/text.js"></script>
-  <script src="js/blocks_vertical/control.js"></script>
-  <script src="js/blocks_vertical/data.js"></script>
-  <script src="js/blocks_vertical/event.js"></script>
-  <script src="js/blocks_vertical/extensions.js"></script>
-  <script src="js/blocks_vertical/looks.js"></script>
-  <script src="js/blocks_vertical/motion.js"></script>
-  <script src="js/blocks_vertical/drone_motion.js"></script>
-  <script src="js/blocks_vertical/drone_camera.js"></script>
-  <script src="js/blocks_vertical/operators.js"></script>
-  <script src="js/blocks_vertical/sensing.js"></script>
-  <script src="js/blocks_vertical/drone_sensing.js"></script>
-  <script src="js/blocks_vertical/sound.js"></script>
-  <script src="js/blocks_vertical/vertical_extensions.js"></script>
-  <script src="js/generators/javascript.js"></script>
-  <script src="js/generators/javascript/event.js"></script>
-  <script src="js/generators/javascript/colour.js"></script>
-  <script src="js/generators/javascript/lists.js"></script>
-  <script src="js/generators/javascript/logic.js"></script>
-  <script src="js/generators/javascript/loops.js"></script>
-  <script src="js/generators/javascript/math.js"></script>
-  <script src="js/generators/javascript/text.js"></script>
-  <script src="js/generators/javascript/variables.js"></script>
-  <script src="js/generators/javascript/variables_dynamic.js"></script>
-  <script src="js/generators/javascript/operators.js"></script>
-  <script src="js/generators/javascript/drone_motion.js"></script>
-  <script src="js/generators/javascript/drone_camera.js"></script>
-  <script src="js/generators/javascript/control.js"></script>
-  <script src="js/generators/javascript/drone_sensing.js"></script>
-  <script src="js/generators/javascript/data.js"></script>
-  <script src="js/jsmpeg.min.js"></script>
-  <script src="js/videofeed.js"></script>
-  <script src="js/blocks_vertical/default_toolbox.js"></script>
-  <script type="text/javascript" src="js/cv.js"></script> 
-  <script type="text/javascript" src="js/aruco.js"></script> 
 </head>
 
 <body onload="start()">
@@ -61,6 +15,7 @@
 
   <!-- Sidebar -->
   <div id="sidebarDiv">
+    <img src="media/Hermes-1200x250.png" class="logo"/>
     <div id="videowrapper" style="width: 100%;">
       <div class="controls">
         <div>
@@ -72,79 +27,79 @@
           </button>
         </div>
         <div>
-          <span style="display: none;" id="drone_sensing_speed_x" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_speed_x" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">speed</i>
             <span class="mdl-chip__text">speed x: <span id='vgx'>0</span> cm/s</span>
           </span>
-          <span style="display: none;" id="drone_sensing_speed_y" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_speed_y" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">speed</i>
             <span class="mdl-chip__text">speed y: <span id='vgy'>0</span> cm/s</span>
           </span>
-          <span style="display: none;" id="drone_sensing_speed_z" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_speed_z" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">speed</i>
             <span class="mdl-chip__text">speed z: <span id='vgz'>0</span> cm/s</span>
           </span>
-          <span id="drone_sensing_battery" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span id="drone_sensing_battery" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">battery_full</i>
             <span class="mdl-chip__text"><span id='bat'>0</span>%</span>
           </span>
-          <span style="display: none;" id="drone_sensing_time" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_time" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">update</i>
             <span class="mdl-chip__text"><span id='time'>0</span> s</span>
           </span>
-          <span id="drone_sensing_height" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span id="drone_sensing_height" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">height</i>
             <span class="mdl-chip__text"><span id='h'>0</span> cm</span>
           </span>
-          <span style="display: none;" id="drone_sensing_temp_high" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_temp_high" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">whatshot</i>
             <span class="mdl-chip__text"><span id='temph'>0</span> C</span>
           </span>
-          <span style="display: none;" id="drone_sensing_temp_low" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_temp_low" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">ac_unit</i>
             <span class="mdl-chip__text"><span id='templ'>0</span> C</span>
           </span>
-          <span style="display: none;" id="drone_sensing_pitch" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_pitch" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">device_hub</i>
             <span class="mdl-chip__text">pitch: <span id='pitch'>0</span>°</span>
           </span>
-          <span style="display: none;" id="drone_sensing_roll" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_roll" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">device_hub</i>
             <span class="mdl-chip__text">roll: <span id='roll'>0</span>°</span>
           </span>
-          <span style="display: none;" id="drone_sensing_yaw" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_yaw" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">device_hub</i>
             <span class="mdl-chip__text">yaw: <span id='yaw'>0</span>°</span>
           </span>
-          <span style="display: none;" id="drone_sensing_baro" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_baro" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">height</i>
             <span class="mdl-chip__text"><span id='baro'>0</span> m</span>
           </span>
-          <span style="display: none;" id="drone_sensing_accx" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_accx" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">fast_forward</i>
             <span class="mdl-chip__text">acc x: <span id='agx'>0</span> cm/s²</span>
           </span>
-          <span style="display: none;" id="drone_sensing_accy" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_accy" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">fast_forward</i>
             <span class="mdl-chip__text">acc y: <span id='agy'>0</span> cm/s²</span>
           </span>
-          <span style="display: none;" id="drone_sensing_accz" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_accz" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">fast_forward</i>
             <span class="mdl-chip__text">acc z: <span id='agz'>0</span> cm/s²</span>
           </span>
-          <span style="display: none;" id="drone_sensing_tof" class="mdl-chip mdl-color--gray mdl-chip--contact">
+          <span style="display: none;" id="drone_sensing_tof" class="mdl-chip mdl-color--gray mdl-chip--contact sensor">
             <i class="material-icons mdl-chip__contact">square_foot</i>
             <span class="mdl-chip__text"><span id='tof'>0</span> cm</span>
           </span>
         </div>
         <div>
           <button
-            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary video"
             onclick="">
             <i class="material-icons">photo_camera</i>
           </button>
           <button
-            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary video"
             onclick="">
             <i class="material-icons">videocam</i>
           </button>
@@ -155,11 +110,11 @@
           </button>
         </div>
       </div>
-      
+
       <!-- Canvas for processed video -->
       <canvas id="canvasOutput" width="640" height="480"></canvas>
       <!-- JSMpeg player canvas -->
-      <canvas id="video-canvas" width="640" height="480" ></canvas>
+      <canvas id="video-canvas" width="640" height="480"></canvas>
       <!-- Local mediaDevices video element -->
       <video playsinline autoplay></video>
 
@@ -167,7 +122,7 @@
       <div id="fullscreen-rc-controls">
         <div class="page-content takeoff-land" style="flex-direction: column;">
           <button id="btn-takeoff-land"
-            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion"
             onclick="takeoffOrLand();">
             <i class="material-icons">flight_takeoff</i>
           </button>
@@ -177,38 +132,38 @@
           <div class="rc-controls">
             <div class="rc-controls-bg"></div>
             <button
-              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion up">
               <i class="material-icons">vertical_align_top</i>
             </button>
             <button
-              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion down">
               <i class="material-icons">vertical_align_bottom</i>
             </button>
             <button
-              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion yaw-left">
               <i class="material-icons">rotate_left</i>
             </button>
             <button
-              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion yaw-right">
               <i class="material-icons">rotate_right</i>
             </button>
           </div>
           <div class="rc-controls">
             <div class="rc-controls-bg"></div>
             <button
-              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+              class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion forward">
               <i class="material-icons">arrow_upward</i>
             </button>
             <button
-              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+              class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion backward">
               <i class="material-icons">arrow_downward</i>
             </button>
             <button
-              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+              class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion left">
               <i class="material-icons">arrow_back</i>
             </button>
             <button
-              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+              class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion right">
               <i class="material-icons">arrow_forward</i>
             </button>
           </div>
@@ -251,38 +206,38 @@
               <div class="rc-controls">
                 <div class="rc-controls-bg"></div>
                 <button
-                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary up">
+                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion up">
                   <i class="material-icons">vertical_align_top</i>
                 </button>
                 <button
-                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary down">
+                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion down">
                   <i class="material-icons">vertical_align_bottom</i>
                 </button>
                 <button
-                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-left">
+                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion yaw-left">
                   <i class="material-icons">rotate_left</i>
                 </button>
                 <button
-                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary yaw-right">
+                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion yaw-right">
                   <i class="material-icons">rotate_right</i>
                 </button>
               </div>
               <div class="rc-controls">
                 <div class="rc-controls-bg"></div>
                 <button
-                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary forward">
+                  class="top mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion forward">
                   <i class="material-icons">arrow_upward</i>
                 </button>
                 <button
-                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary backward">
+                  class="bottom mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion backward">
                   <i class="material-icons">arrow_downward</i>
                 </button>
                 <button
-                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary left">
+                  class="left mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion left">
                   <i class="material-icons">arrow_back</i>
                 </button>
                 <button
-                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary right">
+                  class="right mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion right">
                   <i class="material-icons">arrow_forward</i>
                 </button>
               </div>
@@ -290,7 +245,7 @@
             <div class="page-content" style="flex-direction: column;">
               <!-- Keyboard -->
               <button id="btn-takeoff-land"
-                class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"
+                class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary motion"
                 onclick="takeoffOrLand();">
                 <i class="material-icons">flight_takeoff</i>
               </button>
@@ -306,6 +261,50 @@
       </div>
     </div>
   </div>
+  <script>var detectedMarkers; var flying = false;</script>
+  <script defer src="../node_modules/material-design-lite/material.min.js"></script>
+  <script src="js/blockly_compressed_vertical.js"></script>
+  <script src="js/blockly.js"></script>
+  <script src="js/msg/messages.js"></script>
+  <script src="js/msg/scratch_msgs.js"></script>
+  <script src="js/blocks_common/colour.js"></script>
+  <script src="js/blocks_common/math.js"></script>
+  <script src="js/blocks_common/matrix.js"></script>
+  <script src="js/blocks_common/text.js"></script>
+  <script src="js/blocks_vertical/control.js"></script>
+  <script src="js/blocks_vertical/data.js"></script>
+  <script src="js/blocks_vertical/event.js"></script>
+  <script src="js/blocks_vertical/extensions.js"></script>
+  <script src="js/blocks_vertical/looks.js"></script>
+  <script src="js/blocks_vertical/motion.js"></script>
+  <script src="js/blocks_vertical/drone_motion.js"></script>
+  <script src="js/blocks_vertical/drone_camera.js"></script>
+  <script src="js/blocks_vertical/operators.js"></script>
+  <script src="js/blocks_vertical/sensing.js"></script>
+  <script src="js/blocks_vertical/drone_sensing.js"></script>
+  <script src="js/blocks_vertical/sound.js"></script>
+  <script src="js/blocks_vertical/vertical_extensions.js"></script>
+  <script src="js/generators/javascript.js"></script>
+  <script src="js/generators/javascript/event.js"></script>
+  <script src="js/generators/javascript/colour.js"></script>
+  <script src="js/generators/javascript/lists.js"></script>
+  <script src="js/generators/javascript/logic.js"></script>
+  <script src="js/generators/javascript/loops.js"></script>
+  <script src="js/generators/javascript/math.js"></script>
+  <script src="js/generators/javascript/text.js"></script>
+  <script src="js/generators/javascript/variables.js"></script>
+  <script src="js/generators/javascript/variables_dynamic.js"></script>
+  <script src="js/generators/javascript/operators.js"></script>
+  <script src="js/generators/javascript/drone_motion.js"></script>
+  <script src="js/generators/javascript/drone_camera.js"></script>
+  <script src="js/generators/javascript/control.js"></script>
+  <script src="js/generators/javascript/drone_sensing.js"></script>
+  <script src="js/generators/javascript/data.js"></script>
+  <script src="js/jsmpeg.min.js"></script>
+  <script src="js/videofeed.js"></script>
+  <script src="js/blocks_vertical/default_toolbox.js"></script>
+  <script type="text/javascript" src="js/cv.js"></script>
+  <script type="text/javascript" src="js/aruco.js"></script>
 </body>
 
 </html>

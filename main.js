@@ -9,6 +9,24 @@ const { outputFile } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
 let winMarkerConfig;
 
+const droneState = {
+    vgx: 0,
+    vgy: 0,
+    vgz: 0,
+    bat: 0, 
+    time: 0,             
+    h: 0,
+    temph: 0,
+    templ: 0,
+    pitch: 0,
+    yaw: 0,
+    baro: 0,
+    agx: 0,
+    agy: 0,
+    agz: 0,
+    tof: 0
+}
+
 // Normalize platform for path to ffmpeg binary
 let platform = os.platform()
 if (platform == "darwin") {
@@ -177,6 +195,7 @@ drone.on("state", state => {
     // console.log("Received State > ", state);
     droneState = state;
     win.webContents.send('dronestate', state);
+    Object.assign(droneState, state);
 });
 
 drone.on("send", (err, length) => {
@@ -282,7 +301,7 @@ function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
         width: 1280,
-        height: 720,
+        height: 800,
         webPreferences: {
             nodeIntegration: true
         }
