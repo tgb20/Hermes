@@ -12,6 +12,6 @@ You can find the latest version of Hermes at https://github.com/tgb20/Hermes/rel
 
 ## Documentation
 
-Please read the documentation at https://tgb.gitbook.io/hermes/
+Please read the documentation at https://hermes.orange.haus
 
 
