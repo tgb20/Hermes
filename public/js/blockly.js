@@ -14,7 +14,7 @@ Blockly.prompt = ((msg, defaultValue, callback) => {
         title: msg,
         label: msg,
         type: 'input'
-    }).then((name) => {callback(name)});
+    }).then((name) => { callback(name) });
 });
 
 function start() {
@@ -72,7 +72,7 @@ function start() {
         let blockID = event.detail.id;
         let showHide = event.detail.value;
 
-        
+
         let sensorChip = document.getElementById(blockID);
         if (showHide) {
             sensorChip.style.display = "";
@@ -103,13 +103,13 @@ function generateJavaScript() {
         let lines = code.match(/[^\r\n]+/g);
         let cpLines = [...lines];
 
-        for(let i = 0; i < lines.length; i++) {
+        for (let i = 0; i < lines.length; i++) {
             let line = lines[i];
-            if(line == '(async function greenFlag() {') {
-                if(i > 0) {
-                    let lineBefore = lines[i-1];
+            if (line == '(async function greenFlag() {') {
+                if (i > 0) {
+                    let lineBefore = lines[i - 1];
 
-                    if(!lineBefore.startsWith('var')) {
+                    if (!lineBefore.startsWith('var')) {
                         cpLines.splice(i, 0, '})();');
                     }
                 }
@@ -128,14 +128,14 @@ function generateJavaScript() {
 function updateCodePreview(event) {
     if (event.type != Blockly.Events.BLOCK_MOVE) {
         const code = generateJavaScript();
-        if(code != '') {
+        if (code != '') {
             document.getElementById('importExport').textContent = code + '})();';
         }
     }
 }
 
 function clickedGreenFlag() {
-    const code = generateJavaScript();
+    const code = generateJavaScript() + '})();';
     ipcRenderer.send('greenflag', code);
 }
 
@@ -154,9 +154,9 @@ function disableKeyboard() {
 function fullScreenVideo() {
     if (!document.fullscreenElement) {
         document.querySelector("#videowrapper").requestFullscreen();
-      } else {
+    } else {
         document.exitFullscreen();
-      }
+    }
 }
 
 document.addEventListener('fullscreenchange', (event) => {
@@ -205,14 +205,14 @@ ipcRenderer.on('flying', (event, arg) => {
 });
 
 const validKeys = {
-    'KeyW': {leftRight: 0, forBack: 50, upDown: 0, yaw: 0},
-    'KeyS': {leftRight: 0, forBack: -50, upDown: 0, yaw: 0},
-    'KeyA': {leftRight: -50, forBack: 0, upDown: 0, yaw: 0},
-    'KeyD': {leftRight: 50, forBack: 0, upDown: 0, yaw: 0},
-    'ArrowUp': {leftRight: 0, forBack: 0, upDown: 50, yaw: 0},
-    'ArrowDown': {leftRight: 0, forBack: 0, upDown: -50, yaw: 0},
-    'ArrowRight': {leftRight: 0, forBack: 0, upDown: 0, yaw: 50},
-    'ArrowLeft': {leftRight: 0, forBack: 0, upDown: 0, yaw: -50},
+    'KeyW': { leftRight: 0, forBack: 50, upDown: 0, yaw: 0 },
+    'KeyS': { leftRight: 0, forBack: -50, upDown: 0, yaw: 0 },
+    'KeyA': { leftRight: -50, forBack: 0, upDown: 0, yaw: 0 },
+    'KeyD': { leftRight: 50, forBack: 0, upDown: 0, yaw: 0 },
+    'ArrowUp': { leftRight: 0, forBack: 0, upDown: 50, yaw: 0 },
+    'ArrowDown': { leftRight: 0, forBack: 0, upDown: -50, yaw: 0 },
+    'ArrowRight': { leftRight: 0, forBack: 0, upDown: 0, yaw: 50 },
+    'ArrowLeft': { leftRight: 0, forBack: 0, upDown: 0, yaw: -50 },
 }
 
 document.addEventListener('keydown', getKeyPress);
@@ -238,63 +238,63 @@ function getKeyPress(key) {
 
 document.addEventListener('keyup', (key) => {
     if (keyboard && key.code in validKeys) {
-        ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0});
+        ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: 0, yaw: 0 });
     }
 });
 
 document.querySelectorAll('.mdl-button.forward').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 50, upDown: 0, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 50, upDown: 0, yaw: 0 });
         })
     }
 );
 document.querySelectorAll('.mdl-button.backward').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: -50, upDown: 0, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: -50, upDown: 0, yaw: 0 });
         })
     }
 );
 document.querySelectorAll('.mdl-button.left').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: -50, forBack: 0, upDown: 0, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: -50, forBack: 0, upDown: 0, yaw: 0 });
         })
     }
 )
 document.querySelectorAll('.mdl-button.right').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 50, forBack: 0, upDown: 0, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 50, forBack: 0, upDown: 0, yaw: 0 });
         })
     }
 );
 document.querySelectorAll('.mdl-button.up').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 50, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: 50, yaw: 0 });
         })
     }
 );
 document.querySelectorAll('.mdl-button.down').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: -50, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: -50, yaw: 0 });
         })
     }
 );
 document.querySelectorAll('.mdl-button.yaw-left').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: -50}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: 0, yaw: -50 });
         })
     }
 )
 document.querySelectorAll('.mdl-button.yaw-right').forEach(
     (button) => {
         button.addEventListener('mousedown', () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 50}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: 0, yaw: 50 });
         })
     }
 );
@@ -302,14 +302,14 @@ document.querySelectorAll('.mdl-button.yaw-right').forEach(
 document.querySelectorAll(".mdl-button").forEach(
     (button) => {
         button.addEventListener("mouseup", () => {
-            ipcRenderer.send('rc', {leftRight: 0, forBack: 0, upDown: 0, yaw: 0}); 
+            ipcRenderer.send('rc', { leftRight: 0, forBack: 0, upDown: 0, yaw: 0 });
         });
     }
 );
 
-const interval = setInterval(function() {
+const interval = setInterval(function () {
     let connectButtonElement = document.getElementById('connectButton');
-    if(currentState != lastState) {
+    if (currentState != lastState) {
         connectButtonElement.classList.remove('mdl-color--red');
         connectButtonElement.classList.add('mdl-color--green');
         connectButtonElement.children[0].innerHTML = 'wifi_on';
@@ -317,7 +317,7 @@ const interval = setInterval(function() {
         connectButtonElement.classList.remove('mdl-color--green');
         connectButtonElement.classList.add('mdl-color--red');
         connectButtonElement.children[0].innerHTML = 'wifi_off';
-        ipcRenderer.send('tryConnect', 'connect'); 
+        ipcRenderer.send('tryConnect', 'connect');
     }
 
     lastState = currentState;
