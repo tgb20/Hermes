@@ -2,7 +2,7 @@
 
 Use the keyboard to control the drone by selecting the keyboard tab in the sidebar.
 
-![](../.gitbook/assets/keyboard_controls.png)
+![](../.gitbook/assets/hermes-keyboardcontrols.png)
 
 W = Forward, A = Left, S = Back, D = Right
 
