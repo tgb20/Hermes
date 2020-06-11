@@ -2,7 +2,7 @@
 
 ## Motion
 
-![takeoff](.gitbook/assets/scratch-blocks/m-takeoff.gif)
+![takeoff](/.gitbook/assets/scratch-blocks/m-takeoff.gif)
 
 ## Events
 
