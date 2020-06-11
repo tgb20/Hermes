@@ -1,7 +1,7 @@
 # Block Definitions
 
 ## Motion
-![takeoff](/.gitbook/assets/scratch-blocks/m-takeoff.gif?raw=true "takeoff")
+![takeoff](/assets/scratch-blocks/m-takeoff.gif?raw=true "takeoff")
 
 
 ## Events
