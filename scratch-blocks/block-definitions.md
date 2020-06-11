@@ -49,6 +49,45 @@
 ![While](../.gitbook/assets/scratch-blocks/c-while.gif)
 
 ## Sensing
+![Speed X](../.gitbook/assets/scratch-blocks/s-speedx.gif)
+
+![Speed Y](../.gitbook/assets/scratch-blocks/s-speedy.gif)
+
+![Speed Z](../.gitbook/assets/scratch-blocks/s-speedz.gif)
+
+![Battery](../.gitbook/assets/scratch-blocks/s-battery.gif)
+
+![Flight Time](../.gitbook/assets/scratch-blocks/s-flighttime.gif)
+
+![Height](../.gitbook/assets/scratch-blocks/s-height.gif)
+
+![Height](../.gitbook/assets/scratch-blocks/s-height.gif)
+
+![Low Temperature](../.gitbook/assets/scratch-blocks/s-lowtemperature.gif)
+
+![High Temperature](../.gitbook/assets/scratch-blocks/s-hightemperature.gif)
+
+![Pitch](../.gitbook/assets/scratch-blocks/s-pitch.gif)
+
+![Roll](../.gitbook/assets/scratch-blocks/s-roll.gif)
+
+![Yaw](../.gitbook/assets/scratch-blocks/s-yaw.gif)
+
+![Barometer](../.gitbook/assets/scratch-blocks/s-barometer.gif)
+
+![Acceleration X](../.gitbook/assets/scratch-blocks/s-accelerationx.gif)
+
+![Acceleration Y](../.gitbook/assets/scratch-blocks/s-accelerationy.gif)
+
+![Acceleration Z](../.gitbook/assets/scratch-blocks/s-accelerationz.gif)
+
+![TOF](../.gitbook/assets/scratch-blocks/s-tof.gif)
+
+
+
+
+
+
 
 ## Camera
 ![Photo](../.gitbook/assets/scratch-blocks/c-photo.gif)
