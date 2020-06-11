@@ -51,6 +51,18 @@
 ## Sensing
 
 ## Camera
+![Photo](../.gitbook/assets/scratch-blocks/c-photo.gif)
+
+![Start Video](../.gitbook/assets/scratch-blocks/c-startvideo.gif)
+
+![Stop Video](../.gitbook/assets/scratch-blocks/c-stopvideo.gif)
+
+![Marker](../.gitbook/assets/scratch-blocks/c-marker.gif)
+
+
+
+
+
 
 ## Operators
 
