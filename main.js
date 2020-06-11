@@ -57,7 +57,6 @@ const exp = express()
 const drone = tello.connect();
 
 let win;
-let droneState;
 let flying;
 
 const TELLO_VIDEO_PORT = 11111
