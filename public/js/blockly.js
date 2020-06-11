@@ -7,6 +7,8 @@ const dialog = remote.dialog;
 const win = remote.getCurrentWindow();
 let keyboard = false;
 
+let lastState, currentState;
+
 Blockly.prompt = ((msg, defaultValue, callback) => {
     prompt({
         title: msg,
@@ -57,7 +59,15 @@ function start() {
     });
     workspace.addChangeListener(updateCodePreview);
 
+    let greenFlagBlock = workspace.newBlock('event_whenflagclicked');
+    greenFlagBlock.initSvg();
+    greenFlagBlock.render();
+
+    workspace.scrollCenter();
+
     document.addEventListener('blocklyCheckmark', (event) => {
+
+        console.log(event);
 
         let blockID = event.detail.id;
         let showHide = event.detail.value;
@@ -171,6 +181,7 @@ ipcRenderer.on('file', (event, arg) => {
 });
 
 ipcRenderer.on('dronestate', (event, arg) => {
+    currentState = arg;
     document.getElementById('vgx').textContent = arg.vgx;
     document.getElementById('vgy').textContent = arg.vgy;
     document.getElementById('vgz').textContent = arg.vgz;
@@ -191,7 +202,7 @@ ipcRenderer.on('dronestate', (event, arg) => {
 ipcRenderer.on('flying', (event, arg) => {
     flying = arg;
     console.log('app flying: ', flying);
-})
+});
 
 const validKeys = {
     'KeyW': {leftRight: 0, forBack: 50, upDown: 0, yaw: 0},
@@ -296,6 +307,23 @@ document.querySelectorAll(".mdl-button").forEach(
     }
 );
 
+const interval = setInterval(function() {
+    let connectButtonElement = document.getElementById('connectButton');
+    if(currentState != lastState) {
+        connectButtonElement.classList.remove('mdl-color--red');
+        connectButtonElement.classList.add('mdl-color--green');
+        connectButtonElement.children[0].innerHTML = 'wifi_on';
+    } else {
+        connectButtonElement.classList.remove('mdl-color--green');
+        connectButtonElement.classList.add('mdl-color--red');
+        connectButtonElement.children[0].innerHTML = 'wifi_off';
+        ipcRenderer.send('tryConnect', 'connect'); 
+    }
+
+    lastState = currentState;
+}, 1000);
+
+
 function takeoffOrLand() {
     if (flying) {
         ipcRenderer.send('land');
@@ -383,5 +411,5 @@ function loadWorkspace() {
 }
 
 function connectButton() {
-    ipcRenderer.send('connect', 'connect');
+    ipcRenderer.send('tryConnect', 'connect');
 }

@@ -57,6 +57,7 @@ const exp = express()
 const drone = tello.connect();
 
 let win;
+let droneState;
 let flying;
 
 const TELLO_VIDEO_PORT = 11111
@@ -82,6 +83,11 @@ function mkDir(path) {
         dir.close();
     });
 }
+
+ipcMain.on('tryConnect', (event, arg) => {
+    drone.send('command');
+    console.log('Tried Connecting to Drone');
+});
 
 ipcMain.on('greenflag', (event, codeBlocks) => {
     console.log('CODE:\n' + codeBlocks.join("\n"));
@@ -111,11 +117,6 @@ ipcMain.on('emergency', (event, arg) => {
 
 ipcMain.on('rc', (event, arg) => { 
     drone.send("rc", { a: arg.leftRight, b: arg.forBack, c: arg.upDown, d: arg.yaw });
-});
-
-ipcMain.on('connect', (event, arg) => {
-    // Try to connect
-    console.log(arg);
 });
 
 function takePhoto() {
@@ -190,12 +191,9 @@ exp.post(`/tellostream`, (req, res) => {
     })
 });
 
-drone.on("connection", () => {
-    console.log("Connected to drone");
-});
-
 drone.on("state", state => {
     // console.log("Received State > ", state);
+    droneState = state;
     win.webContents.send('dronestate', state);
     Object.assign(droneState, state);
 });
@@ -214,6 +212,7 @@ drone.on("connection", async () => {
     try {
         await drone.send("battery?");
         await drone.send("streamon");
+        console.log("Connected to drone");
     } catch (error) {
         console.log(error)
     }
