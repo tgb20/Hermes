@@ -38,6 +38,15 @@
 ![Stop Motors](../.gitbook/assets/scratch-blocks/e-stopmotors.gif)
 
 ## Control
+![Wait](../.gitbook/assets/scratch-blocks/c-wait.gif)
+
+![Stop Motors](../.gitbook/assets/scratch-blocks/c-repeat.gif)
+
+![If Then](../.gitbook/assets/scratch-blocks/c-ifthen.gif)
+
+![If Then Else](../.gitbook/assets/scratch-blocks/c-ifthenelse.gif)
+
+![While](../.gitbook/assets/scratch-blocks/c-while.gif)
 
 ## Sensing
 
