@@ -2,7 +2,7 @@
 
 {% tabs %}
 {% tab title="macOS" %}
-Download the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
+Download the .dmg of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
 
 ![You just need to download the Hermes.dmg file to run Hermes](../.gitbook/assets/screen-shot-2020-06-11-at-5.40.40-pm%20%281%29.png)
 
