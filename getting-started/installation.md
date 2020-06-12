@@ -14,13 +14,15 @@ And you should be good to start programming and flying your Tello Drone with Her
 {% endtab %}
 
 {% tab title="Windows" %}
-Unfortunately right now there is not a Windows version of Hermes. This is planned to be implemented in the near future and should be available before the Beta period ends.
+Windows version instructions coming soon
 {% endtab %}
 
-{% tab title="Linux" %}
-Unfortunately right now there is not a Linux version of Hermes. It would not take long to make a linux version with Electron if someone would like to do that.
+{% tab title="Other Platforms" %}
+There are plans to extend the platforms that Hermes is offered on. The current list of candidates is:
+
+* iOS
+* Chrome OS
+* Android
 {% endtab %}
 {% endtabs %}
-
-
 

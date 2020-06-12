@@ -1,8 +1,10 @@
 # Saving your code
 
-In the top menu select File > Save.
+Saving your code with Hermes is easy. 
 
-Name and save your file in the .space format.
+You can use File-&gt;Save and File-&gt;Load. 
 
-You can use Open in the top menu to open a file.
+This will save all the code in your program and any variables you have created.
+
+Hermes uses the .space extension, which is simply a container holding your entire workspace. In the future support will be added to easily open .space files with Hermes.
 

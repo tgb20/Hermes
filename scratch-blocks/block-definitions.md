@@ -1,133 +1,136 @@
 # Block Definitions
 
 ## Motion
-![Takeoff](../.gitbook/assets/scratch-blocks/m-takeoff.gif)
 
-![Land](../.gitbook/assets/scratch-blocks/m-land.gif)
+![Takeoff](../.gitbook/assets/m-takeoff.gif)
 
-![Set Speed](../.gitbook/assets/scratch-blocks/m-setspeed.gif)
+![Land](../.gitbook/assets/m-land.gif)
 
-![Fly Forward](../.gitbook/assets/scratch-blocks/m-flyforward.gif)
+![Set Speed](../.gitbook/assets/m-setspeed.gif)
 
-![Fly Backward](../.gitbook/assets/scratch-blocks/m-flybackward.gif)
+![Fly Forward](../.gitbook/assets/m-flyforward.gif)
 
-![Fly Left](../.gitbook/assets/scratch-blocks/m-flyleft.gif)
+![Fly Backward](../.gitbook/assets/m-flybackward.gif)
 
-![Fly Right](../.gitbook/assets/scratch-blocks/m-flyright.gif)
+![Fly Left](../.gitbook/assets/m-flyleft.gif)
 
-![Fly Up](../.gitbook/assets/scratch-blocks/m-flyup.gif)
+![Fly Right](../.gitbook/assets/m-flyright.gif)
 
-![Fly Down](../.gitbook/assets/scratch-blocks/m-flydown.gif)
+![Fly Up](../.gitbook/assets/m-flyup.gif)
 
-![Rotate Left](../.gitbook/assets/scratch-blocks/m-rotateleft.gif)
+![Fly Down](../.gitbook/assets/m-flydown.gif)
 
-![Rotate Right](../.gitbook/assets/scratch-blocks/m-rotateright.gif)
+![Rotate Left](../.gitbook/assets/m-rotateleft.gif)
 
-![Flip Forward](../.gitbook/assets/scratch-blocks/m-flipforward.gif)
+![Rotate Right](../.gitbook/assets/m-rotateright.gif)
 
-![Flip Backward](../.gitbook/assets/scratch-blocks/m-flipbackward.gif)
+![Flip Forward](../.gitbook/assets/m-flipforward.gif)
 
-![Flip Left](../.gitbook/assets/scratch-blocks/m-flipleft.gif)
+![Flip Backward](../.gitbook/assets/m-flipbackward.gif)
 
-![Flip Right](../.gitbook/assets/scratch-blocks/m-flipright.gif)
+![Flip Left](../.gitbook/assets/m-flipleft.gif)
 
+![Flip Right](../.gitbook/assets/m-flipright.gif)
 
 ## Events
-![Green Flag](../.gitbook/assets/scratch-blocks/e-greenflag.gif)
 
-![Stop Motors](../.gitbook/assets/scratch-blocks/e-stopmotors.gif)
+![Green Flag](../.gitbook/assets/e-greenflag.gif)
+
+![Stop Motors](../.gitbook/assets/e-stopmotors.gif)
 
 ## Control
-![Wait](../.gitbook/assets/scratch-blocks/c-wait.gif)
 
-![Stop Motors](../.gitbook/assets/scratch-blocks/c-repeat.gif)
+![Wait](../.gitbook/assets/c-wait.gif)
 
-![If Then](../.gitbook/assets/scratch-blocks/c-ifthen.gif)
+![Stop Motors](../.gitbook/assets/c-repeat.gif)
 
-![If Then Else](../.gitbook/assets/scratch-blocks/c-ifthenelse.gif)
+![If Then](../.gitbook/assets/c-ifthen.gif)
 
-![While](../.gitbook/assets/scratch-blocks/c-while.gif)
+![If Then Else](../.gitbook/assets/c-ifthenelse.gif)
+
+![While](../.gitbook/assets/c-while.gif)
 
 ## Sensing
-![Speed X](../.gitbook/assets/scratch-blocks/s-speedx.gif)
 
-![Speed Y](../.gitbook/assets/scratch-blocks/s-speedy.gif)
+![Speed X](../.gitbook/assets/s-speedx.gif)
 
-![Speed Z](../.gitbook/assets/scratch-blocks/s-speedz.gif)
+![Speed Y](../.gitbook/assets/s-speedy.gif)
 
-![Battery](../.gitbook/assets/scratch-blocks/s-battery.gif)
+![Speed Z](../.gitbook/assets/s-speedz.gif)
 
-![Flight Time](../.gitbook/assets/scratch-blocks/s-flighttime.gif)
+![Battery](../.gitbook/assets/s-battery.gif)
 
-![Height](../.gitbook/assets/scratch-blocks/s-height.gif)
+![Flight Time](../.gitbook/assets/s-flighttime.gif)
 
-![Height](../.gitbook/assets/scratch-blocks/s-height.gif)
+![Height](../.gitbook/assets/s-height.gif)
 
-![Low Temperature](../.gitbook/assets/scratch-blocks/s-lowtemperature.gif)
+![Height](../.gitbook/assets/s-height.gif)
 
-![High Temperature](../.gitbook/assets/scratch-blocks/s-hightemperature.gif)
+![Low Temperature](../.gitbook/assets/s-lowtemperature.gif)
 
-![Pitch](../.gitbook/assets/scratch-blocks/s-pitch.gif)
+![High Temperature](../.gitbook/assets/s-hightemperature.gif)
 
-![Roll](../.gitbook/assets/scratch-blocks/s-roll.gif)
+![Pitch](../.gitbook/assets/s-pitch.gif)
 
-![Yaw](../.gitbook/assets/scratch-blocks/s-yaw.gif)
+![Roll](../.gitbook/assets/s-roll.gif)
 
-![Barometer](../.gitbook/assets/scratch-blocks/s-barometer.gif)
+![Yaw](../.gitbook/assets/s-yaw.gif)
 
-![Acceleration X](../.gitbook/assets/scratch-blocks/s-accelerationx.gif)
+![Barometer](../.gitbook/assets/s-barometer.gif)
 
-![Acceleration Y](../.gitbook/assets/scratch-blocks/s-accelerationy.gif)
+![Acceleration X](../.gitbook/assets/s-accelerationx.gif)
 
-![Acceleration Z](../.gitbook/assets/scratch-blocks/s-accelerationz.gif)
+![Acceleration Y](../.gitbook/assets/s-accelerationy.gif)
 
-![TOF](../.gitbook/assets/scratch-blocks/s-tof.gif)
-#### Height from where you took off
+![Acceleration Z](../.gitbook/assets/s-accelerationz.gif)
 
+![TOF](../.gitbook/assets/s-tof.gif)
+
+TOF = Height from where you took off
 
 ## Camera
-![Photo](../.gitbook/assets/scratch-blocks/c-photo.gif)
 
-![Start Video](../.gitbook/assets/scratch-blocks/c-startvideo.gif)
+![Photo](../.gitbook/assets/c-photo.gif)
 
-![Stop Video](../.gitbook/assets/scratch-blocks/c-stopvideo.gif)
+![Start Video](../.gitbook/assets/c-startvideo.gif)
 
-![Marker](../.gitbook/assets/scratch-blocks/c-marker.gif)
+![Stop Video](../.gitbook/assets/c-stopvideo.gif)
 
+![Marker](../.gitbook/assets/c-marker.gif)
 
 ## Operators
-![Add](../.gitbook/assets/scratch-blocks/o-add.gif)
 
-![Minus](../.gitbook/assets/scratch-blocks/o-minus.gif)
+![Add](../.gitbook/assets/o-add.gif)
 
-![Multiply](../.gitbook/assets/scratch-blocks/o-multiplication.gif)
+![Minus](../.gitbook/assets/o-minus.gif)
 
-![Divide](../.gitbook/assets/scratch-blocks/o-division.gif)
+![Multiply](../.gitbook/assets/o-multiplication.gif)
 
-![Random](../.gitbook/assets/scratch-blocks/o-pickrandom.gif)
+![Divide](../.gitbook/assets/o-division.gif)
 
-![Less Than](../.gitbook/assets/scratch-blocks/lessthan.gif)
+![Random](../.gitbook/assets/o-pickrandom.gif)
 
-![Equals](../.gitbook/assets/scratch-blocks/equals.gif)
+![Less Than](../.gitbook/assets/lessthan.gif)
 
-![Greatr Than](../.gitbook/assets/scratch-blocks/greaterthan.gif)
+![Equals](../.gitbook/assets/equals.gif)
 
-![And](../.gitbook/assets/scratch-blocks/and.gif)
+![Greatr Than](../.gitbook/assets/greaterthan.gif)
 
-![Or](../.gitbook/assets/scratch-blocks/or.gif)
+![And](../.gitbook/assets/and.gif)
 
-![Not](../.gitbook/assets/scratch-blocks/not.gif)
+![Or](../.gitbook/assets/or.gif)
 
-![Mod](../.gitbook/assets/scratch-blocks/mod.gif)
+![Not](../.gitbook/assets/not.gif)
 
-![Round](../.gitbook/assets/scratch-blocks/round.gif)
+![Mod](../.gitbook/assets/mod.gif)
 
-![Abs](../.gitbook/assets/scratch-blocks/abs.gif)
+![Round](../.gitbook/assets/round.gif)
 
+![Abs](../.gitbook/assets/abs.gif)
 
 ## Variables
-![Make a Variable](../.gitbook/assets/scratch-blocks/variable.gif)
 
-![Make a List](../.gitbook/assets/scratch-blocks/list.gif)
+![Make a Variable](../.gitbook/assets/variable.gif)
 
+![Make a List](../.gitbook/assets/list.gif)
 
