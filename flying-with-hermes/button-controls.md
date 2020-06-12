@@ -2,7 +2,7 @@
 
 Use the buttons on the interface to control the drone.
 
-![Button Controls](../.gitbook/assets/hermes-buttoncontrols.png)
+![Button Controls](../.gitbook/assets/hermes-buttoncontrols.gif)
 
 
 ### Mouse Control
