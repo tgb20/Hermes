@@ -16,24 +16,47 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
 
+const droneState = {
+    vgx: 0,
+    vgy: 0,
+    vgz: 0,
+    bat: 0,
+    time: 0,
+    h: 0,
+    temph: 0,
+    templ: 0,
+    pitch: 0,
+    yaw: 0,
+    baro: 0,
+    agx: 0,
+    agy: 0,
+    agz: 0,
+    tof: 0
+}
+
 // Normalize platform for path to ffmpeg binary
 let platform = os.platform()
 if (platform == "darwin") {
-	platform = "mac";
-} else if(platform == "win32") {
-	platform = "win";
+    platform = "mac";
+} else if (platform == "win32") {
+    platform = "win";
 }
 
 // Get path to resources directory if app is built
 var getResourcesPath = function () {
     var paths = Array.from(arguments)
-    
-    if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
-        paths.unshift(path.join(process.cwd(), 'resources') );
+    if (arguments === 'mac') {
+        if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
+            paths.unshift(path.join(process.cwd(), 'resources'));
+        } else {
+            // In builds, the resources directory is located in 'Contents/Resources'
+            paths.unshift(process.resourcesPath)
+        }
     } else {
-        // In builds, the resources directory is located in 'Contents/Resources'
-        paths.unshift(process.resourcesPath)
-    } 
+        // win
+        paths.unshift(path.join(process.cwd(), 'resources'))
+    }
+    
     return path.join.apply(null, paths)
 }
 
@@ -72,9 +95,13 @@ function mkDir(path) {
     });
 }
 
-ipcMain.on('greenflag', (event, codeBlocks) => {
-    console.log('CODE:\n' + codeBlocks.join("\n"));
-    codeBlocks.forEach( code => eval(code) );
+ipcMain.on('tryConnect', (event, arg) => {
+    drone.send('command');
+    console.log('Tried Connecting to Drone');
+});
+
+ipcMain.on('greenflag', (event, code) => {
+    eval(code);
 });
 
 ipcMain.on('takeoff', (event, arg) => {
@@ -98,13 +125,8 @@ ipcMain.on('emergency', (event, arg) => {
     win.webContents.send('flying', false);
 });
 
-ipcMain.on('rc', (event, arg) => { 
+ipcMain.on('rc', (event, arg) => {
     drone.send("rc", { a: arg.leftRight, b: arg.forBack, c: arg.upDown, d: arg.yaw });
-});
-
-ipcMain.on('connect', (event, arg) => {
-    // Try to connect
-    console.log(arg);
 });
 
 function takePhoto() {
@@ -146,11 +168,11 @@ ipcMain.on('save_video', (event, fileName, buffer) => {
                 '-strict', 'experimental',
                 mp4Filename
             ])
-            
+
             ffmpeg.stderr.on('data', data => {
                 console.log(`stderr: ${data}`)
             })
-            
+
             ffmpeg.on('close', code => {
                 console.log(`child process exited with code ${code}`);
                 event.reply('saved_file', mp4Filename);
@@ -179,13 +201,12 @@ exp.post(`/tellostream`, (req, res) => {
     })
 });
 
-drone.on("connection", () => {
-    console.log("Connected to drone");
-});
-
 drone.on("state", state => {
     // console.log("Received State > ", state);
-    win.webContents.send('dronestate', state);
+    if (win.webContents) {
+        win.webContents.send('dronestate', state);
+        Object.assign(droneState, state);
+    }
 });
 
 drone.on("send", (err, length) => {
@@ -202,6 +223,7 @@ drone.on("connection", async () => {
     try {
         await drone.send("battery?");
         await drone.send("streamon");
+        console.log("Connected to drone");
     } catch (error) {
         console.log(error)
     }
@@ -228,11 +250,11 @@ function startVideoStream() {
         '30',
         `http://${HOST}:${PORT}/tellostream`
     ])
-    
+
     ffmpeg.stderr.on('data', data => {
         console.log(`stderr: ${data}`)
     })
-    
+
     ffmpeg.on('close', code => {
         console.log(`child process exited with code ${code}`)
     })
@@ -271,7 +293,7 @@ wsServer.broadcast = function (data) {
 
 function configureMarkers() {
     if (!winMarkerConfig) {
-        winMarkerConfig = new BrowserWindow({ 
+        winMarkerConfig = new BrowserWindow({
             width: 472,
             height: 600,
             resizable: false,
@@ -280,7 +302,7 @@ function configureMarkers() {
             }
         });
         winMarkerConfig.on('closed', () => {
-          winMarkerConfig = null
+            winMarkerConfig = null
         })
         winMarkerConfig.loadFile('public/configMarkers.html');
     }
@@ -289,14 +311,14 @@ function configureMarkers() {
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 980,
-        height: 600,
+        width: 1280,
+        height: 800,
         webPreferences: {
             nodeIntegration: true
         }
     })
     win.loadFile('public/index.html');
-    
+
     win.on('closed', () => {
         win = null;
         if (wsServer) wsServer.close();
@@ -337,9 +359,25 @@ function createWindow() {
         {
             label: 'View',
             submenu: [
+                { type: 'separator' },
+                { role: 'reload' },
+                { role: 'forcereload' },
+                { type: 'separator' },
+                { role: 'resetzoom' },
+                { role: 'zoomin' },
+                { role: 'zoomout' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
+        },
+        {
+            label: 'Developer',
+            submenu: [
+                { role: 'toggledevtools' },
+                { type: 'separator' },
                 {
                     label: 'Display JavaScript',
-                    type: 'checkbox', 
+                    type: 'checkbox',
                     checked: false,
                     click: e => {
                         win.webContents.send('displayJS', e.checked);
@@ -358,18 +396,27 @@ function createWindow() {
                     click: e => {
                         win.webContents.send('useLocalCamera', e.checked);
                     }
-                },
-                { type: 'separator' },
-                { role: 'toggledevtools' },
-                { type: 'separator' },
-                { role: 'resetzoom' },
-                { role: 'zoomin' },
-                { role: 'zoomout' },
-                { type: 'separator' },
-                { role: 'togglefullscreen' }
+                }
             ]
         },
-        { role: 'windowMenu' }
+        { role: 'windowMenu' },
+        {
+            label: 'Help',
+            submenu: [
+                {
+                    label: 'Open Documentation',
+                    click: e => {
+                        shell.openExternal('https://hermes.orange.haus');
+                    }
+                },
+                {
+                    label: 'Submit Bug Report',
+                    click: e => {
+                        shell.openExternal('https://github.com/tgb20/Hermes/issues');
+                    }
+                }
+            ]
+        }
     ];
 
     const menu = Menu.buildFromTemplate(template);
