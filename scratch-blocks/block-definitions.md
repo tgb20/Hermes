@@ -82,6 +82,8 @@
 ![Acceleration Z](../.gitbook/assets/scratch-blocks/s-accelerationz.gif)
 
 ![TOF](../.gitbook/assets/scratch-blocks/s-tof.gif)
+#### Height from where you took off
+
 
 ## Camera
 ![Photo](../.gitbook/assets/scratch-blocks/c-photo.gif)
