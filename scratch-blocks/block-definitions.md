@@ -83,12 +83,6 @@
 
 ![TOF](../.gitbook/assets/scratch-blocks/s-tof.gif)
 
-
-
-
-
-
-
 ## Camera
 ![Photo](../.gitbook/assets/scratch-blocks/c-photo.gif)
 
@@ -99,11 +93,46 @@
 ![Marker](../.gitbook/assets/scratch-blocks/c-marker.gif)
 
 
-
-
-
-
 ## Operators
+![Add](../.gitbook/assets/scratch-blocks/o-add.gif)
+
+![Minus](../.gitbook/assets/scratch-blocks/o-minus.gif)
+
+![Multiply](../.gitbook/assets/scratch-blocks/o-multiplication.gif)
+
+![Divide](../.gitbook/assets/scratch-blocks/o-division.gif)
+
+![Random](../.gitbook/assets/scratch-blocks/o-pickrandom.gif)
+
+![Less Than](../.gitbook/assets/scratch-blocks/lessthan.gif)
+
+![Equals](../.gitbook/assets/scratch-blocks/equals.gif)
+
+![Greatr Than](../.gitbook/assets/scratch-blocks/greaterthan.gif)
+
+![And](../.gitbook/assets/scratch-blocks/and.gif)
+
+![Or](../.gitbook/assets/scratch-blocks/or.gif)
+
+![Not](../.gitbook/assets/scratch-blocks/not.gif)
+
+![Mod](../.gitbook/assets/scratch-blocks/mod.gif)
+
+![Round](../.gitbook/assets/scratch-blocks/round.gif)
+
+![Abs](../.gitbook/assets/scratch-blocks/abs.gif)
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Variables
 
