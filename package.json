@@ -43,6 +43,13 @@
         "filter": [
           "**/*"
         ]
+      },
+      {
+        "from": "resources/win/bin",
+        "to": "resources/win/bin",
+        "filter": [
+          "**/*"
+        ]
       }
     ]
   },
