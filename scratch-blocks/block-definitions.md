@@ -123,16 +123,9 @@
 ![Abs](../.gitbook/assets/scratch-blocks/abs.gif)
 
 
-
-
-
-
-
-
-
-
-
-
-
 ## Variables
+![Make a Variable](../.gitbook/assets/scratch-blocks/variable.gif)
+
+![Make a List](../.gitbook/assets/scratch-blocks/list.gif)
+
 
