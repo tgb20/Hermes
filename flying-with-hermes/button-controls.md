@@ -1,6 +1,6 @@
 # Button Controls
 
-Use the buttons on the interface to control the drone.
+Use the buttons in the app to control the drone.
 
 ![Button Controls](../.gitbook/assets/hermes-buttoncontrols.gif)
 
