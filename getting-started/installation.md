@@ -18,7 +18,7 @@ Unfortunately right now there is not a Windows version of Hermes. This is planne
 {% endtab %}
 
 {% tab title="Linux" %}
-Unfortunately right now there is not a Linux version of Hermes. There are not current plans to implement this at this time.
+Unfortunately right now there is not a Linux version of Hermes. It would not take long to make a linux version with Electron if someone would like to do that.
 {% endtab %}
 {% endtabs %}
 
