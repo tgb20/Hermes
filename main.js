@@ -38,13 +38,18 @@ if (platform == "darwin") {
 // Get path to resources directory if app is built
 var getResourcesPath = function () {
     var paths = Array.from(arguments)
-
-    if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
-        paths.unshift(path.join(process.cwd(), 'resources'));
+    if (arguments === 'mac') {
+        if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
+            paths.unshift(path.join(process.cwd(), 'resources'));
+        } else {
+            // In builds, the resources directory is located in 'Contents/Resources'
+            paths.unshift(process.resourcesPath)
+        }
     } else {
-        // In builds, the resources directory is located in 'Contents/Resources'
-        paths.unshift(process.resourcesPath)
+        // win
+        paths.unshift(path.join(process.cwd(), 'resources'))
     }
+    
     return path.join.apply(null, paths)
 }
 
