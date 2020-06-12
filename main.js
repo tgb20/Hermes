@@ -196,7 +196,7 @@ exp.post(`/tellostream`, (req, res) => {
 
 drone.on("state", state => {
     // console.log("Received State > ", state);
-    if (win.webContents != null) {
+    if (win.webContents) {
         win.webContents.send('dronestate', state);
         Object.assign(droneState, state);
     }
