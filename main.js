@@ -5,7 +5,7 @@ const path = require('path');
 const ws = require('ws');
 const fs = require('fs');
 const os = require('os');
-const { outputFile } = require('fs-extra');
+const { outputFile, remove } = require('fs-extra');
 const { ipcMain, app, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log');
 const { autoUpdater } = require("electron-updater");
@@ -178,6 +178,7 @@ ipcMain.on('save_video', (event, fileName, buffer) => {
 
             ffmpeg.on('close', code => {
                 console.log(`child process exited with code ${code}`);
+                remove(webmFilename);
                 event.reply('saved_file', mp4Filename);
             })
         }
@@ -477,8 +478,9 @@ autoUpdater.on('update-available', (info) => {
         cancelId: 1
     };
     dialog.showMessageBox(win, options, (res, checked) => {
-        console.log(res);
+        log.info('auto-update response', res);
         if (res === 0) {
+            log.info('Downloading update...');
             let cancellationToken;
             appUpdater.downloadUpdate(cancellationToken);
         }
