@@ -100,7 +100,7 @@ function mkDir(path) {
 
 ipcMain.on('tryConnect', (event, arg) => {
     drone.send('command');
-    console.log('Tried Connecting to Drone');
+    // console.log('Tried Connecting to Drone');
 });
 
 ipcMain.on('greenflag', (event, code) => {
@@ -216,7 +216,7 @@ drone.on("state", state => {
 drone.on("send", (err, length) => {
     if (err) console.log(err);
 
-    console.log(`Sent command is ${length} long`);
+    // console.log(`Sent command is ${length} long`);
 });
 
 drone.on("message", message => {
@@ -521,12 +521,14 @@ autoUpdater.on('update-downloaded', (info) => {
             const isSilent = false;
             const isForceRunAfter = true;
             appUpdater.quitAndInstall(isSilent, isForceRunAfter)
+            app.relaunch();
+            app.quit();
         }
     });
 });
 
 app.on('ready', function()  {
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdates();
 });
 
 app.whenReady().then(createWindow)
