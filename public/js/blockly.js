@@ -160,10 +160,15 @@ function fullScreenVideo() {
 }
 
 document.addEventListener('fullscreenchange', (event) => {
+
+    let sensorOutputs = document.querySelector('#sensor-outputs');
+
     if (document.fullscreenElement) {
+        document.querySelector('#fullscreen-sensors').appendChild(sensorOutputs);
         document.querySelector("#fullscreen i").textContent = 'fullscreen_exit';
         document.querySelector("#fullscreen-rc-controls").style.display = 'block';
     } else {
+        document.querySelector('#sensor-area').appendChild(sensorOutputs);
         document.querySelector("#fullscreen i").textContent = 'fullscreen';
         document.querySelector("#fullscreen-rc-controls").style.display = 'none';
     }
