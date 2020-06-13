@@ -44,28 +44,30 @@
       "target": [
         "dmg",
         "zip"
+      ],
+      "extraFiles": [
+        {
+          "from": "resources/mac/bin",
+          "to": "resources/mac/bin",
+          "filter": [
+            "**/*"
+          ]
+        }
       ]
     },
     "win": {
-      "target": "NSIS"
+      "target": "NSIS",
+      "extraFiles": [
+        {
+          "from": "resources/win/bin",
+          "to": "resources/win/bin",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
     },
-    "afterSign": "build/notarize.js",
-    "extraFiles": [
-      {
-        "from": "resources/mac/bin",
-        "to": "resources/mac/bin",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": "resources/win/bin",
-        "to": "resources/win/bin",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ]
+    "afterSign": "build/notarize.js"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
