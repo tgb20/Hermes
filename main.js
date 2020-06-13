@@ -330,7 +330,7 @@ function aboutWindow() {
             e.preventDefault();
             require('electron').shell.openExternal(url);
         });
-
+        aboutBrowserWindow.setMenu(null);
         aboutBrowserWindow.loadFile('public/aboutBrowserWindow.html');
         aboutBrowserWindow.webContents.on('did-finish-load', () => {
             aboutBrowserWindow.webContents.send('version', version);
