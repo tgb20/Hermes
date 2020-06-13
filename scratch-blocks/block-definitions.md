@@ -86,7 +86,7 @@
 
 ![TOF](../.gitbook/assets/s-tof.gif)
 
-TOF = Height from where you took off
+TOF = Distance to ground using just the built in ToF sensor \(height estimation using light\)
 
 ## Camera
 
