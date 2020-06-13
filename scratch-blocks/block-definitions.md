@@ -64,7 +64,7 @@
 
 ![Height](../.gitbook/assets/s-height.gif)
 
-![Height](../.gitbook/assets/s-height.gif)
+Height from takeoff position. TOF is distance from ground.
 
 ![Low Temperature](../.gitbook/assets/s-lowtemperature.gif)
 
@@ -86,7 +86,7 @@
 
 ![TOF](../.gitbook/assets/s-tof.gif)
 
-TOF = Height from where you took off
+TOF = Distance to ground using just the built-in ToF sensor \(height estimation using light\)
 
 ## Camera
 
