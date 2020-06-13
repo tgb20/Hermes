@@ -42,7 +42,8 @@
         "github"
       ],
       "target": [
-        "dmg"
+        "dmg",
+        "zip"
       ]
     },
     "win": {
