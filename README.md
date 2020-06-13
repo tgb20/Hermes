@@ -8,6 +8,8 @@ Hermes is an app for Mac and Windows that allows you to:
 * Control your drone with mouse or keyboard
 * Recognize AruCo markers with OpenCV
 
+![](.gitbook/assets/hermes-screenshot.png)
+
 #### Contributors:
 
 Jacob Bashista and Andrew Pasquale
