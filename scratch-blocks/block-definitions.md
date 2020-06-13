@@ -86,13 +86,13 @@
 
 ![TOF](../.gitbook/assets/s-tof.gif)
 
-TOF = Distance to ground using just the built in ToF sensor \(height estimation using light\)
+TOF = Height from where you took off
 
 ## Camera
 
-![Photo](../.gitbook/assets/c-photo.gif)
+![Photos are saved in the default Pictures folder for your operating system.](../.gitbook/assets/c-photo.gif)
 
-![Start Video](../.gitbook/assets/c-startvideo.gif)
+![Videos are saved in the mp4 and webm formats in the default Movies/Videos folder for your operating system.](../.gitbook/assets/c-startvideo.gif)
 
 ![Stop Video](../.gitbook/assets/c-stopvideo.gif)
 
