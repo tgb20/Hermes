@@ -20,3 +20,8 @@ lldb /path/to/Hermes.app
 run --remote-debugging-port=8315
 ```
 
+To publish a release to Github:
+
+```text
+npm run publish
+```
