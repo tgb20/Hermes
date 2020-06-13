@@ -315,7 +315,7 @@ function aboutWindow() {
     if (!aboutBrowserWindow) {
         aboutBrowserWindow = new BrowserWindow({
             width: 480,
-            height: 360,
+            height: 540,
             resizable: false,
             webPreferences: {
                 nodeIntegration: true
