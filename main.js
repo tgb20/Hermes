@@ -45,7 +45,7 @@ if (platform == "darwin") {
 // Get path to resources directory if app is built
 var getResourcesPath = function () {
     var paths = Array.from(arguments)
-    if (arguments === 'mac') {
+    if (platform === 'mac') {
         if (/[\\/]Electron\.app[\\/]/.test(process.execPath)) {
             paths.unshift(path.join(process.cwd(), 'resources'));
         } else {
