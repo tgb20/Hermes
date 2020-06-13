@@ -62,9 +62,7 @@
 
 ![Flight Time](../.gitbook/assets/s-flighttime.gif)
 
-![Height](../.gitbook/assets/s-height.gif)
-
-Height from takeoff position. TOF is distance from ground.
+![Height from takeoff position. TOF is distance from ground.](../.gitbook/assets/s-height.gif)
 
 ![Low Temperature](../.gitbook/assets/s-lowtemperature.gif)
 
@@ -84,9 +82,7 @@ Height from takeoff position. TOF is distance from ground.
 
 ![Acceleration Z](../.gitbook/assets/s-accelerationz.gif)
 
-![TOF](../.gitbook/assets/s-tof.gif)
-
-TOF = Distance to ground using just the built-in ToF sensor \(height estimation using light\)
+![TOF = distance to ground using just the built-in ToF sensor \(height estimation using light\)](../.gitbook/assets/s-tof.gif)
 
 ## Camera
 
