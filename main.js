@@ -10,11 +10,14 @@ const { ipcMain, app, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log');
 const { autoUpdater } = require("electron-updater");
 const { dialog } = require('electron')
-let winMarkerConfig;
+let winMarkerConfig, aboutBrowserWindow;
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
+
+const version = app.getVersion()
+log.info('Hermes version', version);
 
 const droneState = {
     vgx: 0,
@@ -308,6 +311,32 @@ function configureMarkers() {
     }
 }
 
+function aboutWindow() {
+    if (!aboutBrowserWindow) {
+        aboutBrowserWindow = new BrowserWindow({
+            width: 480,
+            height: 360,
+            resizable: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        });
+        aboutBrowserWindow.on('closed', () => {
+            aboutBrowserWindow = null
+        })
+
+        aboutBrowserWindow.webContents.on('new-window', function(e, url) {
+            e.preventDefault();
+            require('electron').shell.openExternal(url);
+        });
+
+        aboutBrowserWindow.loadFile('public/aboutBrowserWindow.html');
+        aboutBrowserWindow.webContents.on('did-finish-load', () => {
+            aboutBrowserWindow.webContents.send('version', version);
+        })
+    }
+}
+
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
@@ -326,7 +355,15 @@ function createWindow() {
 
     const template = [
         {
-            label: 'Default'
+            label: 'Default',
+            submenu: [
+                {
+                    label: 'About',
+                    click() {
+                        aboutWindow();
+                    }
+                }
+            ]
         },
         {
             label: 'File',
@@ -433,7 +470,7 @@ autoUpdater.on('checking-for-update', () => {
 autoUpdater.on('update-available', (info) => {
     options = {
         title: 'Hermes Updates',
-        message: 'An update for Hermes is available.',
+        message: 'An update for Hermes is available. The update will download in the background.',
         buttons: ["Download", "Cancel"],
         defaultId: 0,
         cancelId: 1
