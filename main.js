@@ -355,13 +355,21 @@ function createWindow() {
 
     const template = [
         {
-            label: 'Default',
+            label: 'Hermes',
             submenu: [
                 {
                     label: 'About',
                     click() {
                         aboutWindow();
                     }
+                },
+                {
+                    
+                    label: 'Quit',
+                    click() {
+                        app.quit()
+                    },
+                    accelerator: 'CmdOrCtrl+Q'
                 }
             ]
         },
@@ -383,13 +391,6 @@ function createWindow() {
                         win.webContents.send('file', 'open');
                     },
                     accelerator: 'CmdOrCtrl+O'
-                },
-                {
-                    label: 'Quit',
-                    click() {
-                        app.quit()
-                    },
-                    accelerator: 'CmdOrCtrl+Q'
                 }
             ]
         },
