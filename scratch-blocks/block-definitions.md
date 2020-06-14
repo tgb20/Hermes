@@ -6,31 +6,31 @@
 
 ![](../.gitbook/assets/m-land.gif)
 
-![Set Speed (10 - 100 cm/s)](../.gitbook/assets/m-setspeed.gif)
+![(10 - 100 cm/s)](../.gitbook/assets/m-setspeed.gif)
 
-![Fly Forward (20 - 500 cm)](../.gitbook/assets/m-flyforward.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flyforward.gif)
 
-![Fly Backward (20 - 500 cm)](../.gitbook/assets/m-flybackward.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flybackward.gif)
 
-![Fly Left (20 - 500 cm)](../.gitbook/assets/m-flyleft.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flyleft.gif)
 
-![Fly Right (20 - 500 cm)](../.gitbook/assets/m-flyright.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flyright.gif)
 
-![Fly Up (20 - 500 cm)](../.gitbook/assets/m-flyup.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flyup.gif)
 
-![Fly Down (20 - 500 cm)](../.gitbook/assets/m-flydown.gif)
+![(20 - 500 cm)](../.gitbook/assets/m-flydown.gif)
 
-![Rotate Left (1 - 360 degrees)](../.gitbook/assets/m-rotateleft.gif)
+![(1 - 360 degrees)](../.gitbook/assets/m-rotateleft.gif)
 
-![Rotate Right (1 - 360 degrees)](../.gitbook/assets/m-rotateright.gif)
+![(1 - 360 degrees)](../.gitbook/assets/m-rotateright.gif)
 
-![Flip Forward](../.gitbook/assets/m-flipforward.gif)
+![](../.gitbook/assets/m-flipforward.gif)
 
-![Flip Backward](../.gitbook/assets/m-flipbackward.gif)
+![](../.gitbook/assets/m-flipbackward.gif)
 
-![Flip Left](../.gitbook/assets/m-flipleft.gif)
+![](../.gitbook/assets/m-flipleft.gif)
 
-![Flip Right](../.gitbook/assets/m-flipright.gif)
+![](../.gitbook/assets/m-flipright.gif)
 
 ## Events
 
