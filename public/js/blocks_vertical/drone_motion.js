@@ -43,6 +43,7 @@ Blockly.Blocks['drone_motion_setspeed'] = {
     init: function () {
         this.jsonInit({
             "message0": "set speed to %1 cm/s",
+            "tooltip": "10 - 100 cm/s",
             "args0": [
                 {
                     "type": "input_value",
@@ -63,6 +64,7 @@ Blockly.Blocks['drone_motion_flyforward'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly forward %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -83,6 +85,7 @@ Blockly.Blocks['drone_motion_flybackward'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly backward %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -103,6 +106,7 @@ Blockly.Blocks['drone_motion_flyleft'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly left %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -123,6 +127,7 @@ Blockly.Blocks['drone_motion_flyright'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly right %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -143,6 +148,7 @@ Blockly.Blocks['drone_motion_flyup'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly up %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -163,6 +169,7 @@ Blockly.Blocks['drone_motion_flydown'] = {
     init: function () {
         this.jsonInit({
             "message0": "fly down %1 cm",
+            "tooltip": "20 - 500 cm",
             "args0": [
                 {
                     "type": "input_value",
@@ -251,6 +258,7 @@ Blockly.Blocks['drone_motion_rotateleft'] = {
     init: function () {
         this.jsonInit({
             "message0": "rotate left %1 degrees",
+            "tooltip": "1 - 360 degrees",
             "args0": [
                 {
                     "type": "input_value",
@@ -271,6 +279,7 @@ Blockly.Blocks['drone_motion_rotateright'] = {
     init: function () {
         this.jsonInit({
             "message0": "rotate right %1 degrees",
+            "tooltip": "1 - 360 degrees",
             "args0": [
                 {
                     "type": "input_value",

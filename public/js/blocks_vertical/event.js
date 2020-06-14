@@ -79,6 +79,7 @@ Blockly.Blocks['event_whenflagclicked'] = {
     this.jsonInit({
       "id": "event_whenflagclicked",
       "message0": Blockly.Msg.EVENT_WHENFLAGCLICKED,
+      "tooltip": "Multiple start blocks are possible",
       "args0": [
         {
           "type": "field_image",
@@ -335,6 +336,7 @@ Blockly.Blocks['drone_event_emergency'] = {
   init: function () {
       this.jsonInit({
           "message0": "stop motors",
+          "tooltip": "Stop motors. For emergency landing only!",
           "category": Blockly.Categories.event,
           "extensions": ["colours_event", "shape_statement"]
       });
