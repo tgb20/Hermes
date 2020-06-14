@@ -17,7 +17,7 @@ Blockly.Blocks['drone_sensing_speed_x'] = {
             "message0": "speed x (cm/s)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
-            "tooltip": "the speed of the x axis",
+            "tooltip": "the speed of the x axis (1-100cm/s)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -33,7 +33,7 @@ Blockly.Blocks['drone_sensing_speed_y'] = {
             "message0": "speed y (cm/s)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
-            "tooltip": "the speed of the y axis",
+            "tooltip": "the speed of the y axis (1-100cm/s)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -49,7 +49,7 @@ Blockly.Blocks['drone_sensing_speed_z'] = {
             "message0": "speed z (cm/s)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
-            "tooltip": "the speed of the z axis",
+            "tooltip": "the speed of the z axis (1-100cm/s)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -64,7 +64,7 @@ Blockly.Blocks['drone_sensing_battery'] = {
         this.jsonInit({
             "message0": "battery (%)",
             "category": Blockly.Categories.sensing,
-            "tooltip": "the percentage of the current battery level",
+            "tooltip": "the percentage of the current battery level (0-100%)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -95,7 +95,7 @@ Blockly.Blocks['drone_sensing_height'] = {
         this.jsonInit({
             "message0": "height (cm)",
             "category": Blockly.Categories.sensing,
-            "tooltip": "the height in cm",
+            "tooltip": "the height in cm (0-3000cm)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -111,7 +111,7 @@ Blockly.Blocks['drone_sensing_temp_high'] = {
             "message0": "high temperature (C)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
-            "tooltip": "the highest temperature in degree Celsius",
+            "tooltip": "the highest temperature in degree Celsius (0-90C)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
@@ -127,7 +127,7 @@ Blockly.Blocks['drone_sensing_temp_low'] = {
             "message0": "low temperature (C)",
             "category": Blockly.Categories.sensing,
             "checkboxInFlyout": true,
-            "tooltip": "the lowest temperature in degree Celsius",
+            "tooltip": "the lowest temperature in degree Celsius (0-90C)",
             "extensions": ["colours_sensing", "output_number"]
         });
     }
