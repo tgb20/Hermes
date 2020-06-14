@@ -6,10 +6,9 @@ const ws = require('ws');
 const fs = require('fs');
 const os = require('os');
 const { outputFile, remove } = require('fs-extra');
-const { ipcMain, app, BrowserWindow, Menu } = require('electron')
+const { ipcMain, app, dialog, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log');
 const { autoUpdater } = require("electron-updater");
-const { dialog } = require('electron')
 let winMarkerConfig, aboutBrowserWindow;
 
 autoUpdater.logger = log;
@@ -470,21 +469,7 @@ autoUpdater.on('checking-for-update', () => {
 });
 
 autoUpdater.on('update-available', (info) => {
-    options = {
-        title: 'Hermes Updates',
-        message: 'An update for Hermes is available. The update will download in the background.',
-        buttons: ["Download", "Cancel"],
-        defaultId: 0,
-        cancelId: 1
-    };
-    dialog.showMessageBox(win, options, (res, checked) => {
-        log.info('auto-update response', res);
-        if (res === 0) {
-            log.info('Downloading update...');
-            let cancellationToken;
-            appUpdater.downloadUpdate(cancellationToken);
-        }
-    });
+    // Download automatically
 });
 
 autoUpdater.on('update-not-available', (info) => {
@@ -492,12 +477,7 @@ autoUpdater.on('update-not-available', (info) => {
 });
 
 autoUpdater.on('error', (err) => {
-    options = {
-        message: 'Error in auto-updater. ' + err,
-    };
-    dialog.showMessageBox(win, options, (res, checked) => {
-        console.log(res);
-    });
+    log.error(err);
 })
 
 autoUpdater.on('download-progress', (progressObj) => {
@@ -510,28 +490,25 @@ autoUpdater.on('download-progress', (progressObj) => {
 autoUpdater.on('update-downloaded', (info) => {
     options = {
         title: 'Hermes Updates',
-        message: 'The update has been downloaded. ',
-        buttons: ["Restart & Install", "Cancel"],
+        message: 'An update is ready and will be installed the next time you run Hermes.',
+        buttons: ["Restart now", "Keep working"],
         defaultId: 0,
         cancelId: 1
     };
-    dialog.showMessageBox(win, options, (res, checked) => {
-        console.log(res);
-        if (res === 0) {
+    dialog.showMessageBox(win, options).then( (res, checked) => {
+        if (res.response === 0) {
             const isSilent = false;
             const isForceRunAfter = true;
-            appUpdater.quitAndInstall(isSilent, isForceRunAfter)
-            app.relaunch();
-            app.quit();
+            autoUpdater.quitAndInstall(isSilent, isForceRunAfter);
         }
     });
 });
 
 app.on('ready', function()  {
-    autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdatesAndNotify();
 });
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
 
 const updateMarkers = () => {
     win.webContents.send('updateMarkers');
