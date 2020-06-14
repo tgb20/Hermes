@@ -4,7 +4,7 @@
 {% tab title="macOS" %}
 Download the .dmg of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
 
-![You just need to download the Hermes.dmg file to run Hermes](../.gitbook/assets/screen-shot-2020-06-11-at-5.40.40-pm%20%281%29.png)
+![](../.gitbook/assets/screen-shot-2020-06-14-at-2.09.55-pm%20%281%29.png)
 
 Then copy the Hermes program to your Applications folder
 
@@ -14,7 +14,11 @@ And you should be good to start programming and flying your Tello Drone with Her
 {% endtab %}
 
 {% tab title="Windows" %}
-Windows version instructions coming soon
+Download the .exe of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
+
+![](../.gitbook/assets/screen-shot-2020-06-14-at-2.09.55-pm.png)
+
+The run the .exe to install Hermes. When it finishes installing it will launch. You may need to configure firewall settings to allow it to connect to the drone.
 {% endtab %}
 
 {% tab title="Other Platforms" %}

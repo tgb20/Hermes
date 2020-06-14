@@ -6,23 +6,23 @@
 
 ![](../.gitbook/assets/m-land.gif)
 
-![(10 - 100 cm/s)](../.gitbook/assets/m-setspeed.gif)
+![\(10 - 100 cm/s\)](../.gitbook/assets/m-setspeed.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flyforward.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flyforward.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flybackward.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flybackward.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flyleft.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flyleft.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flyright.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flyright.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flyup.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flyup.gif)
 
-![(20 - 500 cm)](../.gitbook/assets/m-flydown.gif)
+![\(20 - 500 cm\)](../.gitbook/assets/m-flydown.gif)
 
-![(1 - 360 degrees)](../.gitbook/assets/m-rotateleft.gif)
+![\(1 - 360 degrees\)](../.gitbook/assets/m-rotateleft.gif)
 
-![(1 - 360 degrees)](../.gitbook/assets/m-rotateright.gif)
+![\(1 - 360 degrees\)](../.gitbook/assets/m-rotateright.gif)
 
 ![](../.gitbook/assets/m-flipforward.gif)
 
@@ -130,4 +130,7 @@
 
 ![Make a List](../.gitbook/assets/list.gif)
 
-{% hint style="warning" %} It is currently possible to create variables and lists with conflicting names. Please be aware of this issue when naming your variables. {% endhint %}
+{% hint style="warning" %}
+It is currently possible to create variables and lists with conflicting names. Please be aware of this issue when naming your variables.
+{% endhint %}
+

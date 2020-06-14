@@ -10,7 +10,7 @@ Hermes is an app for Mac and Windows that allows you to:
 
 ![](.gitbook/assets/hermes-screenshot.png)
 
-#### Contributors:
+## Contributors:
 
 Jacob Bashista and Andrew Pasquale
 
