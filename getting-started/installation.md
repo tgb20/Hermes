@@ -2,7 +2,7 @@
 
 {% tabs %}
 {% tab title="macOS" %}
-Download the .dmg of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
+Download the Hermes.dmg of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
 
 ![](../.gitbook/assets/screen-shot-2020-06-14-at-2.09.55-pm%20%281%29.png)
 
@@ -14,7 +14,7 @@ And you should be good to start programming and flying your Tello Drone with Her
 {% endtab %}
 
 {% tab title="Windows" %}
-Download the .exe of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
+Download the Hermes.Setup.exe of the newest release from the [releases page](https://github.com/tgb20/Hermes/releases).
 
 ![](../.gitbook/assets/screen-shot-2020-06-14-at-2.09.55-pm.png)
 
