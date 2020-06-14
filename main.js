@@ -6,7 +6,7 @@ const ws = require('ws');
 const fs = require('fs');
 const os = require('os');
 const { outputFile, remove } = require('fs-extra');
-const { ipcMain, app, dialog, BrowserWindow, Menu } = require('electron')
+const { ipcMain, app, dialog, shell, BrowserWindow, Menu } = require('electron')
 const log = require('electron-log');
 const { autoUpdater } = require("electron-updater");
 let winMarkerConfig, aboutBrowserWindow;
@@ -327,7 +327,7 @@ function aboutWindow() {
 
         aboutBrowserWindow.webContents.on('new-window', function(e, url) {
             e.preventDefault();
-            require('electron').shell.openExternal(url);
+            shell.openExternal(url);
         });
         aboutBrowserWindow.setMenu(null);
         aboutBrowserWindow.loadFile('public/aboutBrowserWindow.html');
