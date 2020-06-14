@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "productName": "Hermes",
   "description": "Hermes enables you to control your Tello drone with code using Scratch blocks, keyboard, and mouse controls.",
   "main": "main.js",
