@@ -2,27 +2,27 @@
 
 ## Motion
 
-![Takeoff](../.gitbook/assets/m-takeoff.gif)
+![](../.gitbook/assets/m-takeoff.gif)
 
-![Land](../.gitbook/assets/m-land.gif)
+![](../.gitbook/assets/m-land.gif)
 
-![Set Speed](../.gitbook/assets/m-setspeed.gif)
+![Set Speed (10 - 100 cm/s)](../.gitbook/assets/m-setspeed.gif)
 
-![Fly Forward](../.gitbook/assets/m-flyforward.gif)
+![Fly Forward (20 - 500 cm)](../.gitbook/assets/m-flyforward.gif)
 
-![Fly Backward](../.gitbook/assets/m-flybackward.gif)
+![Fly Backward (20 - 500 cm)](../.gitbook/assets/m-flybackward.gif)
 
-![Fly Left](../.gitbook/assets/m-flyleft.gif)
+![Fly Left (20 - 500 cm)](../.gitbook/assets/m-flyleft.gif)
 
-![Fly Right](../.gitbook/assets/m-flyright.gif)
+![Fly Right (20 - 500 cm)](../.gitbook/assets/m-flyright.gif)
 
-![Fly Up](../.gitbook/assets/m-flyup.gif)
+![Fly Up (20 - 500 cm)](../.gitbook/assets/m-flyup.gif)
 
-![Fly Down](../.gitbook/assets/m-flydown.gif)
+![Fly Down (20 - 500 cm)](../.gitbook/assets/m-flydown.gif)
 
-![Rotate Left](../.gitbook/assets/m-rotateleft.gif)
+![Rotate Left (1 - 360 degrees)](../.gitbook/assets/m-rotateleft.gif)
 
-![Rotate Right](../.gitbook/assets/m-rotateright.gif)
+![Rotate Right (1 - 360 degrees)](../.gitbook/assets/m-rotateright.gif)
 
 ![Flip Forward](../.gitbook/assets/m-flipforward.gif)
 
@@ -34,53 +34,53 @@
 
 ## Events
 
-![Green Flag](../.gitbook/assets/e-greenflag.gif)
+![Multiple start blocks are possible](../.gitbook/assets/e-greenflag.gif)
 
-![Stop Motors](../.gitbook/assets/e-stopmotors.gif)
+![Stop motors. For emergency landing only!](../.gitbook/assets/e-stopmotors.gif)
 
 ## Control
 
-![Wait](../.gitbook/assets/c-wait.gif)
+![](../.gitbook/assets/c-wait.gif)
 
-![Stop Motors](../.gitbook/assets/c-repeat.gif)
+![](../.gitbook/assets/c-repeat.gif)
 
-![If Then](../.gitbook/assets/c-ifthen.gif)
+![](../.gitbook/assets/c-ifthen.gif)
 
-![If Then Else](../.gitbook/assets/c-ifthenelse.gif)
+![](../.gitbook/assets/c-ifthenelse.gif)
 
-![While](../.gitbook/assets/c-while.gif)
+![](../.gitbook/assets/c-while.gif)
 
 ## Sensing
 
-![Speed X](../.gitbook/assets/s-speedx.gif)
+![](../.gitbook/assets/s-speedx.gif)
 
-![Speed Y](../.gitbook/assets/s-speedy.gif)
+![](../.gitbook/assets/s-speedy.gif)
 
-![Speed Z](../.gitbook/assets/s-speedz.gif)
+![](../.gitbook/assets/s-speedz.gif)
 
-![Battery](../.gitbook/assets/s-battery.gif)
+![](../.gitbook/assets/s-battery.gif)
 
-![Flight Time](../.gitbook/assets/s-flighttime.gif)
+![](../.gitbook/assets/s-flighttime.gif)
 
 ![Height from takeoff position. TOF is distance from ground.](../.gitbook/assets/s-height.gif)
 
-![Low Temperature](../.gitbook/assets/s-lowtemperature.gif)
+![](../.gitbook/assets/s-lowtemperature.gif)
 
-![High Temperature](../.gitbook/assets/s-hightemperature.gif)
+![](../.gitbook/assets/s-hightemperature.gif)
 
-![Pitch](../.gitbook/assets/s-pitch.gif)
+![](../.gitbook/assets/s-pitch.gif)
 
-![Roll](../.gitbook/assets/s-roll.gif)
+![](../.gitbook/assets/s-roll.gif)
 
-![Yaw](../.gitbook/assets/s-yaw.gif)
+![](../.gitbook/assets/s-yaw.gif)
 
-![Barometer](../.gitbook/assets/s-barometer.gif)
+![](../.gitbook/assets/s-barometer.gif)
 
-![Acceleration X](../.gitbook/assets/s-accelerationx.gif)
+![](../.gitbook/assets/s-accelerationx.gif)
 
-![Acceleration Y](../.gitbook/assets/s-accelerationy.gif)
+![](../.gitbook/assets/s-accelerationy.gif)
 
-![Acceleration Z](../.gitbook/assets/s-accelerationz.gif)
+![](../.gitbook/assets/s-accelerationz.gif)
 
 ![TOF = distance to ground using just the built-in ToF sensor \(height estimation using light\)](../.gitbook/assets/s-tof.gif)
 
@@ -90,39 +90,39 @@
 
 ![Videos are saved in mp4 format in the default Movies/Videos folder for your operating system.](../.gitbook/assets/c-startvideo.gif)
 
-![Stop Video](../.gitbook/assets/c-stopvideo.gif)
+![](../.gitbook/assets/c-stopvideo.gif)
 
-![Marker](../.gitbook/assets/c-marker.gif)
+![ArUco Marker](../.gitbook/assets/c-marker.gif)
 
 ## Operators
 
-![Add](../.gitbook/assets/o-add.gif)
+![](../.gitbook/assets/o-add.gif)
 
-![Minus](../.gitbook/assets/o-minus.gif)
+![](../.gitbook/assets/o-minus.gif)
 
-![Multiply](../.gitbook/assets/o-multiplication.gif)
+![](../.gitbook/assets/o-multiplication.gif)
 
-![Divide](../.gitbook/assets/o-division.gif)
+![](../.gitbook/assets/o-division.gif)
 
-![Random](../.gitbook/assets/o-pickrandom.gif)
+![](../.gitbook/assets/o-pickrandom.gif)
 
-![Less Than](../.gitbook/assets/lessthan.gif)
+![](../.gitbook/assets/lessthan.gif)
 
-![Equals](../.gitbook/assets/equals.gif)
+![](../.gitbook/assets/equals.gif)
 
-![Greatr Than](../.gitbook/assets/greaterthan.gif)
+![](../.gitbook/assets/greaterthan.gif)
 
-![And](../.gitbook/assets/and.gif)
+![](../.gitbook/assets/and.gif)
 
-![Or](../.gitbook/assets/or.gif)
+![](../.gitbook/assets/or.gif)
 
-![Not](../.gitbook/assets/not.gif)
+![](../.gitbook/assets/not.gif)
 
-![Mod](../.gitbook/assets/mod.gif)
+![](../.gitbook/assets/mod.gif)
 
-![Round](../.gitbook/assets/round.gif)
+![](../.gitbook/assets/round.gif)
 
-![Abs](../.gitbook/assets/abs.gif)
+![](../.gitbook/assets/abs.gif)
 
 ## Variables
 
@@ -130,3 +130,4 @@
 
 ![Make a List](../.gitbook/assets/list.gif)
 
+{% hint style="warning" %} It is currently possible to create variables and lists with conflicting names. Please be aware of this issue when naming your variables. {% endhint %}
