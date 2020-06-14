@@ -88,7 +88,7 @@
 
 ![Photos are saved in the default Pictures folder for your operating system.](../.gitbook/assets/c-photo.gif)
 
-![Videos are saved in the mp4 and webm formats in the default Movies/Videos folder for your operating system.](../.gitbook/assets/c-startvideo.gif)
+![Videos are saved in mp4 format in the default Movies/Videos folder for your operating system.](../.gitbook/assets/c-startvideo.gif)
 
 ![Stop Video](../.gitbook/assets/c-stopvideo.gif)
 
